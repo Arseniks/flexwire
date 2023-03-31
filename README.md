@@ -5,6 +5,11 @@
 ```
 git clone https://github.com/Arseniks/lyceum_django_education_project
 ```
+- Скопируйте файл .env.template в .env, при необходимости отредактируйте 
+  значения переменных:
+```
+cp .env.template .env
+``` 
 ### На Windows
 - Установите и активируйте виртуальное окружение с помощью команд:
 ```
