@@ -25,6 +25,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'users.apps.UsersConfig',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -35,6 +37,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 INTERNAL_IPS = [
@@ -46,7 +49,7 @@ ROOT_URLCONF = 'meeting_point.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -89,6 +92,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LOGIN_URL = '/auth/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/auth/login/'
+
 
 LANGUAGE_CODE = 'ru'
 
@@ -105,3 +112,21 @@ STATIC_URL = '/static/'
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = BASE_DIR / 'sent_emails'
+
+MEETING_POINT_MAIL = os.environ.get('MEETING_POINT_MAIL', 'meeting-point@gmail.com')
+
+
+NUMBER_OF_FAILED_LOGIN = os.environ.get('NUMBER_OF_FAILED_LOGIN', '3')
+if NUMBER_OF_FAILED_LOGIN.isdigit():
+    NUMBER_OF_FAILED_LOGIN = int(NUMBER_OF_FAILED_LOGIN)
+else:
+    NUMBER_OF_FAILED_LOGIN = 3
+
+
+DEFAULT_USER_ACTIVITY = (
+    os.environ.get('DEFAULT_USER_ACTIVITY', str(DEBUG)) == 'True'
+)

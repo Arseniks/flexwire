@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+
+        {% with form=form %}
+          {% include 'users/includes/form.html' %}
+        {% endwith %}
+
+      <div class="col text-center">
+        {% with request.resolver_match.view_name as view_name %}
+          {% if view_name == 'users:login' %}
+            <p>
+            </p>
+            <button type="submit" class="btn btn-dark mx-sm-3 w-25">
+              Войти
+            </button>
+          {% elif view_name == 'users:password_change' or view_name == 'users:profile' %}
+            <button type="submit" class="btn btn-dark mx-sm-3 w-25 ">
+              Обновить
+            </button>
+          {% elif view_name == 'users:password_reset' or view_name == 'users:password_reset_confirm' %}
+            <button type="submit" class="btn btn-dark mx-sm-3 ">
+              Восстановить пароль
+            </button>
+          {% elif view_name == 'users:signup'%}
+            <button type="submit" class="btn btn-dark mx-sm-3 ">
+              Зарегистрироваться
+            </button>
+          {% endif %}
+        {% endwith %}
+      </div>
+    </form>
+  </div>
+</div>
+
