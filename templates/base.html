@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <title>
+    {% block title %}
+      {{ title }}
+    {% endblock title %}
+  </title>
+</head>
+<body>
+  <div class="wrapper d-flex flex-column">
+    {% include 'includes/header.html' %}
+    <main class="main">
+      {% block content %}
+      {% endblock content %}
+    </main>
+    {% include 'includes/footer.html' %}
+  </div>
+
+  {% block scripts %}
+  {% endblock scripts %}
+  <script src="{% static 'js/bootstrap.js' %}"></script>
+</body>
+</html>
