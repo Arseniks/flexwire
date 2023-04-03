@@ -97,6 +97,7 @@ LOGIN_URL = '/auth/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/auth/login/'
 
+AUTH_USER_MODEL = 'users.CustomUser'
 
 LANGUAGE_CODE = 'ru'
 
@@ -114,6 +115,9 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static_dev',
 ]
 STATIC_ROOT = BASE_DIR / 'static'
+
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
