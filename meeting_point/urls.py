@@ -16,7 +16,7 @@ if meeting_point.settings.DEBUG:
     if hasattr(meeting_point.settings, 'MEDIA_ROOT'):
         urlpatterns += static(
             meeting_point.settings.MEDIA_URL,
-            document_root=meeting_point.settings.MEDIA_ROOT
+            document_root=meeting_point.settings.MEDIA_ROOT,
         )
     else:
         urlpatterns += staticfiles_urlpatterns()
