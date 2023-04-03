@@ -1,10 +1,12 @@
 {% for field in form %}
-  <div class="form-group col-sm-5 mx-auto mb-2">
-    {{ field.label_tag }}
-    {{ field }}
+  <div class="form-group text-center col-sm-3 mx-auto mb-2">
+    <fieldset>
+      <div>{{ field.label_tag }}</div>
+      {{ field }}
+    </fieldset>
     {% if field.help_text %}
       <small class="form-text text-muted">
-    {{ field.help_text }}
+        {{ field.help_text }}
       </small>
     {% endif %}
     {% if field.errors %}

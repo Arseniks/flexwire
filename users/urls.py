@@ -62,13 +62,13 @@ urlpatterns = [
         ),
         name='password_reset_complete',
     ),
-    # django.urls.path(
-    #     'signup/',
-    #     users.views.Register.as_view(
-    #         template_name='users/signup.html',
-    #     ),
-    #     name='signup',
-    # ),
+    django.urls.path(
+        'signup/',
+        users.views.Register.as_view(
+            template_name='users/signup.html',
+        ),
+        name='signup',
+    ),
     # django.urls.re_path(
     #     r'activate/(?P<name>[\da-zA-Z+_@.-]*)/$',
     #     users.views.ActivateUserView.as_view(),

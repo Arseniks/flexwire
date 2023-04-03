@@ -23,4 +23,7 @@ if meeting_point.settings.DEBUG:
             document_root=meeting_point.settings.MEDIA_ROOT
         )
     else:
+        import debug_toolbar
+        urlpatterns += (path('__debug__/', include(debug_toolbar.urls)),)
+
         urlpatterns += staticfiles_urlpatterns()
