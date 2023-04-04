@@ -116,7 +116,7 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = BASE_DIR / 'static'
 
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 
@@ -126,14 +126,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = BASE_DIR / 'sent_emails'
 
-MEETING_POINT_MAIL = os.environ.get('MEETING_POINT_MAIL', 'meeting-point@gmail.com')
-
-
-NUMBER_OF_FAILED_LOGIN = os.environ.get('NUMBER_OF_FAILED_LOGIN', '3')
-if NUMBER_OF_FAILED_LOGIN.isdigit():
-    NUMBER_OF_FAILED_LOGIN = int(NUMBER_OF_FAILED_LOGIN)
-else:
-    NUMBER_OF_FAILED_LOGIN = 3
+FLEXWIRE_MAIL = os.environ.get('FLEXWIRE_MAIL', 'meeting-point@gmail.com')
 
 
 DEFAULT_USER_ACTIVITY = (

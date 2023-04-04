@@ -4,7 +4,7 @@
       {% csrf_token %}
 
         {% with form=form %}
-          {% include 'users/includes/form.html' %}
+          {% include 'users/includes/auth_form.html' %}
         {% endwith %}
 
       <div class="col-sm-3 mx-auto mb-2 text-center">
@@ -13,17 +13,17 @@
             <button type="submit" class="btn btn-dark">
               Sign in
             </button>
-          {% elif view_name == 'users:password_change' or view_name == 'users:profile' %}
+          {% elif view_name == 'users:password_change' or view_name == 'users:profile' or view_name == 'users:account' %}
             <button type="submit" class="btn btn-dark mx-sm-3 w-25 ">
-              Обновить
+              Upload
             </button>
           {% elif view_name == 'users:password_reset' or view_name == 'users:password_reset_confirm' %}
             <button type="submit" class="btn btn-dark mx-sm-3 ">
-              Восстановить пароль
+              Reset password
             </button>
           {% elif view_name == 'users:signup'%}
             <button type="submit" class="btn btn-dark mx-sm-3 ">
-              Зарегистрироваться
+              Sign up
             </button>
           {% endif %}
         {% endwith %}
@@ -31,4 +31,3 @@
     </form>
   </div>
 </div>
-

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Activating account
+{% endblock %}
+
+{% load static %}
+{% block content %}
+  <h4 class="text-center" >Activating account</h4>
+  {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <h5 {% if message.tags %} class="{{ message.tags }} text-center"{% endif %}>{{ message }}</h5>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endblock %}

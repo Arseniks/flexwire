@@ -69,14 +69,9 @@ urlpatterns = [
         ),
         name='signup',
     ),
-    # django.urls.re_path(
-    #     r'activate/(?P<name>[\da-zA-Z+_@.-]*)/$',
-    #     users.views.ActivateUserView.as_view(),
-    #     name='activate_user',
-    # ),
-    # django.urls.re_path(
-    #     r'recovery/(?P<name>[\da-zA-Z+_@.-]*)/$',
-    #     users.views.RecoveryUserView.as_view(),
-    #     name='recovery_user',
-    # ),
+    django.urls.path(
+        'activate/<str:token>/',
+        users.views.ActivateUserView.as_view(),
+        name='activate_user',
+    ),
 ]
