@@ -6,15 +6,12 @@ from django.contrib import messages
 from django.contrib.auth import login
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404
-from django.shortcuts import redirect
 from django.shortcuts import render
 from django.template import loader
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.views import View
-from django.views.generic import DetailView
 from django.views.generic import FormView
-from django.views.generic import ListView
 import jwt
 
 from users.forms import CustomUserCreationForm
@@ -37,7 +34,6 @@ class ActivateUserView(View):
     template_name = 'users/activate.html'
 
     def get(self, request, token):
-        print(token)
         is_decoding_token_correct, result_token_decoding = decode_token(token)
         if not is_decoding_token_correct:
             messages.error(request, result_token_decoding)
