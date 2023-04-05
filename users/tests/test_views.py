@@ -64,11 +64,6 @@ class ViewsTests(TestCase):
         self.assertEqual(CustomUser.objects.count(), user_count + 1)
 
     def test_user_login_success(self):
-        Client().post(
-            reverse('users:signup'),
-            self.user_register_data_1,
-            follow=True,
-        )
         response = Client().post(
             reverse('users:login'),
             self.user_login_data_1,
