@@ -24,7 +24,7 @@ class StaticUrlsTests(TestCase):
     def test_password_reset_confirm_endpoint(self):
         response = Client().get(
             reverse(
-                f'users:password_reset_confirm',
+                'users:password_reset_confirm',
                 args=('Mg', 'bm573d-62e40259727921f3b2b46c36f31ccf78'),
             )
         )
@@ -33,7 +33,7 @@ class StaticUrlsTests(TestCase):
     def test_activate_user_endpoint(self):
         response = Client().get(
             reverse(
-                f'users:activate_user',
+                'users:activate_user',
                 args=('bm573d-62e40259727921f3b2b46c36f31ccf78',),
             )
         )
