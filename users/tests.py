@@ -1,7 +1,11 @@
 from django.core import exceptions
-from django.test import TestCase, Client
+from django.test import Client
+from django.test import TestCase
 from django.urls import reverse
-from .models import CustomUser, Language, Technology
+
+from .models import CustomUser
+from .models import Language
+from .models import Technology
 
 
 class TestDataBaseAddUser(TestCase):
@@ -34,7 +38,7 @@ class TestDataBaseAddUser(TestCase):
                 nickname='nickname',
                 contact_data='https://t.me/some_user',
                 education_choose='university',
-                education='some university'
+                education='some university',
             )
 
             self.user.full_clean()
@@ -58,7 +62,7 @@ class TestDataBaseAddUser(TestCase):
                 nickname='nickname',
                 github='https://github.com/some_user',
                 education_choose='university',
-                education='some university'
+                education='some university',
             )
 
             self.user.full_clean()
@@ -82,7 +86,7 @@ class TestDataBaseAddUser(TestCase):
                 nickname='nickname',
                 github='https://github.com/some_user',
                 contact_data='https://t.me/some_user',
-                education='some university'
+                education='some university',
             )
 
             self.user.full_clean()
@@ -130,7 +134,7 @@ class TestDataBaseAddUser(TestCase):
             github='https://github.com/some_user',
             contact_data='https://t.me/some_user',
             education_choose='university',
-            education='some university'
+            education='some university',
         )
 
         self.user.set_password('password')
@@ -159,7 +163,7 @@ class TestDataBaseAddUser(TestCase):
             city='Karaganda',
             resume='some_resume.pfd',
             education_choose='university',
-            education='some university'
+            education='some university',
         )
 
         self.user.set_password('password')
@@ -189,7 +193,7 @@ class TestAccountAndProfile(TestCase):
             city='Karaganda',
             resume='some_resume.pfd',
             education_choose='university',
-            education='some university'
+            education='some university',
         )
         cls.user2 = CustomUser.objects.create(
             id=2,
@@ -199,7 +203,7 @@ class TestAccountAndProfile(TestCase):
             github='https://github.com/some_user2',
             contact_data='https://t.me/some_user2',
             education_choose='university',
-            education='some university2'
+            education='some university2',
         )
         super().setUpTestData()
 

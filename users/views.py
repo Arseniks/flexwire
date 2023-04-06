@@ -1,8 +1,10 @@
-from django.views.generic import DetailView, View
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect
+from django.shortcuts import render
+from django.views.generic import DetailView
+from django.views.generic import View
 
-from users.models import CustomUser
 from users.forms import UserAccountForm
+from users.models import CustomUser
 
 
 class Profile(DetailView):
