@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Sign up
+{% endblock %}
+
+{% block content %}
+  <div class="text-center">
+    <a href="/landing/" class="header__logo text-decoration-none">
+      <span>FLEXWIRE</span>
+    </a>
+  </div>
+  <h1 class="text-center">Please sign up</h1>
+  <br>
+  {% include 'users/includes/form_with_buttons.html' %}
+{% endblock %}
