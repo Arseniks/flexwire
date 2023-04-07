@@ -77,7 +77,7 @@ class Register(FormView):
                 'Verification account',
                 '',
                 settings.FLEXWIRE_MAIL,
-                [f'{form.cleaned_data["email"]}'],
+                [form.cleaned_data["email"]],
                 html_message=loader.render_to_string(
                     'users/activating_email.html',
                     {
