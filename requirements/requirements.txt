@@ -11,3 +11,4 @@ pyyaml==6.0
 sorl-thumbnail==12.9.0
 sqlparse==0.4.3
 transliterate==1.10.2
+django-bootstrap-icons==0.8.2

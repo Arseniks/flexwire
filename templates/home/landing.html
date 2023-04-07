@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load bootstrap_icons %}
+
+{% block title %}
+  FLEXWIRE
+{% endblock title %}
+
+{% block content %}
+  <div class="d-flex align-items-center landing">
+    <div class="container d-flex align-items-center min-vh-100 flex-xl-row flex-lg-row flex-column-reverse justify-content-end mt-md-4 mt-ms-4 ">
+      <div class="w-100">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="mb-5">
+              <h1 class="display-4 mb-3 fw-bold">
+                Make your dream
+                <br/>
+                <span class="text-primary" id="live-text">team.</span>
+              </h1>
+              <p class="lead landing__text">
+                Come up with an idea, find people, implement the project and get
+                invaluable team
+                development experience
+              </p>
+            </div>
+            <div class="d-grid d-sm-flex gap-3">
+              <a href="#" class="btn btn-primary btn-transition px-5">Sign
+                up</a>
+              <a href="#learn-more" class="btn btn-link text-decoration-none">
+                Learn more
+                <span class="ms-1 ">{% bs_icon 'chevron-right' extra_classes='small' %}</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-7 d-lg-block">
+        <img src="{% static 'images/landing.png' %}"
+             height="auto"
+             width="100%"
+             alt="team work"/>
+      </div>
+    </div>
+  </div>
+  <div class="border-top min-vh-100 d-flex align-items-center flex-column justify-content-center"
+       id="learn-more">
+    <div class="w-lg-75 text-center mx-lg-auto landing">
+      <div class="mb-5 mb-md-10">
+        <h1 class="display-4 fw-bold">About Us</h1>
+        <p class="lead landing__text">
+          Flexwire is a service that will help you find people to create pet
+          projects and gain invaluable team
+          development experience
+        </p>
+      </div>
+      <div class="container content-space-2 content-space-lg-3">
+        <div class="w-md-75 w-lg-50 text-center mx-md-auto mb-5 mb-md-9">
+          <span class="landing__text_team">Our team</span>
+          <h2>Developers</h2>
+        </div>
+        <div class="row gx-5 mb-5 d-flex justify-content-center">
+          <div class="col-sm-6 col-lg-3 mb-3">
+            <div class="card landing__card h-100 border-0">
+              <div class="card-body">
+                <div class="mb-4">
+                  <img src="{% static 'images/arseniy.jpg' %}"
+                       alt="developer"
+                       class="landing__avatar"/>
+                </div>
+                <h4 class="card-title">Korotkov Arseniy</h4>
+                <span class="card-subtitle landing__text text-uppercase">Lead</span>
+              </div>
+              <div class="card-footer pt-0 border-top-0">
+                <ul class="list-inline mb-0">
+                  <li class="list-inline-item">
+                    <a href="https://github.com/Arseniks"
+                       class="btn btn-outline-dark btn-xs btn-icon rounded">
+                      {% bs_icon 'github' %}
+                    </a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a href="https://t.me/arseniksk"
+                       class="btn btn-outline-primary btn-xs btn-icon rounded">{% bs_icon 'telegram' %}</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3 mb-3">
+            <div class="card landing__card h-100 border-0">
+              <div class="card-body">
+                <div class="mb-4">
+                  <img src="{% static 'images/elena.jpg' %}"
+                       alt="developer"
+                       class="landing__avatar"/>
+                </div>
+                <h4 class="card-title">Starostina Elena</h4>
+                <span class="card-subtitle landing__text text-uppercase">Backend</span>
+              </div>
+              <div class="card-footer pt-0 border-top-0">
+                <ul class="list-inline mb-0">
+                  <li class="list-inline-item">
+                    <a href="https://github.com/Starostina-elena"
+                       class="btn btn-outline-dark btn-xs btn-icon rounded">
+                      {% bs_icon 'github' %}
+                    </a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a href="https://t.me/li_a_be"
+                       class="btn btn-outline-primary btn-xs btn-icon rounded">{% bs_icon 'telegram' %}</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3 mb-3">
+            <div class="card landing__card h-100 border-0">
+              <div class="card-body">
+                <div class="mb-4">
+                  <img src="{% static 'images/grigoriy.jpg' %}"
+                       alt="developer"
+                       class="landing__avatar"/>
+                </div>
+                <h4 class="card-title">Morozov Grigoriy</h4>
+                <span class="card-subtitle landing__text text-uppercase">Frontend</span>
+              </div>
+              <div class="card-footer pt-0 border-top-0">
+                <ul class="list-inline mb-0">
+                  <li class="list-inline-item">
+                    <a href="https://github.com/JeeEssEm"
+                       class="btn btn-outline-dark btn-xs btn-icon rounded">
+                      {% bs_icon 'github' %}
+                    </a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a href="https://t.me/JeeEssEm"
+                       class="btn btn-outline-primary btn-xs btn-icon rounded">{% bs_icon 'telegram' %}</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+{% block scripts %}
+  <script src="{% static 'js/typed.js' %}"></script>
+  <script src="{% static 'js/live_text.js' %}"></script>
+{% endblock scripts %}
