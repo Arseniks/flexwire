@@ -18,8 +18,14 @@ class Team(django.db.models.Model):
                 f'presentation.{filename.split(".")[-1]}'
         )
 
-    title = django.db.models.CharField('', help_text='', max_length=64)
-    description = django.db.models.TextField('', help_text='')
+    title = django.db.models.CharField(
+        'Title',
+        help_text='Write title of your project',
+        max_length=64
+    )
+    description = django.db.models.TextField(
+        'Description',
+        help_text='Write description of your project')
     image = django.db.models.ImageField('', help_text='',
                                         null=True, blank=True,
                                         upload_to=get_upload_image)
