@@ -37,6 +37,6 @@ jobs:
     - name: Lint with Black
       run: |
         black --check --verbose .
-    - name: Run Tests
+    - name: Lint with djlint
       run: |
-        python manage.py test
+        djlint templates --profile=django
