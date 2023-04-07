@@ -1,9 +1,9 @@
 from django.core import exceptions
 from django.test import TestCase
 
-from .models import CustomUser
-from .models import Language
-from .models import Technology
+from users.models import CustomUser
+from users.models import Language
+from users.models import Technology
 
 
 class TestDataBaseAddUser(TestCase):
