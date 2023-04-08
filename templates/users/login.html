@@ -5,15 +5,15 @@
 {% endblock title %}
 
 {% block content %}
-  <br>
+  <br />
   <div class="text-center">
     <a href="{% url 'home:landing' %}" class="header__logo text-decoration-none">
       <span>FLEXWIRE</span>
     </a>
   </div>
   <h1 class="text-center text-dark">Please login</h1>
-  {% include 'users/includes/form_with_buttons.html' %}
+  {% include "users/includes/form_with_buttons.html" %}
   <a href="{% url 'users:password_reset' %}" class="nav-link px-2 text-dark text-center">Forgot your password?</a>
-  <hr>
+  <hr />
   <a href="{% url 'users:signup' %}" class="nav-link px-2 text-dark text-center">No profile on FLEXWIRE? Register now!</a>
 {% endblock content %}
