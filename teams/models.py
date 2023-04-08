@@ -43,7 +43,7 @@ class Team(django.db.models.Model):
     creator = django.db.models.OneToOneField(
         users.models.CustomUser,
         help_text='Person who came up with this idea of project',
-        on_delete=django.db.models.deletion.CASCADE
+        on_delete=django.db.models.deletion.CASCADE,
     )
     languages = django.db.models.ManyToManyField(
         users.models.Language,
