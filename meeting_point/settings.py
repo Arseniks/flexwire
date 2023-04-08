@@ -38,7 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'teams.apps.TeamsConfig',
+    'debug_toolbar',
     'home.apps.HomeConfig',
+    'django_cleanup.apps.CleanupConfig',
+    'sorl.thumbnail',
     'django_bootstrap_icons',
 ]
 
@@ -50,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 INTERNAL_IPS = [

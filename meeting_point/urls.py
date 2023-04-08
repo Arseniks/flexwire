@@ -1,17 +1,28 @@
-from django.conf import settings
 from django.conf.urls.static import static
-from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.contrib import admin
 from django.urls import include
 from django.urls import path
 
+import meeting_point
 import home.urls
-import meeting_point.settings
+import teams.urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(home.urls)),
+    path('teams/', include(teams.urls)),
 ]
 
-urlpatterns += static('static_dev', document_root=settings.STATICFILES_DIRS[0])
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if meeting_point.settings.DEBUG:
+    import debug_toolbar
+
+    urlpatterns += (path('__debug__/', include(debug_toolbar.urls)),)
+
+    if hasattr(meeting_point.settings, 'MEDIA_ROOT'):
+        urlpatterns += static(
+            meeting_point.settings.MEDIA_URL,
+            document_root=meeting_point.settings.MEDIA_ROOT,
+        )
+    else:
+        urlpatterns += staticfiles_urlpatterns()
