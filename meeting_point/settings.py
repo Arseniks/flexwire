@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'teams.apps.TeamsConfig',
     'users.apps.UsersConfig',
     'debug_toolbar',
+    'home.apps.HomeConfig',
     'django_bootstrap_icons',
 ]
 
