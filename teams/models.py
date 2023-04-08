@@ -6,17 +6,17 @@ import users.models
 
 
 class Team(django.db.models.Model):
-    def get_upload_image(instance, filename):
+    def get_upload_image(self, filename):
         return (
             pathlib.Path('team_files')
-            / pathlib.Path(str(instance.pk))
+            / pathlib.Path(str(self.pk))
             / f'team_image.{filename.split(".")[-1]}'
         )
 
-    def get_upload_presentation(instance, filename):
+    def get_upload_presentation(self, filename):
         return (
             pathlib.Path('team_files')
-            / pathlib.Path(str(instance.pk))
+            / pathlib.Path(str(self.pk))
             / f'presentation.{filename.split(".")[-1]}'
         )
 
@@ -41,20 +41,16 @@ class Team(django.db.models.Model):
         upload_to=get_upload_presentation,
     )
     creator = django.db.models.OneToOneField(
-        'project creator',
+        users.models.CustomUser,
         help_text='Person who came up with this idea of project',
-        to=users.models.CustomUser,
-        on_delete=django.db.models.deletion.CASCADE,
+        on_delete=django.db.models.deletion.CASCADE
     )
     languages = django.db.models.ManyToManyField(
-        'team languages',
-        to=users.models.Language,
-        verbose_name='Languages',
+        users.models.Language,
         help_text='Specify team languages',
     )
     technologies = django.db.models.ManyToManyField(
-        'team technologies',
-        to=users.models.Technology,
+        users.models.Technology,
         verbose_name='Technologies your team use',
         help_text='Specify technologies your team use',
     )
@@ -71,44 +67,38 @@ class Role(django.db.models.Model):
 
 class RoleTeam(django.db.models.Model):
     role_default = django.db.models.ForeignKey(
-        'standard role',
+        Role,
         help_text='Role from standard list',
-        to=Role,
         on_delete=django.db.models.deletion.CASCADE,
     )
     team = django.db.models.ForeignKey(
-        'team',
+        Team,
         help_text='Choose  your teammate',
-        to=Team,
         on_delete=django.db.models.deletion.CASCADE,
     )
 
 
 class Member(django.db.models.Model):
     role_team = django.db.models.ForeignKey(
-        'Team role',
+        RoleTeam,
         help_text='Choose roles in your project',
-        to=RoleTeam,
         on_delete=django.db.models.deletion.CASCADE,
     )
     user = django.db.models.OneToOneField(
-        'user',
+        users.models.CustomUser,
         help_text='User for this role',
-        to=users.models.CustomUser,
         on_delete=django.db.models.deletion.CASCADE,
     )
 
 
 class Pending(django.db.models.Model):
     role_team = django.db.models.ForeignKey(
-        'Pending role',
+        RoleTeam,
         help_text='Choose role that you want to be',
-        to=RoleTeam,
         on_delete=django.db.models.deletion.CASCADE,
     )
     user = django.db.models.OneToOneField(
-        'user',
+        users.models.CustomUser,
         help_text='User for this pending',
-        to=users.models.CustomUser,
         on_delete=django.db.models.deletion.CASCADE,
     )
