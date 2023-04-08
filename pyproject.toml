@@ -9,3 +9,5 @@ profile = "google"
 
 [tool.djlint]
 indent=2
+ignore="H031"
+exclude="activating_email.html"
