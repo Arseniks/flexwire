@@ -25,8 +25,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'teams.apps.TeamsConfig',
     'users.apps.UsersConfig',
     'debug_toolbar',
+    'home.apps.HomeConfig',
     'django_bootstrap_icons',
 ]
 
