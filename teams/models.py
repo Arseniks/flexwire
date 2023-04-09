@@ -56,6 +56,13 @@ class Team(django.db.models.Model):
     )
     is_published = django.db.models.BooleanField(default=True)
 
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'team'
+        verbose_name_plural = 'teams'
+
 
 class Role(django.db.models.Model):
     name = django.db.models.CharField(
@@ -63,6 +70,13 @@ class Role(django.db.models.Model):
         help_text='Choose role name that you need in your project',
         max_length=128,
     )
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'role'
+        verbose_name_plural = 'roles'
 
 
 class RoleTeam(django.db.models.Model):
@@ -77,6 +91,13 @@ class RoleTeam(django.db.models.Model):
         on_delete=django.db.models.deletion.CASCADE,
     )
 
+    def __str__(self):
+        return self.role_default.name
+
+    class Meta:
+        verbose_name = 'role in team'
+        verbose_name_plural = 'roles in team'
+
 
 class Member(django.db.models.Model):
     role_team = django.db.models.ForeignKey(
@@ -90,6 +111,13 @@ class Member(django.db.models.Model):
         on_delete=django.db.models.deletion.CASCADE,
     )
 
+    def __str__(self):
+        return self.role_team.name
+
+    class Meta:
+        verbose_name = 'member'
+        verbose_name_plural = 'members'
+
 
 class Pending(django.db.models.Model):
     role_team = django.db.models.ForeignKey(
@@ -102,3 +130,10 @@ class Pending(django.db.models.Model):
         help_text='User for this pending',
         on_delete=django.db.models.deletion.CASCADE,
     )
+
+    def __str__(self):
+        return self.role_team.name
+
+    class Meta:
+        verbose_name = 'pending'
+        verbose_name_plural = 'pending list'
