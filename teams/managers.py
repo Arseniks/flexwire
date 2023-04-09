@@ -27,8 +27,11 @@ class TeamManager(models.Manager):
                 Team.description.field.name,
                 Team.image.field.name,
                 Team.presentation.field.name,
-                f'{Team.creator.field.name}__{CustomUser.username.field.name}',
-                f'{Team.languages.related.name}__{Language.language.field.name}',
-                f'{Team.technologies.related.name}__{Technology.technology.field.name}',
+                f'{Team.creator.field.name}'
+                f'__{CustomUser.username.field.name}',
+                f'{Team.languages.related.name}'
+                f'__{Language.language.field.name}',
+                f'{Team.technologies.related.name}'
+                f'__{Technology.technology.field.name}',
             )
         )
