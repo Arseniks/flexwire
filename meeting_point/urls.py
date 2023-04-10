@@ -7,6 +7,7 @@ from django.urls import path
 
 import home.urls
 import meeting_point.settings
+import teams.urls
 import users.urls
 
 urlpatterns = [
@@ -14,6 +15,7 @@ urlpatterns = [
     path('', include(home.urls)),
     path('auth/', include(users.urls)),
     path('auth/', include(django.contrib.auth.urls)),
+    path('teams/', include(teams.urls)),
 ]
 
 if meeting_point.settings.DEBUG:

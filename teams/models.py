@@ -2,10 +2,14 @@ import pathlib
 
 import django.db.models
 
+from teams.managers import RoleTeamManager
+from teams.managers import TeamManager
 import users.models
 
 
 class Team(django.db.models.Model):
+    objects = TeamManager()
+
     def get_upload_image(self, filename):
         return (
             pathlib.Path('team_files')
@@ -80,6 +84,8 @@ class Role(django.db.models.Model):
 
 
 class RoleTeam(django.db.models.Model):
+    objects = RoleTeamManager()
+
     role_default = django.db.models.ForeignKey(
         Role,
         help_text='Role from standard list',
