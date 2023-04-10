@@ -1,0 +1,284 @@
+{% extends "base.html" %}
+
+{% load thumbnail %}
+{% load bootstrap_icons %}
+
+{% block title %}
+  {{ team.title }}
+{% endblock title %}
+
+{% block content %}
+  {% if team.creator_id == request.user.id %}
+    <div class="col-lg-6 mx-auto">
+      <div class="card d-flex border-0 my-5 p-3 rounded shadow-sm" id="tabs"
+           role="tablist">
+        <ul class="nav nav-pills" id="options-tab">
+          <li class="nav-item" role="presentation">
+            <button class="tab_link active border-0" id="pills-about-tab"
+                    data-bs-toggle="pill" data-bs-target="#options-public-view"
+                    type="button" role="tab" aria-controls="options-public-view"
+                    aria-selected="true">Public view
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="tab_link border-0" id="pills-about-tab"
+                    data-bs-toggle="pill" data-bs-target="#options-edit"
+                    type="button" role="tab" aria-controls="options-edit"
+                    aria-selected="true">Edit
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="tab_link border-0" id="pills-about-tab"
+                    data-bs-toggle="pill" data-bs-target="#options-pendings"
+                    type="button" role="tab" aria-controls="options-pendings"
+                    aria-selected="true">Pendings <span class="badge rounded-circle text-bg-danger">{{ pendings.all.count }}</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tab-content mb-5" id="options-tabContent">
+    <div class="tab-pane fade active show" id="options-public-view" role="tabpanel"
+         aria-labelledby="options-public-view" tabindex="0">
+  {% endif %}
+  <div class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 d-flex flex-column">
+        <div class="card d-flex flex-row p-4 border-0 align-items-center rounded shadow-sm">
+          {% thumbnail team.image "256x256" crop="center" as img %}
+            <img src="{{ img.url }}"
+                 width="auto"
+                 height="128px"
+                 class="rounded-circle"
+                 alt="team image"/>
+          {% endthumbnail %}
+          <h3 class="fw-bold ms-4">{{ team.title }}</h3>
+        </div>
+        <div class="card d-flex border-0 my-5 p-3 rounded shadow-sm" id="tabs"
+             role="tablist">
+          <ul class="nav nav-pills" id="pills-tab">
+            <li class="nav-item" role="presentation">
+              <button class="tab_link active border-0" id="pills-about-tab"
+                      data-bs-toggle="pill" data-bs-target="#pills-about"
+                      type="button" role="tab" aria-controls="pills-home"
+                      aria-selected="true">About project
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="tab_link border-0" id="pills-team-tab"
+                      data-bs-toggle="pill" data-bs-target="#pills-team"
+                      type="button" role="tab" aria-controls="pills-team"
+                      aria-selected="true">Team
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="tab_link border-0" id="pills-vacancies-tab"
+                      data-bs-toggle="pill" data-bs-target="#pills-vacancies"
+                      type="button" role="tab" aria-controls="pills-vacancies"
+                      aria-selected="true">Vacancies
+              </button>
+            </li>
+          </ul>
+        </div>
+        <div class="tab-content" id="pills-tabContent">
+          <div class="tab-pane active show fade card border-0 rounded p-3 shadow-sm"
+               id="pills-about" role="tabpanel"
+               aria-labelledby="pills-about-tab" tabindex="0">
+            <p class="text-muted">{{ team.description }}</p>
+            <p>{% bs_icon "file-earmark-ppt" %}
+              <a href="{{ team.presentation }}" download>Presentation</a>
+            </p>
+            <div class="d-flex flex-column gap-2 mt-auto">
+              <div class="d-flex gap-2">
+                <span class="tech bg-light">{% bs_icon "stack" %}Technologies:</span>
+                <ul class="list-unstyled d-flex flex-wrap gap-2 mb-0">
+                  {% for tech in team.technologies.all %}
+                    <li class="badge tech">{{ tech.technology }}</li>
+                  {% endfor %}
+                </ul>
+              </div>
+              <div class="d-flex gap-2">
+                <span class="lang bg-light">{% bs_icon "translate" %}Languages:</span>
+                <ul class="list-unstyled d-flex flex-wrap gap-2 mb-0">
+                  {% for lang in team.languages.all %}
+                    <li class="badge lang">{{ lang.language }}</li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="pills-team" role="tabpanel"
+               aria-labelledby="pills-team-tab" tabindex="0">
+            <div class="row row-cols-md-2 row-cols-lg-3 row-cols-1 d-flex w-100 gy-4 justify-content-center">
+              {% for member in members.all %}
+                <a class="col-sm-6 col-lg-4 mb-3 text-decoration-none"
+                   href="#">
+                  <div class="card card-fw h-100 border-0">
+                    <div class="card-body text-center">
+                      <div class="mb-2 justify-content-center d-flex">
+                        {% thumbnail member.user.image "256x256" crop="center" as img %}
+                          <img src="{{ img.url }}"
+                               width="72px"
+                               height="72px"
+                               class="rounded-circle"
+                               alt="team image"/>
+                        {% empty %}
+                          {% bs_icon "person-circle" size="72px" extra_classes="text-secondary" %}
+                        {% endthumbnail %}
+                      </div>
+                      <h4 class="card-title text-dark fw-bold">{{ member.user.nickname }}</h4>
+                      <span class="card-subtitle gray-text text-uppercase">{{ member.role_default.name }}</span>
+                    </div>
+                  </div>
+                </a>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="tab-pane fade card border-0 rounded p-3 shadow-sm"
+               id="pills-vacancies" role="tabpanel"
+               aria-labelledby="pills-vacancies-tab" tabindex="0">
+            <ul class="list-group list-group-flush">
+              {% for place in vacancies %}
+                <li class="list-group-item d-flex justify-content-between">
+                  <p class="fw-lighter text-capitalize my-auto">{{ place.role_default.name }}</p>
+                  {% if team.creator_id != request.user.id and request.user.is_authenticated %}
+                    <form action="{% url 'teams:create_pending' place.id %}"
+                          method="post">
+                      {% csrf_token %}
+                      <input class="btn btn-primary" type="submit" value="Respond"/>
+                    </form>
+                  {% else %}
+                    <div class="d-flex flex-column">
+                      <input class="btn btn-primary" value="Respond" disabled/>
+                      <p class="m-0 text-muted h-50">You aren't able to respond to vacancy</p>
+                    </div>
+                  {% endif %}
+                </li>
+              {% empty %}
+                <h4>Oops... there's no job for you</h4>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% if team.creator_id == request.user.id %}
+    </div>
+    <div class="tab-pane fade card border-0 rounded p-3 shadow-sm col-lg-6 mx-auto"
+         id="options-edit" role="tabpanel"
+         aria-labelledby="options-edit" tabindex="0">
+      <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for field in edit_form.visible_fields %}
+          <div class="mb-3">
+            {% for error in field.errors %}
+              <div class="alert alert-danger">
+                {{ error|escape }}
+              </div>
+            {% endfor %}
+            <div class="form-floating">
+              {% if field.widget_type in "text,clearablefile" %}
+                <input name="{{ field.html_name }}"
+                       maxlength="{{ field.max_length }}"
+                       id="{{ field.id_for_label }}"
+                       class="form-control"
+                       type="{{ field.field.widget.input_type }}"
+                       value="{{ field.value|default_if_none:'' }}"
+                        {% if field.field.required %}
+                       required
+                        {% endif %}
+                />
+                <label for="{{ field.auto_id }}">
+                  {{ field.label }}
+                </label>
+              {% elif field.widget_type == "checkbox" %}
+                <div class="form-check">
+                  {{ field }}
+                  <label class="form-check-label" for="flexCheckDefault">
+                    {{ field.label }}
+                  </label>
+                </div>
+              {% else %}
+                {{ field }}
+                {{ field.label_tag }}
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+        {% for error in form.non_field_errors %}
+          <div class="alert alert-danger">
+            {{ error|escape }}
+          </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary px-4">Save</button>
+      </form>
+      <hr/>
+      <h4>Members <span class="badge rounded-circle text-bg-danger">{{ members.all.count }}</span></h4>
+      <div>
+        <ul class="list-group list-group-flush">
+          {% for member in members.all %}
+            <li class="list-group-item">
+              <a href="#" class="text-decoration-none text-dark d-flex justify-content-between align-items-center">
+                {% thumbnail member.user.image "256x256" crop="center" as img %}
+                  <img src="{{ img.url }}"
+                       width="72px"
+                       height="72px"
+                       class="rounded-circle"
+                       alt="team image"/>
+                {% empty %}
+                  {% bs_icon "person-circle" size="72px" extra_classes="text-secondary" %}
+                {% endthumbnail %}
+                <p class="fw-bold m-0">{{ member.user.nickname }}</p>
+                <p class="m-0">{{ role.role_default.name }}</p>
+                <div class="d-flex gap-2">
+                  <form action="{% url 'teams:remove_member' member.id %}" method="post" class="d-flex justify-content-between">
+                    {% csrf_token %}
+                    <input class="btn btn-danger" type="submit" value="Remove"/>
+                  </form>
+                </div>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    <div class="tab-pane fade card border-0 rounded p-3 shadow-sm col-lg-6 mx-auto"
+         id="options-pendings" role="tabpanel"
+         aria-labelledby="options-pendings" tabindex="0">
+      <ul class="list-group list-group-flush">
+        {% for pending in pendings.all %}
+          <li class="list-group-item">
+            <a href="#" class="text-decoration-none text-dark d-flex justify-content-between align-items-center">
+              {% thumbnail pending.user.image "256x256" crop="center" as img %}
+                <img src="{{ img.url }}"
+                     width="72px"
+                     height="72px"
+                     class="rounded-circle"
+                     alt="team image"/>
+              {% empty %}
+                {% bs_icon "person-circle" size="72px" extra_classes="text-secondary" %}
+              {% endthumbnail %}
+              <p class="fw-bold m-0">{{ pending.user.nickname }}</p>
+              <p class="m-0">{{ role.role_default.name }}</p>
+              <div class="d-flex gap-2">
+                <form action="{% url 'teams:accept_pending' pending.id %}" method="post" class="d-flex justify-content-between">
+                  {% csrf_token %}
+                  <input class="btn btn-success" type="submit" value="Accept"/>
+                </form>
+                <form action="{% url 'teams:reject_pending' pending.id %}" method="post" class="d-flex justify-content-between">
+                  {% csrf_token %}
+                  <input class="btn btn-danger" type="submit" value="Reject"/>
+                </form>
+              </div>
+            </a>
+          </li>
+        {% empty %}
+          <h4>Oops... there's no pending users</h4>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  {% endif %}
+{% endblock content %}

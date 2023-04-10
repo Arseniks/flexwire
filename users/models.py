@@ -9,6 +9,9 @@ class Language(django.db.models.Model):
         help_text='Specify the title of this language',
     )
 
+    def __str__(self):
+        return self.language
+
 
 class Technology(django.db.models.Model):
     technology = django.db.models.CharField(
@@ -16,6 +19,9 @@ class Technology(django.db.models.Model):
         verbose_name='Title of technology',
         help_text='Specify the title of this technology',
     )
+
+    def __str__(self):
+        return self.technology
 
 
 class CustomUser(AbstractUser):
@@ -71,6 +77,9 @@ class CustomUser(AbstractUser):
         verbose_name='Technologies you use',
         help_text='Specify technologies you know or those, '
         'which you are still learning',
+    )
+    image = django.db.models.ImageField(
+        'avatar', blank=True, null=True, upload_to='user_avatars/'
     )
 
     class StudyPlaceChoices(django.db.models.TextChoices):

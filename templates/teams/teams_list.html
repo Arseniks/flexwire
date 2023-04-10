@@ -22,7 +22,7 @@
       <div class="row row-cols-md-2 row-cols-lg-3 row-cols-1 my-5 d-flex w-100 gy-4">
         {% for team in teams %}
           <div class="col">  
-            <a class="card team d-flex border-0 flex-column text-decoration-none h-100" href="#">
+            <a class="card team d-flex border-0 flex-column text-decoration-none h-100" href="{% url 'teams:team_detail' team.id %}">
               {% thumbnail team.image "256x256" crop="center" as img %}
                 <img src="{{ img.url }}"
                     width="100%"
