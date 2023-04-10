@@ -87,12 +87,12 @@ class RoleTeam(django.db.models.Model):
     )
     team = django.db.models.ForeignKey(
         Team,
-        help_text='Choose  your teammate',
+        help_text='Choose your teammate',
         on_delete=django.db.models.deletion.CASCADE,
     )
 
     def __str__(self):
-        return self.role_default.name
+        return f'{self.role_default.name} in team {self.team.title}'
 
     class Meta:
         verbose_name = 'role in team'
@@ -112,7 +112,7 @@ class Member(django.db.models.Model):
     )
 
     def __str__(self):
-        return self.role_team.name
+        return self.role_team.role_default.name
 
     class Meta:
         verbose_name = 'member'
@@ -132,7 +132,7 @@ class Pending(django.db.models.Model):
     )
 
     def __str__(self):
-        return self.role_team.name
+        return self.role_team.role_default.name
 
     class Meta:
         verbose_name = 'pending'

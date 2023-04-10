@@ -10,6 +10,13 @@ class Language(django.db.models.Model):
         help_text='Specify communication language',
     )
 
+    def __str__(self):
+        return self.language
+
+    class Meta:
+        verbose_name = 'language'
+        verbose_name_plural = 'languages'
+
 
 class Technology(django.db.models.Model):
     technology = django.db.models.CharField(
@@ -17,6 +24,13 @@ class Technology(django.db.models.Model):
         verbose_name='Technology',
         help_text='Specify technology',
     )
+
+    def __str__(self):
+        return self.technology
+
+    class Meta:
+        verbose_name = 'technology'
+        verbose_name_plural = 'technologies'
 
 
 class CustomUser(AbstractUser):
