@@ -1,6 +1,3 @@
-
-from parameterized import parameterized
-
 from datetime import datetime
 
 from django.test import Client
@@ -8,6 +5,7 @@ from django.test import override_settings
 from django.test import TestCase
 from django.urls import reverse
 from django.utils import timezone
+from parameterized import parameterized
 
 from users.models import CustomUser
 from users.views import decode_token
