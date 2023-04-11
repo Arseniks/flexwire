@@ -4,20 +4,20 @@
 {% load bootstrap_icons %}
 
 {% block content %}
-  <p style="color: green;">{{ profile.username }}</p>
-  <p style="color: green;">{{ profile.nickname }}</p>
-  <p style="color: green;">{{ profile.email }}</p>
-  <p style="color: green;">{{ profile.about_me }}</p>
-  <p style="color: green;">{{ profile.github }}</p>
-  <p style="color: green;">{{ profile.contact_data }}</p>
-  <p style="color: green;">{{ profile.city }}</p>
-  <p style="color: green;">{{ profile.resume }}</p>
+  <p>{{ profile.username }}</p>
+  <p>{{ profile.nickname }}</p>
+  <p>{{ profile.email }}</p>
+  <p>{{ profile.about_me }}</p>
+  <p>{{ profile.github }}</p>
+  <p>{{ profile.contact_data }}</p>
+  <p>{{ profile.city }}</p>
+  <p>{{ profile.resume }}</p>
   <p>
     Languages: {% for lang in profile.languages.all %}<button type="button">{{ lang }}</button> {% endfor %}
   </p>
   <p>
     Technologies: {% for tech in profile.technologies.all %}<button type="button">{{ tech }}</button> {% endfor %}
   </p>
-  <p style="color: green;">{{ profile.education_choose }}</p>
-  <p style="color: green;">{{ profile.education }}</p>
+  <p>{{ profile.education_choose }}</p>
+  <p>{{ profile.education }}</p>
 {% endblock content %}
