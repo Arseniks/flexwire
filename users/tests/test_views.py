@@ -1,3 +1,6 @@
+
+from parameterized import parameterized
+
 from datetime import datetime
 
 from django.test import Client
@@ -9,12 +12,6 @@ from django.utils import timezone
 from users.models import CustomUser
 from users.views import decode_token
 from users.views import generate_token
-from django.test import Client
-from django.test import TestCase
-from django.urls import reverse
-from parameterized import parameterized
-
-from users.models import CustomUser
 
 
 class ViewsTests(TestCase):
@@ -186,16 +183,18 @@ class TestAccountAndProfile(TestCase):
         self.assertEqual(response.status_code, 302)
 
     @parameterized.expand(
-        ('Your nickname:',),
-        ('Tell more about yourself:',),
-        ('GitHub, Bitbucket or something similar',),
-        ('Contact information:',),
-        ('Place where you live (country and city)',),
-        ('Resume:',),
-        ('Languages you speak:',),
-        ('Technologies you use:',),
-        ('Education:',),
-        ('Where have you learned?',),
+        [
+            ('Your nickname',),
+            ('Tell more about yourself',),
+            ('GitHub, Bitbucket or something similar',),
+            ('Contact information',),
+            ('Place where you live (country and city)',),
+            ('Resume',),
+            ('Languages you speak',),
+            ('Technologies you use',),
+            ('Education',),
+            ('Where have you learned?',),
+        ]
     )
     def test_form_is_on_page(self, content):
         client = Client()
@@ -204,15 +203,17 @@ class TestAccountAndProfile(TestCase):
         self.assertContains(response, content)
 
     @parameterized.expand(
-        ('1@gmail.com',),
-        ('nickname',),
-        ('some info',),
-        ('https://github.com/some_user',),
-        ('https://t.me/some_user',),
-        ('Karaganda',),
-        ('some_resume.pfd',),
-        ('university',),
-        ('some university',),
+        [
+            ('1@gmail.com',),
+            ('nickname',),
+            ('some info',),
+            ('https://github.com/some_user',),
+            ('https://t.me/some_user',),
+            ('Karaganda',),
+            ('some_resume.pfd',),
+            ('university',),
+            ('some university',),
+        ]
     )
     def test_profile_200_big(self, content):
         response = Client().get(reverse('users:profile', args=[1]))
@@ -220,12 +221,14 @@ class TestAccountAndProfile(TestCase):
         self.assertContains(response, content)
 
     @parameterized.expand(
-        ('2@gmail.com',),
-        ('nickname2',),
-        ('https://github.com/some_user2',),
-        ('https://t.me/some_user2',),
-        ('university',),
-        ('some university2',),
+        [
+            ('2@gmail.com',),
+            ('nickname2',),
+            ('https://github.com/some_user2',),
+            ('https://t.me/some_user2',),
+            ('university',),
+            ('some university2',),
+        ]
     )
     def test_profile_200_small(self, content):
         response = Client().get(reverse('users:profile', args=[2]))

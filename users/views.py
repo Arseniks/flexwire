@@ -1,28 +1,23 @@
 from datetime import datetime
 from datetime import timedelta
 
-from django.shortcuts import redirect
-from django.shortcuts import render
-from django.views.generic import DetailView
-from django.views.generic import View
-
-from users.forms import UserAccountForm
-from users.models import CustomUser
-
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import login
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404
+from django.shortcuts import redirect
 from django.shortcuts import render
 from django.template import loader
 from django.urls import reverse_lazy
 from django.utils import timezone
-from django.views import View
+from django.views.generic import DetailView
 from django.views.generic import FormView
+from django.views.generic import View
 import jwt
 
 from users.forms import CustomUserCreationForm
+from users.forms import UserAccountForm
 from users.models import CustomUser
 
 
@@ -124,7 +119,3 @@ class Account(View):
         if form.is_valid():
             form.save()
             return redirect('users:profile')
-
-        # context = {'form': (form, profile_form)}
-        # return render(request, self.template_name, context)
-

@@ -3,14 +3,11 @@ from django.contrib import admin
 import django.contrib.auth.urls
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import include
-from django.urls import include
 from django.urls import path
 
 import home.urls
 import meeting_point.settings
 import meeting_point.views
-import users.urls
-
 import users.urls
 
 urlpatterns = [

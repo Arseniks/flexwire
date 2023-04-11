@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
-from django.urls import path
 import django.contrib.auth.views
 import django.urls
+from django.urls import path
 
 import users.views
 
@@ -75,6 +75,7 @@ urlpatterns = [
         'activate/<str:token>/',
         users.views.ActivateUserView.as_view(),
         name='activate_user',
+    ),
     path('profile/<int:pk>/', users.views.Profile.as_view(), name='profile'),
     path(
         'account/',
