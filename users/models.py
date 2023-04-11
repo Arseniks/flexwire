@@ -102,4 +102,5 @@ class CustomUser(AbstractUser):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.nickname = super().username
+        if not self.nickname:
+            self.nickname = super().username
