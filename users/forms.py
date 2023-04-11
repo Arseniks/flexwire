@@ -3,12 +3,7 @@ from django.contrib.auth.forms import UserChangeForm
 from users.models import CustomUser
 
 
-class UserAccountForm(UserChangeForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.visible_fields():
-            field.field.widget.attrs['class'] = 'form-control'
-
+class CustomUserCreationForm(UserCreationForm):
     password = None
 
     class Meta:
@@ -28,3 +23,17 @@ class UserAccountForm(UserChangeForm):
             CustomUser.education_choose.field.name,
             CustomUser.education.field.name,
         ]
+
+
+class UserAccountForm(UserChangeForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.visible_fields():
+            field.field.widget.attrs['class'] = 'form-control'
+
+    class Meta:
+        model = CustomUser
+        fields = (
+            CustomUser.username.field.name,
+            CustomUser.email.field.name,
+        )

@@ -1,14 +1,16 @@
 {% extends "base.html" %}
 
-{% load static %}
-{% load bootstrap_icons %}
+{% block title %}
+  Account
+{% endblock title %}
 
 {% block content %}
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <p>
-      {{ form.as_p }}
-    </p>
-    <button type="submit" >Сохранить</button>
-  </form>
+  <br />
+  <div class="text-center">
+    <a href="{% url 'home:landing' %}" class="header__logo text-decoration-none">
+      <span>FLEXWIRE</span>
+    </a>
+  </div>
+  <h1 class="text-center text-dark">Complete your account</h1>
+  {% include "users/includes/form_with_buttons.html" %}
 {% endblock content %}
