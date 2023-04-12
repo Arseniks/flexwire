@@ -9,10 +9,13 @@ import home.urls
 import meeting_point.settings
 import meeting_point.views
 import users.urls
+import meeting_point
+import teams.urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(home.urls)),
+    path('teams/', include(teams.urls)),
     path('auth/', include(users.urls)),
     path('auth/', include(django.contrib.auth.urls)),
 ]

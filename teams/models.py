@@ -82,12 +82,14 @@ class Role(django.db.models.Model):
 class RoleTeam(django.db.models.Model):
     role_default = django.db.models.ForeignKey(
         Role,
+        related_name='roles',
         help_text='Role from standard list',
         on_delete=django.db.models.deletion.CASCADE,
     )
     team = django.db.models.ForeignKey(
         Team,
-        help_text='Choose your teammate',
+        related_name='roleteams',
+        help_text='Choose  your teammate',
         on_delete=django.db.models.deletion.CASCADE,
     )
 
@@ -102,6 +104,7 @@ class RoleTeam(django.db.models.Model):
 class Member(django.db.models.Model):
     role_team = django.db.models.ForeignKey(
         RoleTeam,
+        related_name='members',
         help_text='Choose roles in your project',
         on_delete=django.db.models.deletion.CASCADE,
     )
@@ -112,7 +115,10 @@ class Member(django.db.models.Model):
     )
 
     def __str__(self):
-        return self.role_team.role_default.name
+        return (
+            f'{self.user.nickname} {self.role_team.role_default.name}'
+            f' {self.role_team.team.title}'
+        )
 
     class Meta:
         verbose_name = 'member'
@@ -122,17 +128,21 @@ class Member(django.db.models.Model):
 class Pending(django.db.models.Model):
     role_team = django.db.models.ForeignKey(
         RoleTeam,
+        related_name='pendings',
         help_text='Choose role that you want to be',
         on_delete=django.db.models.deletion.CASCADE,
     )
-    user = django.db.models.OneToOneField(
+    user = django.db.models.ForeignKey(
         users.models.CustomUser,
         help_text='User for this pending',
         on_delete=django.db.models.deletion.CASCADE,
     )
 
     def __str__(self):
-        return self.role_team.role_default.name
+        return (
+            f'{self.user.nickname} {self.role_team.role_default.name}'
+            f' {self.role_team.team.title}'
+        )
 
     class Meta:
         verbose_name = 'pending'

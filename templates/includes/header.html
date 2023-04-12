@@ -15,14 +15,16 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse " id="navbarNavDropdown">
+      {% with request.resolver_match.view_name as view_name %}
       <ul class="navbar-nav mx-md-auto ms-sm-auto">
         <li class="nav-item">
-          <a class="header__link h3 me-4" href="#">Team search</a>
+          <a class="header__link h3 {% if view_name == 'teams:teams_list' %}active{% endif %} me-4" href="{% url 'teams:teams_list' %}">Team search</a>
         </li>
         <li class="nav-item">
           <a class="header__link h3" href="#">Developer search</a>
         </li>
       </ul>
+      {% endwith %}
       <a href="#" class="ms-lg-auto ms-sm-2 navbar-btn lift text-decoration-none">
         <span class="d-flex align-items-center h-100 ">
           {% bs_icon 'person-circle' size='32px' color='#6C757D' %}
