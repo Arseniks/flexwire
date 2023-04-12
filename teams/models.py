@@ -1,11 +1,17 @@
+import django.db.models
+
 import pathlib
 
 import django.db.models
 
+from teams.managers import RoleTeamManager
+from teams.managers import TeamManager
 import users.models
 
 
 class Team(django.db.models.Model):
+    objects = TeamManager()
+
     def get_upload_image(self, filename):
         return (
             pathlib.Path('team_files')
@@ -59,6 +65,10 @@ class Team(django.db.models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        verbose_name = 'team'
+        verbose_name_plural = 'teams'
+
 
 class Role(django.db.models.Model):
     name = django.db.models.CharField(
@@ -70,8 +80,14 @@ class Role(django.db.models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = 'role'
+        verbose_name_plural = 'roles'
+
 
 class RoleTeam(django.db.models.Model):
+    objects = RoleTeamManager()
+
     role_default = django.db.models.ForeignKey(
         Role,
         related_name='roles',
@@ -86,7 +102,11 @@ class RoleTeam(django.db.models.Model):
     )
 
     def __str__(self):
-        return f'{self.role_default.name} {self.team.title}'
+        return self.role_default.name
+
+    class Meta:
+        verbose_name = 'role in team'
+        verbose_name_plural = 'roles in team'
 
 
 class Member(django.db.models.Model):
@@ -103,10 +123,11 @@ class Member(django.db.models.Model):
     )
 
     def __str__(self):
-        return (
-            f'{self.user.nickname} {self.role_team.role_default.name}'
-            f' {self.role_team.team.title}'
-        )
+        return self.role_team.name
+
+    class Meta:
+        verbose_name = 'member'
+        verbose_name_plural = 'members'
 
 
 class Pending(django.db.models.Model):
@@ -123,7 +144,8 @@ class Pending(django.db.models.Model):
     )
 
     def __str__(self):
-        return (
-            f'{self.user.nickname} {self.role_team.role_default.name}'
-            f' {self.role_team.team.title}'
-        )
+        return self.role_team.name
+
+    class Meta:
+        verbose_name = 'pending'
+        verbose_name_plural = 'pending list'

@@ -1,16 +1,20 @@
 from django.conf.urls.static import static
 from django.contrib import admin
+import django.contrib.auth.urls
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import include
 from django.urls import path
 
 import home.urls
-import meeting_point
+import meeting_point.settings
 import teams.urls
+import users.urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(home.urls)),
+    path('auth/', include(users.urls)),
+    path('auth/', include(django.contrib.auth.urls)),
     path('teams/', include(teams.urls)),
 ]
 

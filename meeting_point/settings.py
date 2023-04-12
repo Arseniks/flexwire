@@ -32,16 +32,14 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
-    'users.apps.UsersConfig',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'teams.apps.TeamsConfig',
+    'users.apps.UsersConfig',
     'debug_toolbar',
     'home.apps.HomeConfig',
-    'django_cleanup.apps.CleanupConfig',
-    'sorl.thumbnail',
     'django_bootstrap_icons',
 ]
 
@@ -108,6 +106,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LOGIN_URL = '/auth/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/auth/login/'
+
 AUTH_USER_MODEL = 'users.CustomUser'
 
 LANGUAGE_CODE = 'ru'
@@ -130,4 +132,16 @@ STATIC_ROOT = BASE_DIR / 'static'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = BASE_DIR / 'sent_emails'
+
+FLEXWIRE_MAIL = os.environ.get('FLEXWIRE_MAIL', 'meeting-point@gmail.com')
+
+
+DEFAULT_USER_ACTIVITY = (
+    os.environ.get('DEFAULT_USER_ACTIVITY', str(DEBUG)) == 'True'
+)
