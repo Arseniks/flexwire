@@ -79,7 +79,7 @@ class Register(FormView):
             send_mail(
                 'Verification account',
                 '',
-                settings.FLEXWIRE_MAIL,
+                settings.DEFAULT_FROM_EMAIL,
                 [form.cleaned_data['email']],
                 html_message=loader.render_to_string(
                     'users/activating_email.html',

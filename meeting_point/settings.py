@@ -125,12 +125,15 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'test@karonus.ru')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'prxnmhxvndensczk')
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-EMAIL_FILE_PATH = BASE_DIR / 'sent_emails'
-
-FLEXWIRE_MAIL = os.environ.get('FLEXWIRE_MAIL', 'meeting-point@gmail.com')
-
 
 DEFAULT_USER_ACTIVITY = (
     os.environ.get('DEFAULT_USER_ACTIVITY', str(DEBUG)) == 'True'
