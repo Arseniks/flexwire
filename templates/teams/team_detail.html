@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load thumbnail %}
+{% load static %}
 {% load bootstrap_icons %}
 
 {% block title %}
@@ -93,7 +94,7 @@
               <div class="d-flex gap-2">
                 <span class="tech bg-light">{% bs_icon "stack" %}Technologies:</span>
                 <ul class="list-unstyled d-flex flex-wrap gap-2 mb-0">
-                  {% for tech in team.technologies.all %}
+                  {% for tech in technologies %}
                     <li class="badge tech">{{ tech.technology }}</li>
                   {% endfor %}
                 </ul>
@@ -101,7 +102,7 @@
               <div class="d-flex gap-2">
                 <span class="lang bg-light">{% bs_icon "translate" %}Languages:</span>
                 <ul class="list-unstyled d-flex flex-wrap gap-2 mb-0">
-                  {% for lang in team.languages.all %}
+                  {% for lang in languages %}
                     <li class="badge lang">{{ lang.language }}</li>
                   {% endfor %}
                 </ul>
@@ -111,7 +112,7 @@
           <div class="tab-pane fade" id="pills-team" role="tabpanel"
                aria-labelledby="pills-team-tab" tabindex="0">
             <div class="row row-cols-md-2 row-cols-lg-3 row-cols-1 d-flex w-100 gy-4 justify-content-center">
-              {% for member in members.all %}
+              {% for member in members %}
                 <a class="col-sm-6 col-lg-4 mb-3 text-decoration-none"
                    href="#">
                   <div class="card card-fw h-100 border-0">
@@ -200,6 +201,13 @@
                     {{ field.label }}
                   </label>
                 </div>
+              {% elif field.widget_type == "selectmultiple" %}
+                <label for="{{ field.auto_id }}">{{ field.label }}</label>
+                <select name="{{ field.html_name }}" id="{{ field.id_for_label }}" multiple placeholder="{{ field.label }}">
+                  {% for el in field.field.queryset.all %}
+                    <option value="{{ el.pk }}" {% if el in languages or el in technologies %}selected{% endif %}>{{ el }}</option>
+                  {% endfor %}
+                </select>
               {% else %}
                 {{ field }}
                 {{ field.label_tag }}
@@ -218,7 +226,7 @@
       <h4>Members <span class="badge rounded-circle text-bg-danger">{{ members.all.count }}</span></h4>
       <div>
         <ul class="list-group list-group-flush">
-          {% for member in members.all %}
+          {% for member in members %}
             <li class="list-group-item">
               <a href="#" class="text-decoration-none text-dark d-flex justify-content-between align-items-center">
                 {% thumbnail member.user.image "256x256" crop="center" as img %}
@@ -282,3 +290,15 @@
   </div>
   {% endif %}
 {% endblock content %}
+{% block scripts %}
+  <script src="{% static 'js/virtual-select.min.js' %}"></script>
+  <script>
+    VirtualSelect.init({
+        ele: 'select',
+        disableSelectAll: true,
+        multiple: true,
+        search: false,
+        required: true,
+    });
+  </script>
+{% endblock scripts %}

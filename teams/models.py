@@ -1,16 +1,13 @@
-import django.db.models
-
 import pathlib
 
 import django.db.models
 
-from teams.managers import RoleTeamManager
-from teams.managers import TeamManager
+import teams.managers
 import users.models
 
 
 class Team(django.db.models.Model):
-    objects = TeamManager()
+    objects = teams.managers.TeamManager()
 
     def get_upload_image(self, filename):
         return (
@@ -86,7 +83,7 @@ class Role(django.db.models.Model):
 
 
 class RoleTeam(django.db.models.Model):
-    objects = RoleTeamManager()
+    objects = teams.managers.RoleTeamManager()
 
     role_default = django.db.models.ForeignKey(
         Role,
@@ -110,6 +107,8 @@ class RoleTeam(django.db.models.Model):
 
 
 class Member(django.db.models.Model):
+    objects = teams.managers.MemberManager()
+
     role_team = django.db.models.ForeignKey(
         RoleTeam,
         related_name='members',
@@ -123,7 +122,7 @@ class Member(django.db.models.Model):
     )
 
     def __str__(self):
-        return self.role_team.name
+        return self.role_team.role_default.name
 
     class Meta:
         verbose_name = 'member'
@@ -131,6 +130,8 @@ class Member(django.db.models.Model):
 
 
 class Pending(django.db.models.Model):
+    objects = teams.managers.PendingManager()
+
     role_team = django.db.models.ForeignKey(
         RoleTeam,
         related_name='pendings',
@@ -144,7 +145,7 @@ class Pending(django.db.models.Model):
     )
 
     def __str__(self):
-        return self.role_team.name
+        return self.role_team.role_default.name
 
     class Meta:
         verbose_name = 'pending'

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'home.apps.HomeConfig',
     'django_bootstrap_icons',
+    'sorl.thumbnail',
 ]
 
 MIDDLEWARE = [

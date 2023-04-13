@@ -12,7 +12,6 @@ class EditTeamForm(django.forms.ModelForm):
             teams.models.Team.description.field.name,
             teams.models.Team.presentation.field.name,
             teams.models.Team.is_published.field.name,
-            teams.models.Team.languages.field.name,
             teams.models.Team.technologies.field.name,
         )
 
@@ -22,7 +21,5 @@ class EditTeamForm(django.forms.ModelForm):
             if field.widget_type == 'checkbox':
                 field.field.widget.attrs['class'] = 'form-check-input'
                 field.label_classes = ('form-check-label',)
-            elif field.widget_type == 'selectmultiple':
-                field.field.widget.attrs['class'] = 'form-select'
             else:
                 field.field.widget.attrs['class'] = 'form-control'
