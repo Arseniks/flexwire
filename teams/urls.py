@@ -29,4 +29,10 @@ urlpatterns = [
         teams.views.RejectPending.as_view(),
         name='reject_pending',
     ),
+    django.urls.path(
+        'create_team/',
+        teams.views.CreateTeam.as_view(),
+        name='create_team',
+    ),
+
 ]

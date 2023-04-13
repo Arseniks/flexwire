@@ -26,14 +26,14 @@ class TeamManager(models.Manager):
         return (
             self.teams(user_id)
             .prefetch_related(
-                Prefetch(Team.languages.field.name),
+                Prefetch(Team.language.field.name),
                 Prefetch(Team.technologies.field.name),
             )
             .select_related(Team.creator.field.name)
             .only(
                 f'{Team.technologies.field.name}__'
                 f'{Technology.technology.field.name}',
-                f'{Team.languages.field.name}__'
+                f'{Team.language.field.name}__'
                 f'{Language.language.field.name}',
                 Team.title.field.name,
                 Team.description.field.name,

@@ -100,12 +100,8 @@
                 </ul>
               </div>
               <div class="d-flex gap-2">
-                <span class="lang bg-light">{% bs_icon "translate" %}Languages:</span>
-                <ul class="list-unstyled d-flex flex-wrap gap-2 mb-0">
-                  {% for lang in languages %}
-                    <li class="badge lang">{{ lang.language }}</li>
-                  {% endfor %}
-                </ul>
+                <span class="lang bg-light">{% bs_icon "translate" %}Language:</span>
+                <span class="badge lang">{{ language.language }}</span>
               </div>
             </div>
           </div>
@@ -172,55 +168,9 @@
          aria-labelledby="options-edit" tabindex="0">
       <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {% for field in edit_form.visible_fields %}
-          <div class="mb-3">
-            {% for error in field.errors %}
-              <div class="alert alert-danger">
-                {{ error|escape }}
-              </div>
-            {% endfor %}
-            <div class="form-floating">
-              {% if field.widget_type in "text,clearablefile" %}
-                <input name="{{ field.html_name }}"
-                       maxlength="{{ field.max_length }}"
-                       id="{{ field.id_for_label }}"
-                       class="form-control"
-                       type="{{ field.field.widget.input_type }}"
-                       value="{{ field.value|default_if_none:'' }}"
-                        {% if field.field.required %}
-                       required
-                        {% endif %}
-                />
-                <label for="{{ field.auto_id }}">
-                  {{ field.label }}
-                </label>
-              {% elif field.widget_type == "checkbox" %}
-                <div class="form-check">
-                  {{ field }}
-                  <label class="form-check-label" for="flexCheckDefault">
-                    {{ field.label }}
-                  </label>
-                </div>
-              {% elif field.widget_type == "selectmultiple" %}
-                <label for="{{ field.auto_id }}">{{ field.label }}</label>
-                <select name="{{ field.html_name }}" id="{{ field.id_for_label }}" multiple placeholder="{{ field.label }}">
-                  {% for el in field.field.queryset.all %}
-                    <option value="{{ el.pk }}" {% if el in languages or el in technologies %}selected{% endif %}>{{ el }}</option>
-                  {% endfor %}
-                </select>
-              {% else %}
-                {{ field }}
-                {{ field.label_tag }}
-              {% endif %}
-            </div>
-          </div>
-        {% endfor %}
-        {% for error in form.non_field_errors %}
-          <div class="alert alert-danger">
-            {{ error|escape }}
-          </div>
-        {% endfor %}
-        <button type="submit" class="btn btn-primary px-4">Save</button>
+        {% with form=edit_form %}
+          {% include 'includes/form.html' %}
+        {% endwith %}
       </form>
       <hr/>
       <h4>Members <span class="badge rounded-circle text-bg-danger">{{ members.all.count }}</span></h4>
@@ -292,13 +242,5 @@
 {% endblock content %}
 {% block scripts %}
   <script src="{% static 'js/virtual-select.min.js' %}"></script>
-  <script>
-    VirtualSelect.init({
-        ele: 'select',
-        disableSelectAll: true,
-        multiple: true,
-        search: false,
-        required: true,
-    });
-  </script>
+  <script src="{% static 'js/init_select.js' %}"></script>
 {% endblock scripts %}

@@ -13,6 +13,8 @@ body {
 
 .main {
   flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .header {
@@ -40,7 +42,7 @@ body {
   text-decoration: none;
 }
 
-.header__link.active{
+.header__link.active, .header__link:hover.active {
   font-weight: 700;
   text-decoration: underline var(--bs-primary);
 }

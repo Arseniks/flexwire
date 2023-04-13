@@ -2,9 +2,11 @@ import django.db.models
 import django.http.request
 import django.shortcuts
 import django.views.generic
+import django.contrib.auth.mixins
 
 import teams.forms
 import teams.models
+import teams.utils
 
 
 class TeamsList(django.views.generic.ListView):
@@ -33,7 +35,7 @@ class TeamDetail(django.views.generic.DetailView):
         members = teams.models.Member.objects.get_members(team.id).all()
         vacancies = teams.models.RoleTeam.objects.get_vacancies(team.id)
 
-        languages = team.languages.all()
+        language = team.language
         technologies = team.technologies.all()
 
         if user_id != -1:
@@ -42,7 +44,7 @@ class TeamDetail(django.views.generic.DetailView):
         if user_id == team.creator_id:
             pendings = teams.models.Pending.objects.get_pendings(team.id)
             context['pendings'] = pendings
-            context['edit_form'] = teams.forms.EditTeamForm(
+            context['edit_form'] = teams.forms.TeamForm(
                 instance=team,
             )
 
@@ -50,7 +52,7 @@ class TeamDetail(django.views.generic.DetailView):
             {
                 'team': team,
                 'technologies': technologies,
-                'languages': languages,
+                'language': language,
                 'vacancies': vacancies,
                 'members': members,
             }
@@ -65,18 +67,20 @@ class TeamDetail(django.views.generic.DetailView):
             )
         )
         if request.user.id == team.creator_id:
-            technology_pks = request.POST.getlist('technologies')[0]
-            if technology_pks:
-                temp_dict = request.POST.copy()
-                temp_dict.setlist('technologies', technology_pks.split(','))
-                request.POST = temp_dict
+            teams.utils.pull_out_technologies(request)
 
-            form = teams.forms.EditTeamForm(
+            form = teams.forms.TeamForm(
                 request.POST, request.FILES, instance=team
             )
 
             if form.is_valid():
                 form.save()
+
+            self.object = self.get_object()
+            context = super(TeamDetail, self).get_context_data(**kwargs)
+            context['edit_form'] = form
+            return super(TeamDetail, self).render_to_response(
+                context=context)
 
         return django.shortcuts.redirect('teams:team_detail', pk=team.id)
 
@@ -135,3 +139,21 @@ class RejectPending(django.views.generic.View):
         return django.shortcuts.redirect(
             'teams:team_detail', pending.role_team.team_id
         )
+
+
+class CreateTeam(django.contrib.auth.mixins.LoginRequiredMixin,
+                 django.views.generic.CreateView):
+    model = teams.models.Team
+    form_class = teams.forms.TeamForm
+    template_name = 'teams/create_team.html'
+
+    def post(self, request, *args, **kwargs):
+        teams.utils.pull_out_technologies(request)
+
+        form = teams.forms.TeamForm(request.POST, request.FILES)
+        form.instance.creator = self.request.user
+
+        if form.is_valid():
+            form.save()
+        
+        return super().post(self, request, *args, **kwargs)
