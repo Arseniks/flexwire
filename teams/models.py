@@ -9,14 +9,16 @@ class Team(django.db.models.Model):
     def get_upload_image(self, filename):
         return (
             pathlib.Path('team_files')
-            / pathlib.Path(str(self.pk))
+            / pathlib.Path(str(self.creator.id))
+            / pathlib.Path(self.title)
             / f'team_image.{filename.split(".")[-1]}'
         )
 
     def get_upload_presentation(self, filename):
         return (
             pathlib.Path('team_files')
-            / pathlib.Path(str(self.pk))
+            / pathlib.Path(str(self.creator.id))
+            / pathlib.Path(self.title)
             / f'presentation.{filename.split(".")[-1]}'
         )
 
