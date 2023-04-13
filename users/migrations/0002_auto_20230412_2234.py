@@ -4,7 +4,6 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('users', '0001_squashed_0003_alter_customuser_education_choose'),
     ]
@@ -12,10 +11,16 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='language',
-            options={'verbose_name': 'language', 'verbose_name_plural': 'languages'},
+            options={
+                'verbose_name': 'language',
+                'verbose_name_plural': 'languages',
+            },
         ),
         migrations.AlterModelOptions(
             name='technology',
-            options={'verbose_name': 'technology', 'verbose_name_plural': 'technologies'},
+            options={
+                'verbose_name': 'technology',
+                'verbose_name_plural': 'technologies',
+            },
         ),
     ]
