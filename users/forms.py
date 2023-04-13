@@ -42,4 +42,5 @@ class UserAccountForm(UserChangeForm):
             CustomUser.technologies.field.name,
             CustomUser.education_choose.field.name,
             CustomUser.education.field.name,
+            CustomUser.user_picture.field.name,
         ]

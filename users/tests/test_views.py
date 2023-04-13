@@ -154,6 +154,7 @@ class TestAccountAndProfile(TestCase):
             resume='some_resume.pfd',
             education_choose='university',
             education='some university',
+            user_picture='avatar.jpg',
         )
         cls.user2 = CustomUser.objects.create(
             id=2,
@@ -192,6 +193,7 @@ class TestAccountAndProfile(TestCase):
             ('Technologies you use',),
             ('Education',),
             ('Where have you learned?',),
+            ('User picture',),
         ]
     )
     def test_form_is_on_page(self, content):
@@ -211,6 +213,7 @@ class TestAccountAndProfile(TestCase):
             ('some_resume.pfd',),
             ('university',),
             ('some university',),
+            ('avatar.jpg',),
         ]
     )
     def test_profile_200_big(self, content):

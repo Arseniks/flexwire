@@ -162,6 +162,7 @@ class TestDataBaseAddUser(TestCase):
             resume='some_resume.pfd',
             education_choose='university',
             education='some university',
+            user_picture='avatar.jpg',
         )
 
         self.user.set_password('password')

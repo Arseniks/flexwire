@@ -100,7 +100,7 @@ class CustomUser(AbstractUser):
         help_text='University you attend or completed',
     )
     user_picture = django.db.models.ImageField(
-        'User picture',
+        verbose_name='User picture',
         help_text='Show others yourself',
         null=True,
         blank=True,
