@@ -51,7 +51,7 @@ class Team(django.db.models.Model):
     language = django.db.models.ForeignKey(
         users.models.Language,
         on_delete=django.db.models.deletion.CASCADE,
-        help_text='Specify team language'
+        help_text='Specify team language',
     )
     technologies = django.db.models.ManyToManyField(
         users.models.Technology,

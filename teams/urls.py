@@ -34,5 +34,4 @@ urlpatterns = [
         teams.views.CreateTeam.as_view(),
         name='create_team',
     ),
-
 ]

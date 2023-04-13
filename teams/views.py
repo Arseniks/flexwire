@@ -1,8 +1,8 @@
+import django.contrib.auth.mixins
 import django.db.models
 import django.http.request
 import django.shortcuts
 import django.views.generic
-import django.contrib.auth.mixins
 
 import teams.forms
 import teams.models
@@ -79,8 +79,7 @@ class TeamDetail(django.views.generic.DetailView):
             self.object = self.get_object()
             context = super(TeamDetail, self).get_context_data(**kwargs)
             context['edit_form'] = form
-            return super(TeamDetail, self).render_to_response(
-                context=context)
+            return super(TeamDetail, self).render_to_response(context=context)
 
         return django.shortcuts.redirect('teams:team_detail', pk=team.id)
 
@@ -141,8 +140,10 @@ class RejectPending(django.views.generic.View):
         )
 
 
-class CreateTeam(django.contrib.auth.mixins.LoginRequiredMixin,
-                 django.views.generic.CreateView):
+class CreateTeam(
+    django.contrib.auth.mixins.LoginRequiredMixin,
+    django.views.generic.CreateView,
+):
     model = teams.models.Team
     form_class = teams.forms.TeamForm
     template_name = 'teams/create_team.html'
@@ -155,5 +156,5 @@ class CreateTeam(django.contrib.auth.mixins.LoginRequiredMixin,
 
         if form.is_valid():
             form.save()
-        
+
         return super().post(self, request, *args, **kwargs)
