@@ -154,3 +154,13 @@ body {
 .tab_link.active {
   text-decoration: #377DFF 2px underline;
 }
+
+.page-item.active .page-link {
+  color: #fff !important;
+  background: #6c757d !important;
+  border-color: #fff;
+}
+
+.page-link {
+  color: #6c757d !important;
+}

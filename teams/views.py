@@ -9,6 +9,7 @@ import teams.models
 class TeamsList(django.views.generic.ListView):
     model = teams.models.Team
     template_name = 'teams/teams_list.html'
+    paginate_by = 3
     context_object_name = 'teams'
 
     def get_queryset(self):
