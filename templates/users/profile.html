@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load bootstrap_icons %}
+
+{% block content %}
+  <p>{{ profile.username }}</p>
+  <p>{{ profile.nickname }}</p>
+  <p>{{ profile.email }}</p>
+  <p>{{ profile.about_me }}</p>
+  <p>{{ profile.github }}</p>
+  <p>{{ profile.contact_data }}</p>
+  <p>{{ profile.city }}</p>
+  <p>{{ profile.resume }}</p>
+  <p>{{ profile.user_picture }}</p>
+  <p>
+    Languages: {% for lang in profile.languages.all %}<button type="button">{{ lang }}</button> {% endfor %}
+  </p>
+  <p>
+    Technologies: {% for tech in profile.technologies.all %}<button type="button">{{ tech }}</button> {% endfor %}
+  </p>
+  <p>{{ profile.education_choose }}</p>
+  <p>{{ profile.education }}</p>
+{% endblock content %}

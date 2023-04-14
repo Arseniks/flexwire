@@ -4,7 +4,7 @@
       {% csrf_token %}
 
         {% with form=form %}
-          {% include 'users/includes/auth_form.html' %}
+          {% include "users/includes/auth_form.html" %}
         {% endwith %}
 
       <div class="col-sm-3 mx-auto mb-2 text-center">
@@ -21,7 +21,7 @@
             <button type="submit" class="btn btn-dark mx-sm-3 ">
               Reset password
             </button>
-          {% elif view_name == 'users:signup'%}
+          {% elif view_name == 'users:signup' %}
             <button type="submit" class="btn btn-dark mx-sm-3 ">
               Sign up
             </button>

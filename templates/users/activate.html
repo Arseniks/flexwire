@@ -1,10 +1,11 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+
+{% load static %}
 
 {% block title %}
   Activating account
-{% endblock %}
+{% endblock title %}
 
-{% load static %}
 {% block content %}
   <h4 class="text-center" >Activating account</h4>
   {% if messages %}
@@ -14,4 +15,4 @@
       {% endfor %}
     </ul>
   {% endif %}
-{% endblock %}
+{% endblock content %}

@@ -6,15 +6,18 @@ from django.contrib import messages
 from django.contrib.auth import login
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404
+from django.shortcuts import redirect
 from django.shortcuts import render
 from django.template import loader
 from django.urls import reverse_lazy
 from django.utils import timezone
-from django.views import View
+from django.views.generic import DetailView
 from django.views.generic import FormView
+from django.views.generic import View
 import jwt
 
 from users.forms import CustomUserCreationForm
+from users.forms import UserAccountForm
 from users.models import CustomUser
 
 
@@ -77,7 +80,7 @@ class Register(FormView):
                 'Verification account',
                 '',
                 settings.FLEXWIRE_MAIL,
-                [f'{form.cleaned_data["email"]}'],
+                [form.cleaned_data['email']],
                 html_message=loader.render_to_string(
                     'users/activating_email.html',
                     {
@@ -91,3 +94,28 @@ class Register(FormView):
 
         login(self.request, user)
         return super().form_valid(form)
+
+
+class Profile(DetailView):
+    template_name = 'users/profile.html'
+    model = CustomUser
+    context_object_name = 'profile'
+
+
+class Account(View):
+    template_name = 'users/account.html'
+
+    def get(self, request):
+        user = request.user
+        form = UserAccountForm(instance=user)
+        context = {'form': form}
+        return render(request, self.template_name, context)
+
+    def post(self, request):
+        user = request.user
+
+        form = UserAccountForm(request.POST, request.FILES, instance=user)
+
+        if form.is_valid():
+            form.save()
+            return redirect('users:profile')

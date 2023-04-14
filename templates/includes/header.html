@@ -1,29 +1,36 @@
 {% load bootstrap_icons %}
-
-<header class="header flex-wrap d-flex container-fluid">
-    <nav class="navbar navbar-expand-md d-flex justify-content-between align-items-center w-100">
-      <a href="{% url 'home:landing' %}"
-         class="header__logo text-decoration-none navbar-brand">
-        <span>FLEXWIRE</span>
+<header class="header flex-wrap d-flex container-fluid position-lg-absolute">
+  <nav class="navbar navbar-expand-md d-flex justify-content-between align-items-center w-100">
+    <a href="{% url 'home:landing' %}"
+       class="header__logo text-decoration-none navbar-brand">
+      <span>FLEXWIRE</span>
+    </a>
+    <button class="navbar-toggler ms-auto"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse " id="navbarNavDropdown">
+      {% with request.resolver_match.view_name as view_name %}
+      <ul class="navbar-nav mx-md-auto ms-sm-auto">
+        <li class="nav-item">
+          <a class="header__link h3 {% if view_name == 'teams:teams_list' %}active{% endif %} me-4" href="{% url 'teams:teams_list' %}">Team search</a>
+        </li>
+        <li class="nav-item">
+          <a class="header__link h3" href="#">Developer search</a>
+        </li>
+      </ul>
+      {% endwith %}
+      <a href="#" class="ms-lg-auto ms-sm-2 navbar-btn lift text-decoration-none">
+        <span class="d-flex align-items-center h-100 ">
+          {% bs_icon 'person-circle' size='32px' color='#6C757D' %}
+          <p class="my-0 ms-1 header__link">username</p>
+        </span>
       </a>
-      <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
-              data-bs-target="#navbarNavDropdown"
-              aria-controls="navbarNavDropdown" aria-expanded="false"
-              aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse " id="navbarNavDropdown">
-        <ul class="navbar-nav mx-md-auto ms-sm-auto">
-          <li class="nav-item"><a class="header__link h3 me-4" href="#">Team search</a></li>
-          <li class="nav-item"><a class="header__link h3" href="#">Developer search</a></li>
-        </ul>
-        <a href="#" class="ms-lg-auto ms-sm-2 navbar-btn lift text-decoration-none">
-          <span class="d-flex align-items-center h-100 ">
-            {% bs_icon 'person-circle' size='32px' color='#6C757D' %}
-            <p class="my-0 ms-1 header__link">username</p>
-          </span>
-        </a>
-      </div>
-    </nav>
+    </div>
+  </nav>
 </header>
