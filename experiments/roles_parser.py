@@ -1,5 +1,5 @@
-import json
 from ast import literal_eval
+import json
 
 import pandas as pd
 
@@ -24,7 +24,9 @@ if __name__ == '__main__':
 
     languages_dataframe = pd.read_csv('top_100_languages.csv')
     all_languages = list(set(languages_dataframe['Language']))
-    languages_fixture = data_list_to_fixture_json(all_languages, 'users.language', 'language')
+    languages_fixture = data_list_to_fixture_json(
+        all_languages, 'users.language', 'language'
+    )
     json.dump(languages_fixture, open('languages_data.json', 'w'))
 
     technologies_dataframe = pd.read_csv('it_vacancies_full.csv')
@@ -33,5 +35,7 @@ if __name__ == '__main__':
     for technologies_list in all_technologies:
         for technologies in literal_eval(technologies_list):
             cleared_technologies.add(technologies)
-    technologies_fixture = data_list_to_fixture_json(list(cleared_technologies), 'users.language', 'language')
+    technologies_fixture = data_list_to_fixture_json(
+        list(cleared_technologies), 'users.language', 'language'
+    )
     json.dump(technologies_fixture, open('technologies_data.json', 'w'))
