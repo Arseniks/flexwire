@@ -5,7 +5,6 @@ from django.db import models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('users', '0002_auto_20230412_2234'),
     ]
@@ -14,6 +13,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='customuser',
             name='image',
-            field=models.ImageField(blank=True, null=True, upload_to='user_avatars/', verbose_name='avatar'),
+            field=models.ImageField(
+                blank=True,
+                null=True,
+                upload_to='user_avatars/',
+                verbose_name='avatar',
+            ),
         ),
     ]

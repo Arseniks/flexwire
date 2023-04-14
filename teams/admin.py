@@ -16,9 +16,7 @@ class TeamAdmin(admin.ModelAdmin):
     )
     list_display_links = (teams.models.Team.title.field.name,)
     list_editable = (teams.models.Team.is_published.field.name,)
-    filter_horizontal = (
-        teams.models.Team.technologies.field.name,
-    )
+    filter_horizontal = (teams.models.Team.technologies.field.name,)
 
 
 @admin.register(teams.models.Member)
