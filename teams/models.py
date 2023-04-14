@@ -12,6 +12,7 @@ class Team(django.db.models.Model):
     def get_upload_image(self, filename):
         return (
             pathlib.Path('team_files')
+            / pathlib.Path(str(self.creator.id))
             / pathlib.Path(self.title)
             / f'team_image.{filename.split(".")[-1]}'
         )
@@ -19,6 +20,7 @@ class Team(django.db.models.Model):
     def get_upload_presentation(self, filename):
         return (
             pathlib.Path('team_files')
+            / pathlib.Path(str(self.creator.id))
             / pathlib.Path(self.title)
             / f'presentation.{filename.split(".")[-1]}'
         )
@@ -100,7 +102,7 @@ class RoleTeam(django.db.models.Model):
     )
 
     def __str__(self):
-        return self.role_default.name
+        return f'{self.role_default.name} in team {self.team.title}'
 
     class Meta:
         verbose_name = 'role in team'

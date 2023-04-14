@@ -36,12 +36,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'home.apps.HomeConfig',
     'teams.apps.TeamsConfig',
     'users.apps.UsersConfig',
     'debug_toolbar',
-    'home.apps.HomeConfig',
     'django_bootstrap_icons',
     'sorl.thumbnail',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [

@@ -8,6 +8,7 @@ from django.urls import path
 import home.urls
 import meeting_point.settings
 import teams.urls
+import meeting_point.views
 import users.urls
 
 urlpatterns = [
@@ -17,6 +18,9 @@ urlpatterns = [
     path('auth/', include(django.contrib.auth.urls)),
     path('teams/', include(teams.urls)),
 ]
+
+handler404 = meeting_point.views.Custom404.as_view()
+
 
 if meeting_point.settings.DEBUG:
     import debug_toolbar

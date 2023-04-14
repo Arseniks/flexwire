@@ -13,6 +13,10 @@ class Language(django.db.models.Model):
     def __str__(self):
         return self.language
 
+    class Meta:
+        verbose_name = 'language'
+        verbose_name_plural = 'languages'
+
 
 class Technology(django.db.models.Model):
     technology = django.db.models.CharField(
@@ -23,6 +27,10 @@ class Technology(django.db.models.Model):
 
     def __str__(self):
         return self.technology
+
+    class Meta:
+        verbose_name = 'technology'
+        verbose_name_plural = 'technologies'
 
 
 class CustomUser(AbstractUser):
@@ -97,4 +105,5 @@ class CustomUser(AbstractUser):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.nickname = super().username
+        if not self.nickname:
+            self.nickname = super().username
