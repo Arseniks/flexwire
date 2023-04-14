@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'debug_toolbar',
     'django_bootstrap_icons',
+    'sorl.thumbnail',
     'django_cleanup.apps.CleanupConfig',
 ]
 
