@@ -6,11 +6,11 @@ from django.urls import include
 from django.urls import path
 
 import home.urls
+import meeting_point
 import meeting_point.settings
 import meeting_point.views
-import users.urls
-import meeting_point
 import teams.urls
+import users.urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
