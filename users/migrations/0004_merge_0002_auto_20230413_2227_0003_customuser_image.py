@@ -4,11 +4,9 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('users', '0002_auto_20230413_2227'),
         ('users', '0003_customuser_image'),
     ]
 
-    operations = [
-    ]
+    operations = []
