@@ -9,14 +9,16 @@ class Team(django.db.models.Model):
     def get_upload_image(self, filename):
         return (
             pathlib.Path('team_files')
-            / pathlib.Path(str(self.pk))
+            / pathlib.Path(str(self.creator.id))
+            / pathlib.Path(self.title)
             / f'team_image.{filename.split(".")[-1]}'
         )
 
     def get_upload_presentation(self, filename):
         return (
             pathlib.Path('team_files')
-            / pathlib.Path(str(self.pk))
+            / pathlib.Path(str(self.creator.id))
+            / pathlib.Path(self.title)
             / f'presentation.{filename.split(".")[-1]}'
         )
 
@@ -40,7 +42,7 @@ class Team(django.db.models.Model):
         blank=True,
         upload_to=get_upload_presentation,
     )
-    creator = django.db.models.OneToOneField(
+    creator = django.db.models.ForeignKey(
         users.models.CustomUser,
         help_text='Person who came up with this idea of project',
         on_delete=django.db.models.deletion.CASCADE,
