@@ -81,6 +81,9 @@ class CustomUser(AbstractUser):
         verbose_name='Technologies you use',
         help_text='Specify your stack of technologies',
     )
+    image = django.db.models.ImageField(
+        'avatar', blank=True, null=True, upload_to='user_avatars/'
+    )
 
     class EducationChoices(django.db.models.TextChoices):
         SCHOOL = 'school', _('School')

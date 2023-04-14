@@ -2,10 +2,13 @@ import pathlib
 
 import django.db.models
 
+import teams.managers
 import users.models
 
 
 class Team(django.db.models.Model):
+    objects = teams.managers.TeamManager()
+
     def get_upload_image(self, filename):
         return (
             pathlib.Path('team_files')
@@ -47,9 +50,10 @@ class Team(django.db.models.Model):
         help_text='Person who came up with this idea of project',
         on_delete=django.db.models.deletion.CASCADE,
     )
-    languages = django.db.models.ManyToManyField(
+    language = django.db.models.ForeignKey(
         users.models.Language,
-        help_text='Specify team languages',
+        on_delete=django.db.models.deletion.CASCADE,
+        help_text='Specify team language',
     )
     technologies = django.db.models.ManyToManyField(
         users.models.Technology,
@@ -82,14 +86,18 @@ class Role(django.db.models.Model):
 
 
 class RoleTeam(django.db.models.Model):
+    objects = teams.managers.RoleTeamManager()
+
     role_default = django.db.models.ForeignKey(
         Role,
+        related_name='roles',
         help_text='Role from standard list',
         on_delete=django.db.models.deletion.CASCADE,
     )
     team = django.db.models.ForeignKey(
         Team,
-        help_text='Choose your teammate',
+        related_name='roleteams',
+        help_text='Choose  your teammate',
         on_delete=django.db.models.deletion.CASCADE,
     )
 
@@ -102,8 +110,11 @@ class RoleTeam(django.db.models.Model):
 
 
 class Member(django.db.models.Model):
+    objects = teams.managers.MemberManager()
+
     role_team = django.db.models.ForeignKey(
         RoleTeam,
+        related_name='members',
         help_text='Choose roles in your project',
         on_delete=django.db.models.deletion.CASCADE,
     )
@@ -122,12 +133,15 @@ class Member(django.db.models.Model):
 
 
 class Pending(django.db.models.Model):
+    objects = teams.managers.PendingManager()
+
     role_team = django.db.models.ForeignKey(
         RoleTeam,
+        related_name='pendings',
         help_text='Choose role that you want to be',
         on_delete=django.db.models.deletion.CASCADE,
     )
-    user = django.db.models.OneToOneField(
+    user = django.db.models.ForeignKey(
         users.models.CustomUser,
         help_text='User for this pending',
         on_delete=django.db.models.deletion.CASCADE,
