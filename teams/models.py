@@ -40,7 +40,7 @@ class Team(django.db.models.Model):
         blank=True,
         upload_to=get_upload_presentation,
     )
-    creator = django.db.models.ForeignKey(
+    creator = django.db.models.OneToOneField(
         users.models.CustomUser,
         help_text='Person who came up with this idea of project',
         on_delete=django.db.models.deletion.CASCADE,
@@ -62,7 +62,6 @@ class Team(django.db.models.Model):
     class Meta:
         verbose_name = 'team'
         verbose_name_plural = 'teams'
-        ordering = ['-id']
 
 
 class Role(django.db.models.Model):
