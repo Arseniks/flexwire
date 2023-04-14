@@ -2,7 +2,6 @@ from django.contrib import admin
 
 import teams.models
 
-
 admin.site.register(teams.models.Role)
 admin.site.register(teams.models.RoleTeam)
 
@@ -18,7 +17,6 @@ class TeamAdmin(admin.ModelAdmin):
     list_display_links = (teams.models.Team.title.field.name,)
     list_editable = (teams.models.Team.is_published.field.name,)
     filter_horizontal = (
-        teams.models.Team.languages.field.name,
         teams.models.Team.technologies.field.name,
     )
 

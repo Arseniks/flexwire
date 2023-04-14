@@ -7,8 +7,8 @@ from django.urls import path
 
 import home.urls
 import meeting_point.settings
-import teams.urls
 import meeting_point.views
+import teams.urls
 import users.urls
 
 urlpatterns = [

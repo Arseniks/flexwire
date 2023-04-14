@@ -11,11 +11,6 @@ import teams.models
 class Migration(migrations.Migration):
     initial = True
 
-    dependencies = [
-        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('users', '0002_customuser_image'),
-    ]
-
     operations = [
         migrations.CreateModel(
             name='Role',
