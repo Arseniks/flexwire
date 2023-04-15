@@ -151,7 +151,11 @@
               <a href="" class="btn btn-danger">Remove</a>
             </div>
           </div>
-          <button class="btn btn-primary mt-3" type="submit">Save</button>
+          <button class="btn btn-lg btn-primary mt-3" type="submit">Save</button>
+          <div class="d-flex justify-content-between">
+            <a href="{% url 'users:password_change' %}" class="text-decoration-none">Do you want to change password?</a>
+            <a href="{% url 'users:password_reset' %}" class="text-decoration-none">Forgot your password?</a>
+          </div>
         </div>
       </div>
     </div>
