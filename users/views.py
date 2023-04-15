@@ -16,11 +16,10 @@ from django.views.generic import FormView
 from django.views.generic import View
 import jwt
 
+from teams.utils import pull_out_list
 from users.forms import CustomUserCreationForm
 from users.forms import UserAccountForm
 from users.models import CustomUser
-
-from teams.utils import pull_out_list
 
 
 def decode_token(token):
@@ -125,6 +124,4 @@ class Account(View):
             form.save()
             return redirect('users:profile', request.user.id)
 
-        return render(request, self.template_name, context={
-            'form': form
-        })
+        return render(request, self.template_name, context={'form': form})
