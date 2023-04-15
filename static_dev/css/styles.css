@@ -157,6 +157,16 @@ body {
   text-decoration: #377DFF 2px underline;
 }
 
+.page-item.active .page-link {
+  color: #fff !important;
+  background: #6c757d !important;
+  border-color: #fff;
+}
+
+.page-link {
+  color: #6c757d !important;
+ }
+ 
 .text-read {
   font-family: "Google Sans Text", "Google Sans", Roboto, Arial,sans-serif;
   color: rgb(95,99,104);

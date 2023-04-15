@@ -68,6 +68,7 @@ class Team(django.db.models.Model):
     class Meta:
         verbose_name = 'team'
         verbose_name_plural = 'teams'
+        ordering = ['-id']
 
 
 class Role(django.db.models.Model):
@@ -125,7 +126,10 @@ class Member(django.db.models.Model):
     )
 
     def __str__(self):
-        return self.role_team.role_default.name
+        return (
+            f'{self.user.nickname} {self.role_team.role_default.name}'
+            f' {self.role_team.team.title}'
+        )
 
     class Meta:
         verbose_name = 'member'
@@ -148,7 +152,10 @@ class Pending(django.db.models.Model):
     )
 
     def __str__(self):
-        return self.role_team.role_default.name
+        return (
+            f'{self.user.nickname} {self.role_team.role_default.name}'
+            f' {self.role_team.team.title}'
+        )
 
     class Meta:
         verbose_name = 'pending'
