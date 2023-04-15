@@ -36,6 +36,25 @@ class ViewsTests(TestCase):
         'password': 'testpassword1231',
     }
 
+    @classmethod
+    def setUpTestData(cls):
+        cls.user1 = CustomUser.objects.create(
+            id=1,
+            username='username',
+            email='1@gmail.com',
+            nickname='nickname',
+            about_me='some info',
+            github='https://github.com/some_user',
+            contact_data='https://t.me/some_user',
+            city='Karaganda',
+            resume='some_resume.pfd',
+            education_choose='university',
+            education='some university',
+        )
+
+    def tearDown(self):
+        CustomUser.objects.all().delete()
+
     def test_user_signup_context(self):
         response = Client().get(
             reverse(
@@ -51,7 +70,7 @@ class ViewsTests(TestCase):
             follow=True,
         )
 
-        self.assertRedirects(response, reverse('users:login'))
+        self.assertRedirects(response, reverse('home:landing'))
 
     def test_user_signup_success(self):
         user_count = CustomUser.objects.count()
@@ -137,6 +156,12 @@ class ViewsTests(TestCase):
         self.assertGreater(
             current_time.timestamp() + 60 * 60, result_token_decoding['exp']
         )
+
+    def test_redirect_logged_in_user_from_login(self):
+        client = Client()
+        client.force_login(self.user1)
+        response = client.get(reverse('users:login'))
+        self.assertEqual(response.url, '/')
 
 
 class TestAccountAndProfile(TestCase):
