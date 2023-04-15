@@ -46,7 +46,7 @@ python manage.py loaddata fixtures/roles_data.json
 python manage.py loaddata fixtures/languages_data.json
 ```
 ```
-python manage.py loaddata fixtures/technilogies_data.json
+python manage.py loaddata fixtures/technologies_data.json
 ```
 - Запуска проекта:
 ```
