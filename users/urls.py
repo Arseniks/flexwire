@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 import django.contrib.auth.views
 import django.urls
 from django.urls import path
+import django.views.generic
 
 import users.views
 
@@ -11,7 +12,7 @@ urlpatterns = [
     django.urls.path(
         'login/',
         django.contrib.auth.views.LoginView.as_view(
-            template_name='users/login.html'
+            template_name='users/login.html', redirect_authenticated_user=True
         ),
         name='login',
     ),
