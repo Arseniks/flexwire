@@ -40,7 +40,7 @@
                   {% endthumbnail %}
                   <p class="my-0 ms-1 header__link">{{ request.user.nickname }}</p>
                 </a>
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu dropdown-menu-end">
                   <li><a href="{% url 'users:profile' request.user.id %}" class="dropdown-item {% if view_name == 'users:profile' %}active{% endif %}">Profile</a></li>
                   <li><a href="{% url 'users:account' %}" class="dropdown-item {% if view_name == 'users:account' %}active{% endif %}">Account</a></li>
                   <li><hr class="dropdown-divider"/></li>
