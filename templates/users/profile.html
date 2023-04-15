@@ -1,23 +1,113 @@
 {% extends "base.html" %}
 
 {% load static %}
+{% load thumbnail %}
 {% load bootstrap_icons %}
 
+{% block title %}
+  {{ user.nickname }}
+{% endblock title %}
+
 {% block content %}
-  <p>{{ profile.username }}</p>
-  <p>{{ profile.nickname }}</p>
-  <p>{{ profile.email }}</p>
-  <p>{{ profile.about_me }}</p>
-  <p>{{ profile.github }}</p>
-  <p>{{ profile.contact_data }}</p>
-  <p>{{ profile.city }}</p>
-  <p>{{ profile.resume }}</p>
-  <p>
-    Languages: {% for lang in profile.languages.all %}<button type="button">{{ lang }}</button> {% endfor %}
-  </p>
-  <p>
-    Technologies: {% for tech in profile.technologies.all %}<button type="button">{{ tech }}</button> {% endfor %}
-  </p>
-  <p>{{ profile.education_choose }}</p>
-  <p>{{ profile.education }}</p>
+  <div class="container d-flex flex-column gap-4 my-auto mt-5">
+    <div class="row mb-5">
+      <div class="col-lg-12 p-0">
+        <div class="card p-3 d-flex flex-row border-0">
+          <div class="col-auto">
+            {% thumbnail user.image "128x128" crop="center" as img %}
+              <img src="{{ img.url }}"
+                   width="128px"
+                   height="128px"
+                   class="rounded-circle"
+                   alt="user image"/>
+            {% empty %}
+              <span class="text-secondary">{% bs_icon 'person-circle' size='128px' %}</span>
+            {% endthumbnail %}
+          </div>
+          <div class="col d-flex flex-column ps-4 {% if user.city %}justify-content-end{% else %}justify-content-center{% endif %}">
+            <div class="row d-flex flex-row">
+              <div class="col d-flex align-items-center">
+                <h1>{{ user.nickname }}</h1>
+                {% if request.user == user %}
+                  <a href="{% url 'users:account' %}" class="btn btn-primary ms-auto px-3">Edit</a>
+                {% endif %}
+              </div>
+            </div>
+            {% if user.city %}
+              <div class="row">
+                <p class="text-read py-0">{% bs_icon 'geo-alt' %}{{ user.city }}</p>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 d-flex flex-lg-row flex-column p-0 justify-content-between">
+        <div class="col-lg-8 pe-lg-3 col-12">
+          {% if user.education %}
+            <div class="card border-0 mb-5 d-flex flex-row p-3 align-items-end">
+              <h1 class="my-0">Education</h1>
+              <p class="ms-2 my-0 text-read fs-5">{{ user.education }}</p>
+            </div>
+          {% endif %}
+          <div class="card border-0 p-3 mb-5">
+            <h1>About me</h1>
+            <p class="text-read fs-5">{{ user.about_me|default:"hmm... there's no information" }}</p>
+            {% if user.resume %}
+              <span class="d-flex align-items-center gap-1">
+                {% bs_icon 'card-text' %}
+                <a href="{{ user.resume }}" download class="text-decoration-none">Curriculum vitae</a>
+              </span>
+            {% endif %}
+          </div>
+        </div>
+        <div class="col-lg-4 ps-lg-3 col-12">
+          {% if user.github or user.email or user.contact_data %}
+            <div class="card border-0 mb-5 p-3 gap-2 d-flex flex-column">
+              <h1>My contacts {% bs_icon 'people-fill' size='24px' %}</h1>
+              {% if user.github %}
+                <span class="d-flex align-items-center gap-1">
+                  {% bs_icon 'github' size='24px' %}
+                  <a href="{{ user.github }}" class="text-decoration-none">Github</a>
+                </span>
+              {% endif %}
+              {% if user.email %}
+                <span class="d-flex align-items-center gap-1">
+                  {% bs_icon 'envelope' size='24px' %}
+                  <a class="text-decoration-none">{{ user.email }}</a>
+                </span>
+              {% endif %}
+              {% if user.contact_data %}
+                <div class="mt-2">
+                  <h4>Other contact information</h4>
+                  <p class="my-0 text-read fs-6">{{ user.contact_data }}</p>
+                </div>
+              {% endif %}
+            </div>
+          {% endif %}
+          {% if user.technologies.exists %}
+            <div class="card border-0 mb-5 p-3 gap-2 d-flex flex-column>">
+              <h1>My stack {% bs_icon 'stack' size='24px' %}</h1>
+              <ul class="text-read list-unstyled fs-5">
+                {% for tech in user.technologies.all %}
+                  <li>{{ tech.technology }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
+          {% if user.languages.exists %}
+            <div class="card border-0 mb-5 p-3 gap-2 d-flex flex-column>">
+              <h1>My languages {% bs_icon 'translate' size='24px' %}</h1>
+              <ul class="text-read list-unstyled fs-5">
+                {% for lang in user.languages.all %}
+                  <li>{{ lang.language }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock content %}

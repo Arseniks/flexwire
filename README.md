@@ -1,9 +1,9 @@
-## Место Встречи
+## FLEXWIRE
 
 # Запуск проекта
 - Клонируйте проект с GitHub с помощью команды:
 ```
-git clone https://github.com/Arseniks/lyceum_django_education_project
+git clone https://github.com/Arseniks/meeting_point
 ```
 - Скопируйте файл .env.template в .env, при необходимости отредактируйте 
   значения переменных:
@@ -38,6 +38,16 @@ pip install -r requirements/requirements_test.txt
 ```
 python manage.py migrate
 ```
+- Заполнения БД данными из фикстуры:
+```
+python manage.py loaddata fixtures/roles_data.json
+```
+```
+python manage.py loaddata fixtures/languages_data.json
+```
+```
+python manage.py loaddata fixtures/technilogies_data.json
+```
 - Запуска проекта:
 ```
 python manage.py runserver
@@ -68,6 +78,16 @@ pip3 install -r requirements/requirements_test.txt
 ```
 python3 manage.py migrate
 ``````
+- Заполнения БД данными из фикстуры:
+```
+python3 manage.py loaddata fixtures/roles_data.json
+```
+```
+python3 manage.py loaddata fixtures/languages_data.json
+```
+```
+python3 manage.py loaddata fixtures/technilogies_data.json
+```
 - Запуска проекта:
 ```
 python3 manage.py runserver

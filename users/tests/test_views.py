@@ -187,9 +187,9 @@ class TestAccountAndProfile(TestCase):
             ('GitHub, Bitbucket or something similar',),
             ('Contact information',),
             ('Place where you live (country and city)',),
-            ('Resume',),
-            ('Languages you speak',),
-            ('Technologies you use',),
+            ('Curriculum vitae',),
+            ('Languages',),
+            ('Technologies',),
             ('Education',),
             ('Where have you learned?',),
         ]

@@ -22,6 +22,8 @@ class UserAccountForm(UserChangeForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.visible_fields():
+            if field.widget_type in ('select', 'selectmultiple'):
+                continue
             field.field.widget.attrs['class'] = 'form-control'
 
     password = None
@@ -42,4 +44,5 @@ class UserAccountForm(UserChangeForm):
             CustomUser.technologies.field.name,
             CustomUser.education_choose.field.name,
             CustomUser.education.field.name,
+            CustomUser.image.field.name,
         ]

@@ -5,10 +5,14 @@
 
 {% block title %}
   Team search
-{% endblock title %}o
+{% endblock title %}
 
 {% block content %}
-  <div class="d-flex justify-content-center flex-column mt-5">  
+  <div class="d-flex justify-content-center flex-column mt-5">
+    <h2 class="text-center mb-5">
+      {% bs_icon 'lightbulb' extra_classes="text-warning" size="1em" %}Have a good idea?
+      <a href="{% url 'teams:create_team' %}" class="link">Create</a> your team!
+    </h2>
     <h1 class="text-center">Team search</h1>
     <div class="container">
       <div class="row">
@@ -19,7 +23,7 @@
           </div>
         </div>
       </div>
-      <div class="row row-cols-md-2 row-cols-lg-3 row-cols-1 my-5 d-flex w-100 gy-4">
+      <div class="row row-cols-md-2 row-cols-lg-3 row-cols-1 my-5 d-flex w-100 gy-4 justify-content-center">
         {% for team in teams %}
           <div class="col">  
             <a class="card team d-flex border-0 flex-column text-decoration-none h-100" href="{% url 'teams:team_detail' team.id %}">
@@ -46,21 +50,18 @@
                   </div>
                   <div class="d-flex gap-2">
                     <span class="lang bg-light">{% bs_icon "translate" %}</span>
-                    <ul class="list-unstyled d-flex flex-wrap gap-2 mb-0">
-                    {% for lang in team.languages.all %}
-                      <li class="badge lang">{{ lang.language }}</li>
-                    {% endfor %}
-                    </ul>
+                    <span class="badge lang">{{ team.language.language }}</span>
                   </div>
                 </div>
               </div>
             </a>  
           </div>
+        {% empty %}
+          <h4>No one has created team yet...</h4>
         {% endfor %}
       </div>
     </div>
   </div>
-
   <ul class="pagination justify-content-center">
     {% if page_obj.has_previous %}
       <li class="page-item"><a class="page-link" href="?page=1"><<</a></li>

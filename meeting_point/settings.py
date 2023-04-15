@@ -8,12 +8,23 @@ load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'
+
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / 'static_dev',
+]
+
+STATIC_ROOT = BASE_DIR / 'static'
+
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY', 'any-other-dummy-key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'True') == 'True'
+DEBUG = os.environ.get('DEBUG', 'true').lower() == 'true'
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 
@@ -32,6 +43,7 @@ INSTALLED_APPS = [
     'django_bootstrap_icons',
     'sorl.thumbnail',
     'django_cleanup.apps.CleanupConfig',
+    'sorl.thumbnail',
 ]
 
 MIDDLEWARE = [
@@ -127,12 +139,21 @@ MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-EMAIL_FILE_PATH = BASE_DIR / 'sent_emails'
-
-FLEXWIRE_MAIL = os.environ.get('FLEXWIRE_MAIL', 'meeting-point@gmail.com')
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+    EMAIL_FILE_PATH = BASE_DIR / 'sent_emails'
+else:
+    EMAIL_HOST = 'smtp.yandex.ru'
+    EMAIL_PORT = 465
+    EMAIL_USE_TLS = False
+    EMAIL_USE_SSL = True
+    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'test@karonus.ru')
+    EMAIL_HOST_PASSWORD = os.environ.get(
+        'EMAIL_HOST_PASSWORD', 'prxnmhxvndensczk'
+    )
+    DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
 DEFAULT_USER_ACTIVITY = (
-    os.environ.get('DEFAULT_USER_ACTIVITY', str(DEBUG)) == 'True'
+    os.environ.get('DEFAULT_USER_ACTIVITY', str(DEBUG)).lower() == 'true'
 )

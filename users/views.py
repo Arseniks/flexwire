@@ -16,6 +16,7 @@ from django.views.generic import FormView
 from django.views.generic import View
 import jwt
 
+from teams.utils import pull_out_list
 from users.forms import CustomUserCreationForm
 from users.forms import UserAccountForm
 from users.models import CustomUser
@@ -79,7 +80,7 @@ class Register(FormView):
             send_mail(
                 'Verification account',
                 '',
-                settings.FLEXWIRE_MAIL,
+                settings.DEFAULT_FROM_EMAIL,
                 [form.cleaned_data['email']],
                 html_message=loader.render_to_string(
                     'users/activating_email.html',
@@ -99,7 +100,7 @@ class Register(FormView):
 class Profile(DetailView):
     template_name = 'users/profile.html'
     model = CustomUser
-    context_object_name = 'profile'
+    context_object_name = 'user'
 
 
 class Account(View):
@@ -112,10 +113,15 @@ class Account(View):
         return render(request, self.template_name, context)
 
     def post(self, request):
+        pull_out_list(request, 'technologies')
+        pull_out_list(request, 'languages')
+
         user = request.user
 
         form = UserAccountForm(request.POST, request.FILES, instance=user)
 
         if form.is_valid():
             form.save()
-            return redirect('users:profile')
+            return redirect('users:profile', request.user.id)
+
+        return render(request, self.template_name, context={'form': form})

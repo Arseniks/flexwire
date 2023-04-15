@@ -18,6 +18,7 @@ urlpatterns = [
     path('teams/', include(teams.urls)),
     path('auth/', include(users.urls)),
     path('auth/', include(django.contrib.auth.urls)),
+    path('teams/', include(teams.urls)),
 ]
 
 handler404 = meeting_point.views.Custom404.as_view()

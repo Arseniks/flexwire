@@ -102,6 +102,13 @@ class CustomUser(AbstractUser):
         verbose_name='Where have you learned?',
         help_text='University you attend or completed',
     )
+    user_picture = django.db.models.ImageField(
+        verbose_name='User picture',
+        help_text='Show others yourself',
+        null=True,
+        blank=True,
+        upload_to='user_pictures',
+    )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
