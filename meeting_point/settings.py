@@ -135,7 +135,9 @@ else:
     EMAIL_USE_TLS = False
     EMAIL_USE_SSL = True
     EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'test@karonus.ru')
-    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'prxnmhxvndensczk')
+    EMAIL_HOST_PASSWORD = os.environ.get(
+        'EMAIL_HOST_PASSWORD', 'prxnmhxvndensczk'
+    )
     DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
