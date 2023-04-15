@@ -2,12 +2,12 @@ import pathlib
 
 import django.db.models
 
-import teams.managers
+from teams import managers
 import users.models
 
 
 class Team(django.db.models.Model):
-    objects = teams.managers.TeamManager()
+    objects = managers.TeamManager()
 
     def get_upload_image(self, filename):
         return (
@@ -26,20 +26,23 @@ class Team(django.db.models.Model):
         )
 
     title = django.db.models.CharField(
-        'title', help_text='Write title of your project', max_length=64
+        verbose_name='title',
+        help_text='Write title of your project',
+        max_length=64,
     )
     description = django.db.models.TextField(
-        'description', help_text='Write description of your project'
+        verbose_name='description',
+        help_text='Write description of your project',
     )
     image = django.db.models.ImageField(
-        'image',
+        verbose_name='image',
         help_text='Load image of your project',
         null=True,
         blank=True,
         upload_to=get_upload_image,
     )
     presentation = django.db.models.FileField(
-        'presentation',
+        verbose_name='presentation',
         help_text='Load presentation of your project',
         null=True,
         blank=True,
@@ -57,7 +60,7 @@ class Team(django.db.models.Model):
     )
     technologies = django.db.models.ManyToManyField(
         users.models.Technology,
-        verbose_name='Technologies your team use',
+        verbose_name='technologies your team use',
         help_text='Specify technologies your team use',
     )
     is_published = django.db.models.BooleanField(default=True)
@@ -73,7 +76,7 @@ class Team(django.db.models.Model):
 
 class Role(django.db.models.Model):
     name = django.db.models.CharField(
-        'name',
+        verbose_name='name',
         help_text='Choose role name that you need in your project',
         max_length=128,
     )
@@ -87,7 +90,7 @@ class Role(django.db.models.Model):
 
 
 class RoleTeam(django.db.models.Model):
-    objects = teams.managers.RoleTeamManager()
+    objects = managers.RoleTeamManager()
 
     role_default = django.db.models.ForeignKey(
         Role,
@@ -111,7 +114,7 @@ class RoleTeam(django.db.models.Model):
 
 
 class Member(django.db.models.Model):
-    objects = teams.managers.MemberManager()
+    objects = managers.MemberManager()
 
     role_team = django.db.models.ForeignKey(
         RoleTeam,
@@ -137,7 +140,7 @@ class Member(django.db.models.Model):
 
 
 class Pending(django.db.models.Model):
-    objects = teams.managers.PendingManager()
+    objects = managers.PendingManager()
 
     role_team = django.db.models.ForeignKey(
         RoleTeam,

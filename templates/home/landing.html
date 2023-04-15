@@ -26,8 +26,11 @@
               </p>
             </div>
             <div class="d-grid d-sm-flex gap-3">
-              <a href="#" class="btn btn-primary btn-transition px-5">Sign
-                up</a>
+              {% if user.is_authenticated %}
+                <a href="{% url 'users:profile' user.pk %}" class="btn btn-primary btn-transition px-5">To profile</a>
+              {% else %}
+                <a href="{% url 'users:signup' %}" class="btn btn-primary btn-transition px-5">Sign up</a>
+              {% endif %}
               <a href="#learn-more" class="btn btn-link text-decoration-none">
                 Learn more
                 <span class="ms-1 ">{% bs_icon 'chevron-right' extra_classes='small' %}</span>

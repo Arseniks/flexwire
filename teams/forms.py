@@ -1,9 +1,9 @@
-import django.forms
+from django import forms
 
-import teams.models
+from teams import models
 
 
-class BootstrapForm(django.forms.ModelForm):
+class BootstrapForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.visible_fields():
@@ -18,13 +18,13 @@ class BootstrapForm(django.forms.ModelForm):
 
 class TeamForm(BootstrapForm):
     class Meta:
-        model = teams.models.Team
+        model = models.Team
         fields = (
-            teams.models.Team.image.field.name,
-            teams.models.Team.title.field.name,
-            teams.models.Team.description.field.name,
-            teams.models.Team.presentation.field.name,
-            teams.models.Team.is_published.field.name,
-            teams.models.Team.technologies.field.name,
-            teams.models.Team.language.field.name,
+            models.Team.image.field.name,
+            models.Team.title.field.name,
+            models.Team.description.field.name,
+            models.Team.presentation.field.name,
+            models.Team.is_published.field.name,
+            models.Team.technologies.field.name,
+            models.Team.language.field.name,
         )
