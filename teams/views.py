@@ -67,7 +67,7 @@ class TeamDetail(django.views.generic.DetailView):
             )
         )
         if request.user.id == team.creator_id:
-            teams.utils.pull_out_technologies(request)
+            teams.utils.pull_out_list(request, 'technologies')
 
             form = teams.forms.TeamForm(
                 request.POST, request.FILES, instance=team
