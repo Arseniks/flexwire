@@ -1,15 +1,13 @@
-import django.contrib.auth.mixins
-import django.db.models
-import django.http.request
-import django.shortcuts
-import django.views.generic
+from django import shortcuts
+from django.contrib.auth import mixins
+from django.views import generic
 
 import teams.forms
 import teams.models
 import teams.utils
 
 
-class TeamsList(django.views.generic.ListView):
+class TeamsList(generic.ListView):
     model = teams.models.Team
     template_name = 'teams/teams_list.html'
     paginate_by = 3
@@ -19,7 +17,7 @@ class TeamsList(django.views.generic.ListView):
         return teams.models.Team.objects.get_team_list(self.request.user.id)
 
 
-class TeamDetail(django.views.generic.DetailView):
+class TeamDetail(generic.DetailView):
     model = teams.models.Team
     template_name = 'teams/team_detail.html'
 
@@ -27,7 +25,7 @@ class TeamDetail(django.views.generic.DetailView):
         context = super().get_context_data(**kwargs)
         user_id = self.request.user.id or -1
 
-        team = kwargs.get('team') or django.shortcuts.get_object_or_404(
+        team = kwargs.get('team') or shortcuts.get_object_or_404(
             teams.models.Team.objects.get_team_by_pk(
                 user_id, self.kwargs.get('pk')
             )
@@ -62,7 +60,7 @@ class TeamDetail(django.views.generic.DetailView):
         return context
 
     def post(self, request, *args, **kwargs):
-        team = django.shortcuts.get_object_or_404(
+        team = shortcuts.get_object_or_404(
             teams.models.Team.objects.get_team_by_pk(
                 self.request.user.id, self.kwargs.get('pk')
             )
@@ -82,14 +80,12 @@ class TeamDetail(django.views.generic.DetailView):
             context['edit_form'] = form
             return super(TeamDetail, self).render_to_response(context=context)
 
-        return django.shortcuts.redirect('teams:team_detail', pk=team.id)
+        return shortcuts.redirect('teams:team_detail', pk=team.id)
 
 
-class CreatePending(django.views.generic.View):
+class CreatePending(generic.View):
     def post(self, request, pk):
-        role_team = django.shortcuts.get_object_or_404(
-            teams.models.RoleTeam, pk=pk
-        )
+        role_team = shortcuts.get_object_or_404(teams.models.RoleTeam, pk=pk)
         is_exists = teams.models.Pending.objects.filter(
             user=self.request.user, role_team=role_team
         ).exists()
@@ -99,51 +95,45 @@ class CreatePending(django.views.generic.View):
                 role_team=role_team,
                 user=self.request.user,
             )
-        return django.shortcuts.redirect(
-            'teams:team_detail', role_team.team_id
-        )
+        return shortcuts.redirect('teams:team_detail', role_team.team_id)
 
 
-class RemoveMember(django.views.generic.View):
+class RemoveMember(generic.View):
     def post(self, request, pk):
-        member = django.shortcuts.get_object_or_404(teams.models.Member, pk=pk)
+        member = shortcuts.get_object_or_404(teams.models.Member, pk=pk)
         if member.role_team.team.creator_id == self.request.user.id:
             member.delete()
-        return django.shortcuts.redirect(
+        return shortcuts.redirect(
             'teams:team_detail', member.role_team.team_id
         )
 
 
-class AcceptPending(django.views.generic.View):
+class AcceptPending(generic.View):
     def post(self, request, pk):
-        pending = django.shortcuts.get_object_or_404(
-            teams.models.Pending, pk=pk
-        )
+        pending = shortcuts.get_object_or_404(teams.models.Pending, pk=pk)
         if pending.role_team.team.creator_id == self.request.user.id:
             pending.delete()
             teams.models.Member.objects.create(
                 role_team=pending.role_team, user=pending.user
             )
-        return django.shortcuts.redirect(
+        return shortcuts.redirect(
             'teams:team_detail', pending.role_team.team_id
         )
 
 
-class RejectPending(django.views.generic.View):
+class RejectPending(generic.View):
     def post(self, request, pk):
-        pending = django.shortcuts.get_object_or_404(
-            teams.models.Pending, pk=pk
-        )
+        pending = shortcuts.get_object_or_404(teams.models.Pending, pk=pk)
         if pending.role_team.team.creator_id == self.request.user.id:
             pending.delete()
-        return django.shortcuts.redirect(
+        return shortcuts.redirect(
             'teams:team_detail', pending.role_team.team_id
         )
 
 
 class CreateTeam(
-    django.contrib.auth.mixins.LoginRequiredMixin,
-    django.views.generic.CreateView,
+    mixins.LoginRequiredMixin,
+    generic.CreateView,
 ):
     model = teams.models.Team
     form_class = teams.forms.TeamForm

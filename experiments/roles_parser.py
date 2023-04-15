@@ -36,7 +36,7 @@ if __name__ == '__main__':
         for technologies in literal_eval(technologies_list):
             cleared_technologies.add(technologies)
     technologies_fixture = data_list_to_fixture_json(
-        list(cleared_technologies), 'users.language', 'language'
+        list(cleared_technologies), 'users.technology', 'technology'
     )
     json.dump(
         technologies_fixture, open('../fixtures/technologies_data.json', 'w')

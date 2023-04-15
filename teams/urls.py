@@ -1,37 +1,35 @@
-import django.urls
+from django import urls
 
-import teams.views
+from teams import views
 
 app_name = 'teams'
 
 urlpatterns = [
-    django.urls.path('', teams.views.TeamsList.as_view(), name='teams_list'),
-    django.urls.path(
-        '<int:pk>/', teams.views.TeamDetail.as_view(), name='team_detail'
-    ),
-    django.urls.path(
+    urls.path('', views.TeamsList.as_view(), name='teams_list'),
+    urls.path('<int:pk>/', views.TeamDetail.as_view(), name='team_detail'),
+    urls.path(
         'create_pending/<int:pk>/',
-        teams.views.CreatePending.as_view(),
+        views.CreatePending.as_view(),
         name='create_pending',
     ),
-    django.urls.path(
+    urls.path(
         'remove_member/<int:pk>/',
-        teams.views.RemoveMember.as_view(),
+        views.RemoveMember.as_view(),
         name='remove_member',
     ),
-    django.urls.path(
+    urls.path(
         'accept_pending/<int:pk>/',
-        teams.views.AcceptPending.as_view(),
+        views.AcceptPending.as_view(),
         name='accept_pending',
     ),
-    django.urls.path(
+    urls.path(
         'reject_pending/<int:pk>/',
-        teams.views.RejectPending.as_view(),
+        views.RejectPending.as_view(),
         name='reject_pending',
     ),
-    django.urls.path(
+    urls.path(
         'create_team/',
-        teams.views.CreateTeam.as_view(),
+        views.CreateTeam.as_view(),
         name='create_team',
     ),
 ]
