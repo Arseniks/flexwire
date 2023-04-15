@@ -6,11 +6,11 @@ from django.urls import include
 from django.urls import path
 
 import home.urls
-import meeting_point
 import meeting_point.settings
 import meeting_point.views
 import teams.urls
 import users.urls
+import feedback.urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -18,6 +18,7 @@ urlpatterns = [
     path('auth/', include(users.urls)),
     path('auth/', include(django.contrib.auth.urls)),
     path('teams/', include(teams.urls)),
+    path('feedback/', include(feedback.urls)),
 ]
 
 handler404 = meeting_point.views.Custom404.as_view()

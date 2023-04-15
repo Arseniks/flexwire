@@ -70,7 +70,7 @@ class ViewsTests(TestCase):
             follow=True,
         )
 
-        self.assertRedirects(response, reverse('home:landing'))
+        self.assertRedirects(response, reverse('users:login'))
 
     def test_user_signup_success(self):
         user_count = CustomUser.objects.count()

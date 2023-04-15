@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'teams.apps.TeamsConfig',
     'users.apps.UsersConfig',
+    'feedback.apps.FeedbackConfig',
     'debug_toolbar',
     'django_bootstrap_icons',
     'django_cleanup.apps.CleanupConfig',
