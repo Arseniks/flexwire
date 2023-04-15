@@ -13,7 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'any-other-dummy-key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'True') == 'True'
+DEBUG = os.environ.get('DEBUG', 'true').lower() == 'true'
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 
@@ -140,5 +140,5 @@ else:
 
 
 DEFAULT_USER_ACTIVITY = (
-    os.environ.get('DEFAULT_USER_ACTIVITY', str(DEBUG)) == 'True'
+    os.environ.get('DEFAULT_USER_ACTIVITY', str(DEBUG)).lower() == 'true'
 )
