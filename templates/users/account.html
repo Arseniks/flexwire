@@ -1,16 +1,164 @@
 {% extends "base.html" %}
+{% load static %}
+{% load bootstrap_icons %}
+{% load thumbnail %}
 
 {% block title %}
   Account
 {% endblock title %}
 
 {% block content %}
-  <br />
-  <div class="text-center">
-    <a href="{% url 'home:landing' %}" class="header__logo text-decoration-none">
-      <span>FLEXWIRE</span>
-    </a>
-  </div>
-  <h1 class="text-center text-dark">Complete your account</h1>
-  {% include "users/includes/form_with_buttons.html" %}
+  <form class="container my-5" method="post" enctype="multipart/form-data">
+    <div>
+      {% for field in form.visible_fields %}
+        {% for error in field.errors %}
+          <div class="alert alert-danger">
+            {{ field.name }}: {{ error|escape }}
+          </div>
+        {% endfor %}
+        {% for error in form.non_field_errors %}
+          <div class="alert alert-danger">
+            {{ error|escape }}
+          </div>
+        {% endfor %}
+      {% endfor %}
+    </div>
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-lg-4 col-12 d-flex flex-column gap-3 justify-content-between mb-lg-0 mb-3">
+        <div class="card border-0 p-3 d-flex flex-column align-items-center">
+          {% thumbnail user.image "128x128" crop="center" as img %}
+            <img src="{{ img.url }}"
+                 width="128px"
+                 height="128px"
+                 class="rounded-circle"
+                 alt="user image"/>
+            <div class="d-flex gap-2 mt-2">
+              <input name="{{ form.image.html_name }}"
+                     type="file"
+                     accept="image/*"
+                     class="form-control"
+              />
+              <a href="" class="btn btn-danger">Remove</a>
+            </div>
+          {% empty %}
+            <span class="text-secondary">{% bs_icon 'person-circle' size='128px' %}</span>
+            <span class="mt-2">{{ form.image }}</span>
+          {% endthumbnail %}
+        </div>
+        <div class="card border-0 p-3 d-flex flex-column">
+          <div class="d-flex flex-column">
+            <h1 class="my-0">Education</h1>
+            <div class="form-floating mt-2">
+              {{ form.education }}
+              {{ form.education.label_tag }}
+            </div>
+            <div class="mt-2">
+              {{ form.education_choose }}
+            </div>
+          </div>
+
+        </div>
+        <div class="card border-0 p-3 d-flex flex-column">
+          <div class="d-flex flex-column">
+            <h1 class="my-0">Address</h1>
+            <div class="form-floating mt-2">
+              {{ form.city }}
+              {{ form.city.label_tag }}
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-lg-8 col-12 d-flex flex-column gap-3">
+        <div class="d-flex flex-column card p-3 border-0">
+          <h1 class="my-0">Nickname</h1>
+          <div class="form-floating mt-2">
+            {{ form.nickname }}
+            {{ form.nickname.label_tag }}
+          </div>
+        </div>
+        <div class="d-flex flex-column card p-3 border-0">
+            <h1 class="my-0">Contacts</h1>
+            <div class="d-flex justify-content-between mt-3 flex-lg-row flex-column gap-4">
+              <div class="d-flex flex-column col-lg-5 col-12">
+                <span class="d-flex align-items-center gap-1">
+                    {% bs_icon 'github' size='24px' %}
+                    <p href="{{ user.github }}" class="text-read my-0">Github</p>
+                </span>
+                <div class="form-floating mt-2">
+                  {{ form.github }}
+                  {{ form.github.label_tag }}
+                </div>
+              </div>
+              <div class="d-flex flex-column col-lg-5 col-12">
+                <span class="d-flex align-items-center gap-1">
+                  {% bs_icon 'envelope' size='24px' %}
+                  <p class="text-read my-0">email</p>
+                </span>
+                <div class="form-floating mt-2">
+                  {{ form.email }}
+                  {{ form.email.label_tag }}
+                </div>
+              </div>
+            </div>
+            <div class="d-flex flex-column mt-3">
+              <h4>Other contacts</h4>
+              <div class="form-floating">
+                {{ form.contact_data }}
+                {{ form.contact_data.label_tag }}
+              </div>
+            </div>
+          </div>
+          <div class="d-flex flex-lg-row flex-column justify-content-between gap-4">
+            <div class="col-12 col-lg-5 d-flex flex-column card p-3 border-0">
+              <h2 class="mb-3">Technologies</h2>
+                {{ form.technologies }}
+            </div>
+            <div class="col-12 col-lg-5 d-flex flex-column card p-3 border-0">
+              <h2 class="mb-3">Languages</h2>
+                {{ form.languages }}
+            </div>
+          </div>
+      </div>
+      <div class="col-12">
+        <div class="card p-3 mt-5 border-0">
+          <h1>About</h1>
+          <div class="form-floating">
+            <textarea name="{{ form.about_me.html_name }}"
+                      id="{{ form.about_me.id_for_label }}"
+                      maxlength="{{ form.about_me.max_length }}"
+                      cols="100" rows="100"
+                      class="about_textarea form-control"
+            >{{ form.about_me.value|default_if_none:'' }}</textarea>
+            {{ form.about_me.label_tag }}
+          </div>
+          <div class="d-flex flex-column mt-3">
+            <span class="d-flex align-items-center gap-2">
+              {% bs_icon 'card-text' %}
+              {% if user.resume %}
+                <a href="{{ MEDIA_URL }}{{ user.resume.url }}" download class="text-decoration-none">Curriculum vitae</a>
+              {% else %}
+                <p class="my-0">Curriculum vitae</p>
+              {% endif %}
+            </span>
+            <div class="d-flex gap-2 mt-2">
+              <span><input name="{{ form.image.html_name }}"
+                     type="file"
+                     accept="image/*"
+                     class="form-control"
+              /></span>
+              <a href="" class="btn btn-danger">Remove</a>
+            </div>
+          </div>
+          <button class="btn btn-primary mt-3" type="submit">Save</button>
+        </div>
+      </div>
+    </div>
+  </form>
 {% endblock content %}
+
+{% block scripts %}
+  <script src="{% static 'js/virtual-select.min.js' %}"></script>
+  <script src="{% static 'js/init_select.js' %}"></script>
+{% endblock scripts %}

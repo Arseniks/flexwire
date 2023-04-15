@@ -20,6 +20,8 @@ from users.forms import CustomUserCreationForm
 from users.forms import UserAccountForm
 from users.models import CustomUser
 
+from teams.utils import pull_out_list
+
 
 def decode_token(token):
     try:
@@ -99,7 +101,7 @@ class Register(FormView):
 class Profile(DetailView):
     template_name = 'users/profile.html'
     model = CustomUser
-    context_object_name = 'profile'
+    context_object_name = 'user'
 
 
 class Account(View):
@@ -112,10 +114,17 @@ class Account(View):
         return render(request, self.template_name, context)
 
     def post(self, request):
+        pull_out_list(request, 'technologies')
+        pull_out_list(request, 'languages')
+
         user = request.user
 
         form = UserAccountForm(request.POST, request.FILES, instance=user)
 
         if form.is_valid():
             form.save()
-            return redirect('users:profile')
+            return redirect('users:profile', request.user.id)
+
+        return render(request, self.template_name, context={
+            'form': form
+        })

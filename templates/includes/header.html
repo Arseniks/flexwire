@@ -1,3 +1,4 @@
+{% load thumbnail %}
 {% load bootstrap_icons %}
 <header class="header flex-wrap d-flex container-fluid position-lg-absolute">
   <nav class="navbar navbar-expand-md d-flex justify-content-between align-items-center w-100">
@@ -27,8 +28,25 @@
       {% endwith %}
       <a href="#" class="ms-lg-auto ms-sm-2 navbar-btn lift text-decoration-none">
         <span class="d-flex align-items-center h-100 ">
-          {% bs_icon 'person-circle' size='32px' color='#6C757D' %}
-          <p class="my-0 ms-1 header__link">username</p>
+          {% if request.user.is_authenticated %}
+            <a class="d-flex align-items-center" href="{% url 'users:profile' request.user.id %}">
+              {% thumbnail request.user.image "32x32" crop="center" as img %}
+                <img src="{{ img.url }}"
+                   width="32px"
+                   height="32px"
+                   class="rounded-circle"
+                   alt="user image"/>
+              {% empty %}
+                <span class="text-secondary">{% bs_icon 'person-circle' size='32px' %}</span>
+              {% endthumbnail %}
+              <p class="my-0 ms-1 header__link">{{ request.user.nickname }}</p>
+            </a>
+          {% else %}
+            <div class="d-flex gap-2">
+              <a href="{% url 'users:login' %}" class="btn btn-primary px-3">Login</a>
+              <a href="{% url 'users:signup' %}" class="btn btn-outline-primary px-3">Signup</a>
+            </div>
+          {% endif %}
         </span>
       </a>
     </div>

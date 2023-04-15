@@ -156,3 +156,12 @@ body {
 .tab_link.active {
   text-decoration: #377DFF 2px underline;
 }
+
+.text-read {
+  font-family: "Google Sans Text", "Google Sans", Roboto, Arial,sans-serif;
+  color: rgb(95,99,104);
+}
+
+.about_textarea {
+  min-height: 10rem!important;
+}
