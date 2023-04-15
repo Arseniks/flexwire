@@ -19,13 +19,11 @@ class TeamsList(django.views.generic.ListView):
         return teams.models.Team.objects.get_team_list(self.request.user.id)
 
 
-
 class TeamDetail(django.views.generic.DetailView):
     model = teams.models.Team
     template_name = 'teams/team_detail.html'
 
     def get_context_data(self, **kwargs):
-
         context = super().get_context_data(**kwargs)
         user_id = self.request.user.id or -1
 
