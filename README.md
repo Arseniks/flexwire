@@ -38,6 +38,10 @@ pip install -r requirements/requirements_test.txt
 ```
 python manage.py migrate
 ```
+- Заполнения БД данными из фикстуры:
+```
+python manage.py loaddata 
+```
 - Запуска проекта:
 ```
 python manage.py runserver
