@@ -20,14 +20,14 @@ if __name__ == '__main__':
     roles_dataframe = pd.read_csv('naukri_data_science_jobs_india.csv')
     all_roles = list(set(roles_dataframe['Job_Role']))
     roles_fixture = data_list_to_fixture_json(all_roles, 'teams.role', 'name')
-    json.dump(roles_fixture, open('roles_data.json', 'w'))
+    json.dump(roles_fixture, open('../fixtures/roles_data.json', 'w'))
 
     languages_dataframe = pd.read_csv('top_100_languages.csv')
     all_languages = list(set(languages_dataframe['Language']))
     languages_fixture = data_list_to_fixture_json(
         all_languages, 'users.language', 'language'
     )
-    json.dump(languages_fixture, open('languages_data.json', 'w'))
+    json.dump(languages_fixture, open('../fixtures/languages_data.json', 'w'))
 
     technologies_dataframe = pd.read_csv('it_vacancies_full.csv')
     all_technologies = list(technologies_dataframe['Keys'])
@@ -38,4 +38,4 @@ if __name__ == '__main__':
     technologies_fixture = data_list_to_fixture_json(
         list(cleared_technologies), 'users.language', 'language'
     )
-    json.dump(technologies_fixture, open('technologies_data.json', 'w'))
+    json.dump(technologies_fixture, open('../fixtures/technologies_data.json', 'w'))
