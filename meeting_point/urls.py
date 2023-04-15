@@ -5,12 +5,12 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import include
 from django.urls import path
 
+import feedback.urls
 import home.urls
 import meeting_point.settings
 import meeting_point.views
 import teams.urls
 import users.urls
-import feedback.urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),

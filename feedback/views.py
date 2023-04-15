@@ -71,7 +71,8 @@ class FeedbackView(CreateView):
                 )
 
             messages.add_message(
-                request, messages.INFO, 'Your feedback has been sent successfully!'
+                request,
+                messages.INFO,
+                'Your feedback has been sent successfully!',
             )
         return super().post(self, request, *args, **kwargs)
-    

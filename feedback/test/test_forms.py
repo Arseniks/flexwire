@@ -2,7 +2,8 @@ from django.test import Client
 from django.test import TestCase
 from django.urls import reverse
 
-from feedback.forms import FeedbackForm, FeedbackFilesForm
+from feedback.forms import FeedbackFilesForm
+from feedback.forms import FeedbackForm
 from feedback.forms import FeedbackTextForm
 
 
