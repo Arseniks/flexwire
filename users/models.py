@@ -70,7 +70,6 @@ class CustomUser(AbstractUser):
         blank=True,
         null=True,
         upload_to='resumes/',
-
     )
     languages = models.ManyToManyField(
         Language,
@@ -87,7 +86,7 @@ class CustomUser(AbstractUser):
         help_text='Your avatar',
         blank=True,
         null=True,
-        upload_to='user_avatars/'
+        upload_to='user_avatars/',
     )
 
     class EducationChoices(models.TextChoices):

@@ -12,26 +12,11 @@ import teams.urls
 import users.urls
 
 urlpatterns = [
-    path(
-        'admin/',
-        admin.site.urls
-    ),
-    path(
-        '',
-        include(home.urls)
-    ),
-    path(
-        'auth/',
-        include(users.urls)
-    ),
-    path(
-        'auth/',
-        include(urls)
-    ),
-    path(
-        'teams/',
-        include(teams.urls)
-    ),
+    path('admin/', admin.site.urls),
+    path('', include(home.urls)),
+    path('auth/', include(users.urls)),
+    path('auth/', include(urls)),
+    path('teams/', include(teams.urls)),
 ]
 
 handler404 = views.Custom404.as_view()

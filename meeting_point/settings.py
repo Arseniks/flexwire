@@ -146,7 +146,9 @@ else:
     EMAIL_PORT = 465
     EMAIL_USE_TLS = False
     EMAIL_USE_SSL = True
-    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'obviously.wrong@email.ru')
+    EMAIL_HOST_USER = os.environ.get(
+        'EMAIL_HOST_USER', 'obviously.wrong@email.ru'
+    )
     EMAIL_HOST_PASSWORD = os.environ.get(
         'EMAIL_HOST_PASSWORD', 'obviouslywrongpassword'
     )

@@ -28,11 +28,11 @@ class Team(django.db.models.Model):
     title = django.db.models.CharField(
         verbose_name='title',
         help_text='Write title of your project',
-        max_length=64
+        max_length=64,
     )
     description = django.db.models.TextField(
         verbose_name='description',
-        help_text='Write description of your project'
+        help_text='Write description of your project',
     )
     image = django.db.models.ImageField(
         verbose_name='image',

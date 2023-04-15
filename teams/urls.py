@@ -5,15 +5,8 @@ from teams import views
 app_name = 'teams'
 
 urlpatterns = [
-    urls.path(
-        '',
-        views.TeamsList.as_view(),
-        name='teams_list'),
-    urls.path(
-        '<int:pk>/',
-        views.TeamDetail.as_view(),
-        name='team_detail'
-    ),
+    urls.path('', views.TeamsList.as_view(), name='teams_list'),
+    urls.path('<int:pk>/', views.TeamDetail.as_view(), name='team_detail'),
     urls.path(
         'create_pending/<int:pk>/',
         views.CreatePending.as_view(),

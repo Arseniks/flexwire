@@ -75,10 +75,7 @@ urlpatterns = [
         users.views.ActivateUserView.as_view(),
         name='activate_user',
     ),
-    path(
-        'profile/<int:pk>/',
-        users.views.Profile.as_view(),
-        name='profile'),
+    path('profile/<int:pk>/', users.views.Profile.as_view(), name='profile'),
     path(
         'account/',
         login_required(users.views.Account.as_view()),
