@@ -5,9 +5,9 @@ from django.utils.translation import gettext_lazy as _
 
 class Language(django.db.models.Model):
     language = django.db.models.CharField(
-        max_length=255,
-        verbose_name='Language',
+        verbose_name='language',
         help_text='Specify communication language',
+        max_length=255,
     )
 
     def __str__(self):
@@ -20,9 +20,9 @@ class Language(django.db.models.Model):
 
 class Technology(django.db.models.Model):
     technology = django.db.models.CharField(
-        max_length=255,
-        verbose_name='Technology',
+        verbose_name='technology',
         help_text='Specify technology',
+        max_length=255,
     )
 
     def __str__(self):
@@ -35,54 +35,59 @@ class Technology(django.db.models.Model):
 
 class CustomUser(AbstractUser):
     nickname = django.db.models.CharField(
-        max_length=255,
-        verbose_name='Your nickname',
+        verbose_name='your nickname',
         help_text='Name that other users will see',
+        max_length=255,
     )
     about_me = django.db.models.TextField(
+        verbose_name='tell more about yourself',
+        help_text='Mention everything you consider to be important',
         max_length=2000,
         null=True,
         blank=True,
-        verbose_name='Tell more about yourself',
-        help_text='Mention everything you consider to be important',
     )
     github = django.db.models.CharField(
-        max_length=255,
-        verbose_name='GitHub, Bitbucket or something similar',
+        verbose_name='gitHub, Bitbucket or something similar',
         help_text='Specify website to allow others check your projects',
+        max_length=255,
     )
     contact_data = django.db.models.CharField(
-        max_length=255,
-        verbose_name='Contact information',
+        verbose_name='contact information',
         help_text='Let other users contact you',
+        max_length=255,
     )
     city = django.db.models.CharField(
+        verbose_name='place where you live (country and city)',
+        help_text='Specify your country and '
+        'city to help people living nearby find you',
         max_length=255,
         blank=True,
         null=True,
-        verbose_name='Place where you live (country and city)',
-        help_text='Specify your country and '
-        'city to help people living nearby find you',
     )
     resume = django.db.models.FileField(
-        upload_to='resumes/',
+        verbose_name='resume',
+        help_text='Show others your resume',
         blank=True,
         null=True,
-        verbose_name='Resume',
-        help_text='Show others your resume',
+        upload_to='resumes/',
+
     )
     languages = django.db.models.ManyToManyField(
         Language,
-        verbose_name='Languages you speak',
+        verbose_name='languages you speak',
         help_text='Specify languages you know',
     )
     technologies = django.db.models.ManyToManyField(
         Technology,
-        verbose_name='Technologies you use',
+        verbose_name='technologies you use',
         help_text='Specify your stack of technologies',
     )
     image = django.db.models.ImageField(
-        'avatar', blank=True, null=True, upload_to='user_avatars/'
+        verbose_name='avatar',
+        help_text='Your avatar',
+        blank=True,
+        null=True,
+        upload_to='user_avatars/'
     )
 
     class EducationChoices(django.db.models.TextChoices):
@@ -90,20 +95,20 @@ class CustomUser(AbstractUser):
         UNIVERSITY = 'university', _('University')
 
     education_choose = django.db.models.CharField(
+        verbose_name='education',
+        help_text='Select place where you have studied',
         max_length=255,
         choices=EducationChoices.choices,
-        verbose_name='Education',
-        help_text='Select place where you have studied',
     )
     education = django.db.models.CharField(
+        verbose_name='where have you learned?',
+        help_text='University you attend or completed',
         max_length=255,
         null=True,
         blank=True,
-        verbose_name='Where have you learned?',
-        help_text='University you attend or completed',
     )
     user_picture = django.db.models.ImageField(
-        verbose_name='User picture',
+        verbose_name='user picture',
         help_text='Show others yourself',
         null=True,
         blank=True,

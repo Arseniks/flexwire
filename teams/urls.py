@@ -5,9 +5,14 @@ import teams.views
 app_name = 'teams'
 
 urlpatterns = [
-    django.urls.path('', teams.views.TeamsList.as_view(), name='teams_list'),
     django.urls.path(
-        '<int:pk>/', teams.views.TeamDetail.as_view(), name='team_detail'
+        '',
+        teams.views.TeamsList.as_view(),
+        name='teams_list'),
+    django.urls.path(
+        '<int:pk>/',
+        teams.views.TeamDetail.as_view(),
+        name='team_detail'
     ),
     django.urls.path(
         'create_pending/<int:pk>/',
