@@ -2,12 +2,12 @@ import pathlib
 
 import django.db.models
 
-import teams.managers
+from teams import managers
 import users.models
 
 
 class Team(django.db.models.Model):
-    objects = teams.managers.TeamManager()
+    objects = managers.TeamManager()
 
     def get_upload_image(self, filename):
         return (
@@ -90,7 +90,7 @@ class Role(django.db.models.Model):
 
 
 class RoleTeam(django.db.models.Model):
-    objects = teams.managers.RoleTeamManager()
+    objects = managers.RoleTeamManager()
 
     role_default = django.db.models.ForeignKey(
         Role,
@@ -114,7 +114,7 @@ class RoleTeam(django.db.models.Model):
 
 
 class Member(django.db.models.Model):
-    objects = teams.managers.MemberManager()
+    objects = managers.MemberManager()
 
     role_team = django.db.models.ForeignKey(
         RoleTeam,
@@ -140,7 +140,7 @@ class Member(django.db.models.Model):
 
 
 class Pending(django.db.models.Model):
-    objects = teams.managers.PendingManager()
+    objects = managers.PendingManager()
 
     role_team = django.db.models.ForeignKey(
         RoleTeam,
