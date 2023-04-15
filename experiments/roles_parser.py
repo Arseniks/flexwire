@@ -38,4 +38,6 @@ if __name__ == '__main__':
     technologies_fixture = data_list_to_fixture_json(
         list(cleared_technologies), 'users.language', 'language'
     )
-    json.dump(technologies_fixture, open('../fixtures/technologies_data.json', 'w'))
+    json.dump(
+        technologies_fixture, open('../fixtures/technologies_data.json', 'w')
+    )
