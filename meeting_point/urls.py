@@ -19,9 +19,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(home.urls)),
     path('auth/', include(users.urls)),
-    path('select2/', include(django_select2.urls)),
-    path('auth/', include(django.contrib.auth.urls)),
     path('auth/', include(urls)),
+    path('select2/', include(django_select2.urls)),
     path('teams/', include(teams.urls)),
     path('feedback/', include(feedback.urls)),
 ]
