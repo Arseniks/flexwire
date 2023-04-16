@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'teams.apps.TeamsConfig',
     'users.apps.UsersConfig',
+    'feedback.apps.FeedbackConfig',
     'debug_toolbar',
     'django_bootstrap_icons',
     'django_cleanup.apps.CleanupConfig',
@@ -146,9 +147,11 @@ else:
     EMAIL_PORT = 465
     EMAIL_USE_TLS = False
     EMAIL_USE_SSL = True
-    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'test@karonus.ru')
+    EMAIL_HOST_USER = os.environ.get(
+        'EMAIL_HOST_USER', 'obviously.wrong@email.ru'
+    )
     EMAIL_HOST_PASSWORD = os.environ.get(
-        'EMAIL_HOST_PASSWORD', 'prxnmhxvndensczk'
+        'EMAIL_HOST_PASSWORD', 'obviouslywrongpassword'
     )
     DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 

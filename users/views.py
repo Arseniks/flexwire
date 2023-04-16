@@ -101,6 +101,12 @@ class Profile(DetailView):
     model = CustomUser
     context_object_name = 'user'
 
+    def get(self, request, pk):
+        if pk == request.user.id:
+            context = {'user': request.user}
+            return render(request, self.template_name, context)
+        return super().get(request, pk)
+
 
 class Account(View):
     template_name = 'users/account.html'
