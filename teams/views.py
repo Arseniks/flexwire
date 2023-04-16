@@ -6,7 +6,6 @@ import django.views.generic
 
 import teams.forms
 import teams.models
-import teams.utils
 
 
 class TeamsList(django.views.generic.ListView):
@@ -17,6 +16,36 @@ class TeamsList(django.views.generic.ListView):
 
     def get_queryset(self):
         return teams.models.Team.objects.get_team_list(self.request.user.id)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = teams.forms.SearchForm()
+        return context
+
+    def post(self, request):
+        technologies = request.POST.getlist('technologies')
+        languages = request.POST.getlist('language')
+        search = request.POST.getlist('value')
+        form = teams.forms.SearchForm(request.POST)
+
+        query = super().get_queryset()
+
+        if technologies:
+            query = query.filter(technologies__id__in=technologies)
+
+        if languages:
+            query = query.filter(language_id__in=languages)
+
+        if search:
+            search = search[0]
+            query = query.filter(
+                django.db.models.Q(title__icontains=search)
+                | django.db.models.Q(description__icontains=search)
+            )
+        self.object_list = query
+        return super().render_to_response(
+            {'teams': query.all(), 'form': form, 'value': search}
+        )
 
 
 class TeamDetail(django.views.generic.DetailView):
@@ -68,14 +97,15 @@ class TeamDetail(django.views.generic.DetailView):
             )
         )
         if request.user.id == team.creator_id:
-            teams.utils.pull_out_list(request, 'technologies')
-
             form = teams.forms.TeamForm(
                 request.POST, request.FILES, instance=team
             )
 
             if form.is_valid():
                 form.save()
+                return django.shortcuts.redirect(
+                    'teams:team_detail', pk=team.id
+                )
 
             self.object = self.get_object()
             context = super(TeamDetail, self).get_context_data(**kwargs)
@@ -149,13 +179,6 @@ class CreateTeam(
     form_class = teams.forms.TeamForm
     template_name = 'teams/create_team.html'
 
-    def post(self, request, *args, **kwargs):
-        teams.utils.pull_out_technologies(request)
-
-        form = teams.forms.TeamForm(request.POST, request.FILES)
+    def form_valid(self, form, *args, **kwargs):
         form.instance.creator = self.request.user
-
-        if form.is_valid():
-            form.save()
-
-        return super().post(self, request, *args, **kwargs)
+        return super(CreateTeam, self).form_valid(form)

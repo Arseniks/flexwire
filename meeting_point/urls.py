@@ -4,9 +4,9 @@ import django.contrib.auth.urls
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import include
 from django.urls import path
+import django_select2.urls
 
 import home.urls
-import meeting_point
 import meeting_point.settings
 import meeting_point.views
 import teams.urls
@@ -16,12 +16,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(home.urls)),
     path('auth/', include(users.urls)),
+    path('select2/', include(django_select2.urls)),
     path('auth/', include(django.contrib.auth.urls)),
     path('teams/', include(teams.urls)),
 ]
 
 handler404 = meeting_point.views.Custom404.as_view()
-
 
 if meeting_point.settings.DEBUG:
     import debug_toolbar

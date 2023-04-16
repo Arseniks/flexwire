@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}"/>
-    <link rel="stylesheet" href="{% static 'css/virtual-select.min.css' %}"/>
     <title>
       {% block title %}
         {{ title }}
@@ -28,6 +27,8 @@
     <link rel="mask-icon"
           href="{% static 'favicons/safari-pinned-tab.svg' %}"
           color="#5bbad5"/>
+    {% block head %}
+    {% endblock head %}
     <meta name="msapplication-TileColor" content="#da532c"/>
     <meta name="theme-color" content="#ffffff"/>
   </head>
@@ -40,8 +41,9 @@
       </main>
       {% include "includes/footer.html" %}
     </div>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/footer_year.js' %}"></script>
     {% block scripts %}
     {% endblock scripts %}
-    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
   </body>
 </html>

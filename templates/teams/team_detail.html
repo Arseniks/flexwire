@@ -8,6 +8,10 @@
   {{ team.title }}
 {% endblock title %}
 
+{% block head %}
+  {{ edit_form.media.css }}
+{% endblock head %}
+
 {% block content %}
   {% if team.creator_id == request.user.id %}
     <div class="col-lg-6 mx-auto">
@@ -242,6 +246,6 @@
 {% endblock content %}
 
 {% block scripts %}
-  <script src="{% static 'js/virtual-select.min.js' %}"></script>
-  <script src="{% static 'js/init_select.js' %}"></script>
+  <script src="{% static 'js/jquery.min.js' %}" type="text/javascript"></script>
+  {{ edit_form.media.js }}
 {% endblock scripts %}

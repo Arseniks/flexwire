@@ -1,11 +1,18 @@
 {% for field in form.visible_fields %}
   <div class="mb-3">
+{#  {{ field.widget_type }}#}
     {% for error in field.errors %}
       <div class="alert alert-danger">
         {{ error|escape }}
       </div>
     {% endfor %}
-    <div class="form-floating">
+    {% if field.widget_type in "language,technology" %}
+      <div class="d-flex flex-column">
+        {{ field.label_tag }}
+        {{ field }}
+      </div>
+    {% else %}
+      <div class="form-floating">
       {% if field.widget_type == "checkbox" %}
         <div class="form-check">
           {{ field }}
@@ -13,9 +20,6 @@
             {{ field.label }}
           </label>
         </div>
-      {% elif field.widget_type in "select,selectmultiple" %}
-        {{ field.label_tag }}
-        {{ field }}
       {% elif field.widget_type == "clearablefile" %}
         <input name="{{ field.html_name }}"
                  id="{{ field.id_for_label }}"
@@ -31,6 +35,7 @@
           {{ field.label_tag }}
       {% endif %}
     </div>
+    {% endif %}
   </div>
 {% endfor %}
 {% for error in form.non_field_errors %}

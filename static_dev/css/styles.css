@@ -130,15 +130,31 @@ body {
 }
 
 .search {
-  border-radius: 1rem;
+  border-radius: 1rem 0 0 1rem;
+  border-right: none;
   padding: 0.825rem 1rem;
 }
 
 .search:focus {
   color: #576071;
-  border-color: #576071;
+  border-color: rgba(0, 0, 0, 0.175);
   outline: 0;
   box-shadow: unset;
+}
+
+.search__button, .search__button:hover {
+  border: 1px solid rgba(0, 0, 0, 0.175);
+  border-radius: 0 1rem 1rem 0;
+}
+
+.search__button:hover {
+  background: rgb(255, 255, 255, 0.5);
+  border-color: rgba(0, 0, 0, 0.262);
+}
+
+.search__button:active {
+  background: rgb(255, 255, 255, 0.5);
+  border-color: rgba(0, 0, 0, 0.2);
 }
 
 .tab_link {

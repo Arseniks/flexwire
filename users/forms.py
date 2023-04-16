@@ -1,6 +1,8 @@
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.forms import UserCreationForm
 
+from teams.forms import LanguagesWidget
+from teams.forms import TechnologyWidget
 from users.models import CustomUser
 
 
@@ -46,3 +48,8 @@ class UserAccountForm(UserChangeForm):
             CustomUser.education.field.name,
             CustomUser.image.field.name,
         ]
+
+        widgets = {
+            CustomUser.technologies.field.name: TechnologyWidget,
+            CustomUser.languages.field.name: LanguagesWidget,
+        }
