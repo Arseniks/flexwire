@@ -1,5 +1,6 @@
 from django import shortcuts
 from django.contrib.auth import mixins
+from django.db import models
 from django.views import generic
 
 import teams.forms
@@ -37,8 +38,8 @@ class TeamsList(generic.ListView):
         if search:
             search = search[0]
             query = query.filter(
-                django.db.models.Q(title__icontains=search)
-                | django.db.models.Q(description__icontains=search)
+                models.Q(title__icontains=search)
+                | models.Q(description__icontains=search)
             )
         self.object_list = query
         return super().render_to_response(
@@ -101,9 +102,7 @@ class TeamDetail(generic.DetailView):
 
             if form.is_valid():
                 form.save()
-                return django.shortcuts.redirect(
-                    'teams:team_detail', pk=team.id
-                )
+                return shortcuts.redirect('teams:team_detail', pk=team.id)
 
             self.object = self.get_object()
             context = super(TeamDetail, self).get_context_data(**kwargs)

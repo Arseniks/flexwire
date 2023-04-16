@@ -8,10 +8,8 @@ import django_select2.urls
 
 import feedback.urls
 import home.urls
-
 from meeting_point import settings
 from meeting_point import views
-
 import teams.urls
 import users.urls
 
