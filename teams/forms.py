@@ -1,3 +1,4 @@
+from ckeditor.widgets import CKEditorWidget
 from django import forms
 
 from teams import models
@@ -28,3 +29,8 @@ class TeamForm(BootstrapForm):
             models.Team.technologies.field.name,
             models.Team.language.field.name,
         )
+        widgets = {
+            models.Team.description.field.name: forms.CharField(
+                widget=CKEditorWidget(attrs={'config_name': 'CONFIG_WIDTH'})
+            )
+        }
