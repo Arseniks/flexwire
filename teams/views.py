@@ -98,9 +98,9 @@ class CreatePending(generic.View):
                 user=self.request.user,
             )
             send_mail(
-                'You crated pending to team',
+                'You created pending to team',
                 f'You created pending to team {role_team.team.title}.\n'
-                'It will be reviewed shortly by creator of the team.\n'
+                'It will be reviewed shortly by the creator of the team.\n'
                 '---\n'
                 'FLEXWIRE',
                 settings.DEFAULT_FROM_EMAIL,
@@ -116,9 +116,9 @@ class RemoveMember(generic.View):
         if member.role_team.team.creator_id == self.request.user.id:
             member.delete()
             send_mail(
-                'You was removed from team',
+                'You was removed from the team',
                 f'Creator of the team {member.role_team.team.title}'
-                'has made a decision to remove you from team.\n'
+                'has made a decision to remove you from the team.\n'
                 '---\n'
                 'FLEXWIRE',
                 settings.DEFAULT_FROM_EMAIL,
@@ -137,7 +137,7 @@ class AcceptPending(generic.View):
             send_mail(
                 'Your pending accepted',
                 f'Creator of the team {pending.role_team.team.title}'
-                'accept your pending.\n'
+                'has accepted your pending.\n'
                 '---\n'
                 'FLEXWIRE',
                 settings.DEFAULT_FROM_EMAIL,
@@ -160,7 +160,7 @@ class RejectPending(generic.View):
             send_mail(
                 'Your pending rejected',
                 f'Creator of the team {pending.role_team.team.title}'
-                'reject your pending.\n'
+                'has rejected your pending.\n'
                 '---\n'
                 'FLEXWIRE',
                 settings.DEFAULT_FROM_EMAIL,
