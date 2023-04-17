@@ -58,7 +58,7 @@ class CreateRoleTeamForm(BootstrapForm):
                     search_fields=[
                         f'{teams.models.Role.name.field.name}__icontains',
                     ],
-                ),
+                )
             )
         }
 
