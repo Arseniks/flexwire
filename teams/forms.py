@@ -17,14 +17,14 @@ class TechnologyWidget(django_select2.forms.ModelSelect2MultipleWidget):
 
 
 class LanguageWidget(django_select2.forms.ModelSelect2Widget):
-    model = users.models.Technology
+    model = users.models.Language
     search_fields = (
         f'{users.models.Language.language.field.name}__icontains',
     )
 
 
 class LanguagesWidget(django_select2.forms.ModelSelect2MultipleWidget):
-    model = users.models.Technology
+    model = users.models.Language
     search_fields = (
         f'{users.models.Language.language.field.name}__icontains',
     )
@@ -45,6 +45,20 @@ class BootstrapForm(django.forms.ModelForm):
                 field.field.widget.attrs['class'] = 'w-100'
             else:
                 field.field.widget.attrs['class'] = 'form-control'
+
+
+class CreateRoleTeamForm(BootstrapForm):
+    class Meta:
+        model = teams.models.RoleTeam
+        fields = (teams.models.RoleTeam.role_default.field.name,)
+        widgets = {
+            teams.models.RoleTeam.role_default.field.name: django_select2.forms.ModelSelect2Widget(
+                model=teams.models.Role,
+                search_fields=[
+                    f'{teams.models.Role.name.field.name}__icontains',
+                ],
+            ),
+        }
 
 
 class TeamForm(BootstrapForm):

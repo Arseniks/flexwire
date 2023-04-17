@@ -49,19 +49,34 @@ class TeamsList(generic.ListView):
         )
 
 
-class TeamDetail(generic.DetailView):
+class TeamMixin:
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        pendings = teams.models.Pending.objects.get_pendings(
+            self.kwargs.get('pk')
+        )
+        team = shortcuts.get_object_or_404(
+            teams.models.Team.objects.get_team_by_pk(
+                self.request.user.id or -1, self.kwargs.get('pk')
+            )
+        )
+        context.update(
+            {
+                'pendings': pendings,
+                'team': team,
+            }
+        )
+        return context
+
+
+class TeamDetail(TeamMixin, generic.DetailView):
     model = teams.models.Team
     template_name = 'teams/team_detail.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        user_id = self.request.user.id or -1
-
-        team = kwargs.get('team') or shortcuts.get_object_or_404(
-            teams.models.Team.objects.get_team_by_pk(
-                user_id, self.kwargs.get('pk')
-            )
-        )
+        team = context['team']
 
         members = teams.models.Member.objects.get_members(team.id).all()
         vacancies = teams.models.RoleTeam.objects.get_vacancies(team.id)
@@ -69,49 +84,86 @@ class TeamDetail(generic.DetailView):
         language = team.language
         technologies = team.technologies.all()
 
-        if user_id != -1:
-            vacancies = vacancies.exclude(pendings__user_id=user_id)
-
-        if user_id == team.creator_id:
-            pendings = teams.models.Pending.objects.get_pendings(team.id)
-            context['pendings'] = pendings
-            context['edit_form'] = teams.forms.TeamForm(
-                instance=team,
+        if self.request.user.is_authenticated:
+            vacancies = vacancies.exclude(
+                pendings__user_id=self.request.user.id
             )
 
         context.update(
             {
-                'team': team,
                 'technologies': technologies,
                 'language': language,
                 'vacancies': vacancies,
                 'members': members,
             }
         )
-
         return context
 
+
+class TeamEdit(TeamMixin, generic.TemplateView):
+    model = teams.models.Team
+    template_name = 'teams/team_edit.html'
+
+    def get(self, request, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        team = context['team']
+        if self.request.user.id != team.creator_id:
+            return shortcuts.redirect('teams:team_detail', kwargs.get('pk'))
+
+        context['members'] = teams.models.Member.objects.get_members(team.id)
+        context['form'] = teams.forms.TeamForm(instance=team)
+        context['roleteams'] = teams.models.RoleTeam.objects.get_vacancies(
+            team.id
+        )
+
+        return self.render_to_response(context)
+
+    def post(self, request, **kwargs):
+        context = self.get_context_data()
+        team = context['team']
+        if self.request.user.id != team.creator_id:
+            return shortcuts.redirect('teams:team_detail', kwargs.get('pk'))
+
+        form = teams.forms.TeamForm(request.POST, request.FILES, instance=team)
+        if form.is_valid():
+            form.save()
+            return shortcuts.redirect('teams:edit_team', kwargs.get('pk'))
+        context['form'] = form
+        return self.render_to_response(context)
+
+
+class TeamPendings(TeamMixin, generic.TemplateView):
+    template_name = 'teams/team_pendings.html'
+
+
+class CreateRoleTeam(generic.CreateView):
+    template_name = 'teams/create_roleteam.html'
+    form_class = teams.forms.CreateRoleTeamForm
+
     def post(self, request, *args, **kwargs):
+        pk = kwargs.get('pk')
         team = shortcuts.get_object_or_404(
             teams.models.Team.objects.get_team_by_pk(
-                self.request.user.id, self.kwargs.get('pk')
+                self.request.user.id or -1, kwargs.get('pk')
             )
         )
-        if request.user.id == team.creator_id:
-            form = teams.forms.TeamForm(
-                request.POST, request.FILES, instance=team
-            )
+        if team.creator_id != self.request.user.id:
+            return shortcuts.redirect('teams:team_detail', pk)
 
-            if form.is_valid():
-                form.save()
-                return shortcuts.redirect('teams:team_detail', pk=team.id)
+        form = teams.forms.CreateRoleTeamForm(request.POST)
+        role_team = form.save(commit=False)
+        role_team.team = team
+        role_team.save()
+        return shortcuts.redirect('teams:edit_team', pk)
 
-            self.object = self.get_object()
-            context = super(TeamDetail, self).get_context_data(**kwargs)
-            context['edit_form'] = form
-            return super(TeamDetail, self).render_to_response(context=context)
 
-        return shortcuts.redirect('teams:team_detail', pk=team.id)
+class RemoveRoleTeam(generic.View):
+    def post(self, request, pk):
+        role_team = shortcuts.get_object_or_404(teams.models.RoleTeam, pk=pk)
+        if role_team.team.creator_id != self.request.user.id:
+            return shortcuts.redirect('teams:team_detail', role_team.team_id)
+        role_team.delete()
+        return shortcuts.redirect('teams:edit_team', role_team.team_id)
 
 
 class CreatePending(generic.View):
@@ -213,3 +265,8 @@ class CreateTeam(
     def form_valid(self, form, *args, **kwargs):
         form.instance.creator = self.request.user
         return super(CreateTeam, self).form_valid(form)
+
+    def get_success_url(self):
+        return shortcuts.reverse(
+            'teams:team_detail', kwargs={'pk': self.object.pk}
+        )

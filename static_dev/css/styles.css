@@ -167,6 +167,8 @@ body {
   transform: scaleX(1);
   transform-origin: bottom center;
   text-decoration: #377DFF  underline;
+  color: #929292;
+
 }
 
 .tab_link.active {

@@ -15,6 +15,7 @@ class TeamManager(models.Manager):
                 | Q(is_published=True)
                 | Q(creator_id=user_id)
             )
+            .distinct()
         )
 
     def get_team_list(self, user_id):

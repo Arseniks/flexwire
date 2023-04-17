@@ -5,8 +5,16 @@ from teams import views
 app_name = 'teams'
 
 urlpatterns = [
-    urls.path('', views.TeamsList.as_view(), name='teams_list'),
-    urls.path('<int:pk>/', views.TeamDetail.as_view(), name='team_detail'),
+    urls.path(
+        '',
+        views.TeamsList.as_view(),
+        name='teams_list',
+    ),
+    urls.path(
+        '<int:pk>/',
+        views.TeamDetail.as_view(),
+        name='team_detail',
+    ),
     urls.path(
         'create_pending/<int:pk>/',
         views.CreatePending.as_view(),
@@ -31,5 +39,25 @@ urlpatterns = [
         'create_team/',
         views.CreateTeam.as_view(),
         name='create_team',
+    ),
+    urls.path(
+        '<int:pk>/edit',
+        views.TeamEdit.as_view(),
+        name='edit_team',
+    ),
+    urls.path(
+        '<int:pk>/pendings',
+        views.TeamPendings.as_view(),
+        name='pendings_team',
+    ),
+    urls.path(
+        '<int:pk>/create_roleteam',
+        views.CreateRoleTeam.as_view(),
+        name='create_roleteam',
+    ),
+    urls.path(
+        'remove_roleteam/<int:pk>/',
+        views.RemoveRoleTeam.as_view(),
+        name='remove_roleteam',
     ),
 ]

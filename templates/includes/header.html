@@ -16,10 +16,10 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      {% with request.resolver_match.view_name as view_name %}
         <ul class="navbar-nav mx-md-auto ms-sm-auto">
           <li class="nav-item">
-            <a class="header__link h3 {% if view_name == 'teams:teams_list' %}active{% endif %} me-4" href="{% url 'teams:teams_list' %}">Team search</a>
+          {% url 'teams:teams_list' as team_list %}
+            <a class="header__link h3 {% if request.path == team_list %}active{% endif %} me-4" href="{{ team_list }}">Team search</a>
           </li>
         </ul>
         <a href="#" class="ms-lg-auto ms-sm-2 navbar-btn lift text-decoration-none">
@@ -41,8 +41,10 @@
                   <p class="my-0 ms-1 header__link">{{ request.user.nickname }}</p>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
-                  <li><a href="{% url 'users:profile' request.user.id %}" class="dropdown-item {% if view_name == 'users:profile' %}active{% endif %}">Profile</a></li>
-                  <li><a href="{% url 'users:account' %}" class="dropdown-item {% if view_name == 'users:account' %}active{% endif %}">Account</a></li>
+                  {% url 'users:profile' request.user.id as profile %}
+                  {% url 'users:account' as account %}
+                  <li><a href="{{ profile }}" class="dropdown-item {% if request.path == profile %}active{% endif %}">Profile</a></li>
+                  <li><a href="{{ account }}" class="dropdown-item {% if request.path == account %}active{% endif %}">Account</a></li>
                   <li><hr class="dropdown-divider"/></li>
                   <li><a href="{% url 'users:logout' %}" class="dropdown-item">Logout</a></li>
                 </ul>
@@ -61,7 +63,6 @@
             {% endif %}
           </span>
         </a>
-      {% endwith %}
     </div>
   </nav>
 </header>
