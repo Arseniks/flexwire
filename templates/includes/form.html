@@ -13,6 +13,9 @@
             {{ field.label }}
           </label>
         </div>
+      {% elif field.html_name == "description" %}
+        {{ field.label }}
+        {{ field }}
       {% elif field.widget_type in "select,selectmultiple" %}
         {{ field.label_tag }}
         {{ field }}

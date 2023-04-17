@@ -1,3 +1,4 @@
+from ckeditor.fields import RichTextField
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _
@@ -39,7 +40,7 @@ class CustomUser(AbstractUser):
         help_text='Name that other users will see',
         max_length=255,
     )
-    about_me = models.TextField(
+    about_me = RichTextField(
         verbose_name='tell more about yourself',
         help_text='Mention everything you consider to be important',
         max_length=2000,

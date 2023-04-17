@@ -53,7 +53,7 @@
           {% endif %}
           <div class="card border-0 p-3 mb-5">
             <h1>About me</h1>
-            <p class="text-read fs-5">{{ user.about_me|default:"hmm... there's no information" }}</p>
+            <p class="text-read fs-5">{{ user.about_me|safe|default:"hmm... there's no information" }}</p>
             {% if user.resume %}
               <span class="d-flex align-items-center gap-1">
                 {% bs_icon 'card-text' %}

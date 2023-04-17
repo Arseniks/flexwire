@@ -1,3 +1,5 @@
+from ckeditor.widgets import CKEditorWidget
+from django import forms
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.forms import UserCreationForm
 
@@ -46,3 +48,8 @@ class UserAccountForm(UserChangeForm):
             CustomUser.education.field.name,
             CustomUser.image.field.name,
         ]
+        widgets = {
+            CustomUser.about_me.field.name: forms.CharField(
+                widget=CKEditorWidget()
+            )
+        }

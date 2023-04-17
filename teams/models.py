@@ -1,5 +1,6 @@
 import pathlib
 
+from ckeditor.fields import RichTextField
 import django.db.models
 
 from teams import managers
@@ -30,7 +31,7 @@ class Team(django.db.models.Model):
         help_text='Write title of your project',
         max_length=64,
     )
-    description = django.db.models.TextField(
+    description = RichTextField(
         verbose_name='description',
         help_text='Write description of your project',
     )
