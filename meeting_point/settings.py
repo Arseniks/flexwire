@@ -164,12 +164,42 @@ DEFAULT_USER_ACTIVITY = (
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 CKEDITOR_CONFIGS = {
     'default': {
-        'toolbar': 'full',
+        'toolbar': [
+            [
+                'Undo',
+                'Redo',
+                'Bold',
+                'Italic',
+                'Underline',
+                'Link',
+                'Unlink',
+                'Anchor',
+                'Format',
+                'Maximize',
+                'Source',
+                'NumberedList',
+                'BulletedList',
+            ],
+            [
+                'JustifyLeft',
+                'JustifyCenter',
+                'JustifyRight',
+                'JustifyBlock',
+                'Font',
+                'FontSize',
+                'TextColor',
+                'Outdent',
+                'Indent',
+                'HorizontalRule',
+                'Blockquote',
+            ],
+        ],
         'width': 'auto',
         'extraPlugins': ','.join(
             [
                 'codesnippet',
             ]
         ),
+        'removePlugins': 'exportpdf',
     },
 }
