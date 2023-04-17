@@ -11,9 +11,11 @@
         {{ field }}
       </div>
     {% elif field.widget_type == "ckeditor" %}
-      {{ field.label_tag }}
-      <br/>
-      {{ field }}
+      <div>
+        {{ form.media }}
+        {{ field.label_tag }}
+        {{ field }}
+      </div>
     {% else %}
       <div class="form-floating">
       {% if field.widget_type == "checkbox" %}
