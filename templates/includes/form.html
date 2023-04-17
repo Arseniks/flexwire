@@ -7,6 +7,7 @@
     {% endfor %}
     {% if field.html_name == "description" %}
       <div>
+        {{ form.media }}
         {{ field.label_tag }}
         {{ field }}
       </div>
