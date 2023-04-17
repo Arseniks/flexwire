@@ -26,8 +26,6 @@ class UserAccountForm(UserChangeForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.visible_fields():
-            if field.widget_type in ('select', 'selectmultiple'):
-                continue
             field.field.widget.attrs['class'] = 'form-control'
 
     password = None
@@ -56,5 +54,5 @@ class UserAccountForm(UserChangeForm):
             CustomUser.languages.field.name: LanguagesWidget,
             CustomUser.about_me.field.name: forms.CharField(
                 widget=CKEditorWidget()
-            )
+            ),
         }

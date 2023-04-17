@@ -57,7 +57,7 @@
             {% if user.resume %}
               <span class="d-flex align-items-center gap-1">
                 {% bs_icon 'card-text' %}
-                <a href="{{ user.resume }}" download class="text-decoration-none">Curriculum vitae</a>
+                <a href="{{ MEDIA_URL }}{{ user.resume.url }}" download class="text-decoration-none">Curriculum vitae</a>
               </span>
             {% endif %}
           </div>

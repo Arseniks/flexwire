@@ -91,9 +91,11 @@
                id="pills-about" role="tabpanel"
                aria-labelledby="pills-about-tab" tabindex="0">
             <p class="text-muted">{{ team.description|safe }}</p>
-            <p>{% bs_icon "file-earmark-ppt" %}
-              <a href="{{ team.presentation }}" download>Presentation</a>
-            </p>
+            {% if team.presentation %}
+              <p>{% bs_icon "file-earmark-ppt" %}
+                <a href="{{ MEDIA_URL }}{{ team.presentation.url }}" download>Presentation</a>
+              </p>
+            {% endif %}
             <div class="d-flex flex-column gap-2 mt-auto">
               <div class="d-flex gap-2">
                 <span class="tech bg-light">{% bs_icon "stack" %}Technologies:</span>
@@ -182,7 +184,7 @@
         <ul class="list-group list-group-flush">
           {% for member in members %}
             <li class="list-group-item">
-              <a href="#" class="text-decoration-none text-dark d-flex justify-content-between align-items-center">
+              <a href="{% url 'users:profile' member.user_id %}" class="text-decoration-none text-dark d-flex justify-content-between align-items-center">
                 {% thumbnail member.user.image "256x256" crop="center" as img %}
                   <img src="{{ img.url }}"
                        width="72px"
