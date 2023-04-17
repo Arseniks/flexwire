@@ -200,5 +200,6 @@ CKEDITOR_CONFIGS = {
                 'codesnippet',
             ]
         ),
+        'removePlugins': 'exportpdf',
     },
 }
