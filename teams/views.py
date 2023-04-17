@@ -1,5 +1,7 @@
 from django import shortcuts
+from django.conf import settings
 from django.contrib.auth import mixins
+from django.core.mail import send_mail
 from django.db import models
 from django.views import generic
 
@@ -124,6 +126,16 @@ class CreatePending(generic.View):
                 role_team=role_team,
                 user=self.request.user,
             )
+            send_mail(
+                'You created pending to team',
+                f'You created pending to team {role_team.team.title}.\n'
+                'It will be reviewed shortly by the creator of the team.\n'
+                '---\n'
+                'FLEXWIRE',
+                settings.DEFAULT_FROM_EMAIL,
+                [request.user.email],
+                fail_silently=False,
+            )
         return shortcuts.redirect('teams:team_detail', role_team.team_id)
 
 
@@ -132,6 +144,16 @@ class RemoveMember(generic.View):
         member = shortcuts.get_object_or_404(teams.models.Member, pk=pk)
         if member.role_team.team.creator_id == self.request.user.id:
             member.delete()
+            send_mail(
+                'You was removed from the team',
+                f'Creator of the team {member.role_team.team.title}'
+                'has made a decision to remove you from the team.\n'
+                '---\n'
+                'FLEXWIRE',
+                settings.DEFAULT_FROM_EMAIL,
+                [member.user.email],
+                fail_silently=False,
+            )
         return shortcuts.redirect(
             'teams:team_detail', member.role_team.team_id
         )
@@ -141,6 +163,16 @@ class AcceptPending(generic.View):
     def post(self, request, pk):
         pending = shortcuts.get_object_or_404(teams.models.Pending, pk=pk)
         if pending.role_team.team.creator_id == self.request.user.id:
+            send_mail(
+                'Your pending accepted',
+                f'Creator of the team {pending.role_team.team.title}'
+                'has accepted your pending.\n'
+                '---\n'
+                'FLEXWIRE',
+                settings.DEFAULT_FROM_EMAIL,
+                [pending.user.email],
+                fail_silently=False,
+            )
             pending.delete()
             teams.models.Member.objects.create(
                 role_team=pending.role_team, user=pending.user
@@ -154,6 +186,16 @@ class RejectPending(generic.View):
     def post(self, request, pk):
         pending = shortcuts.get_object_or_404(teams.models.Pending, pk=pk)
         if pending.role_team.team.creator_id == self.request.user.id:
+            send_mail(
+                'Your pending rejected',
+                f'Creator of the team {pending.role_team.team.title}'
+                'has rejected your pending.\n'
+                '---\n'
+                'FLEXWIRE',
+                settings.DEFAULT_FROM_EMAIL,
+                [pending.user.email],
+                fail_silently=False,
+            )
             pending.delete()
         return shortcuts.redirect(
             'teams:team_detail', pending.role_team.team_id

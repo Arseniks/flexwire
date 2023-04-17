@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django_bootstrap_icons',
     'django_cleanup.apps.CleanupConfig',
     'sorl.thumbnail',
+    'ckeditor',
     'django_select2',
 ]
 
@@ -159,3 +160,16 @@ else:
 DEFAULT_USER_ACTIVITY = (
     os.environ.get('DEFAULT_USER_ACTIVITY', str(DEBUG)).lower() == 'true'
 )
+
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'width': 'auto',
+        'extraPlugins': ','.join(
+            [
+                'codesnippet',
+            ]
+        ),
+    },
+}
