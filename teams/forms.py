@@ -52,12 +52,14 @@ class CreateRoleTeamForm(BootstrapForm):
         model = teams.models.RoleTeam
         fields = (teams.models.RoleTeam.role_default.field.name,)
         widgets = {
-            teams.models.RoleTeam.role_default.field.name: django_select2.forms.ModelSelect2Widget(
-                model=teams.models.Role,
-                search_fields=[
-                    f'{teams.models.Role.name.field.name}__icontains',
-                ],
-            ),
+            teams.models.RoleTeam.role_default.field.name: (
+                django_select2.forms.ModelSelect2Widget(
+                    model=teams.models.Role,
+                    search_fields=[
+                        f'{teams.models.Role.name.field.name}__icontains',
+                    ],
+                ),
+            )
         }
 
 
