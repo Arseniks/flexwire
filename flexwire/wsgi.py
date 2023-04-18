@@ -1,5 +1,5 @@
 """
-WSGI config for meeting_point project.
+WSGI config for flexwire project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'meeting_point.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'flexwire.settings')
 
 application = get_wsgi_application()

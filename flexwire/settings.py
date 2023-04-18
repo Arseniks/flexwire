@@ -62,7 +62,7 @@ INTERNAL_IPS = [
     '127.0.0.1',
 ]
 
-ROOT_URLCONF = 'meeting_point.urls'
+ROOT_URLCONF = 'flexwire.urls'
 
 TEMPLATES = [
     {
@@ -80,7 +80,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'meeting_point.wsgi.application'
+WSGI_APPLICATION = 'flexwire.wsgi.application'
 
 
 DATABASES = {

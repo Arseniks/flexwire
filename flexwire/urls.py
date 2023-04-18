@@ -7,8 +7,8 @@ from django.urls import path
 
 import feedback.urls
 import home.urls
-from meeting_point import settings
-from meeting_point import views
+from flexwire import settings
+from flexwire import views
 import teams.urls
 import users.urls
 
