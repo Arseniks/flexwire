@@ -22,7 +22,7 @@ urlpatterns = [
 ]
 
 handler404 = views.Custom404.as_view()
-handler500 = views.custom500
+handler500 = views.Custom500.as_view()
 
 
 if settings.DEBUG:
