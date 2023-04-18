@@ -24,8 +24,13 @@ STATIC_ROOT = BASE_DIR / 'static'
 SECRET_KEY = os.environ.get('SECRET_KEY', 'any-other-dummy-key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'true').lower() in \
-    {'y', 'yes', 'true', '1', 't'}
+DEBUG = os.environ.get('DEBUG', 'true').lower() in {
+    'y',
+    'yes',
+    'true',
+    '1',
+    't',
+}
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 
@@ -157,10 +162,9 @@ else:
     DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
-DEFAULT_USER_ACTIVITY = (
-    os.environ.get('DEFAULT_USER_ACTIVITY', str(DEBUG)).lower() in
-    {'y', 'yes', 'true', '1', 't'}
-)
+DEFAULT_USER_ACTIVITY = os.environ.get(
+    'DEFAULT_USER_ACTIVITY', str(DEBUG)
+).lower() in {'y', 'yes', 'true', '1', 't'}
 
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 CKEDITOR_CONFIGS = {
