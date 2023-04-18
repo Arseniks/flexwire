@@ -36,6 +36,10 @@
                         height="auto"
                         class="card-img-top team__image"
                         alt="team image"/>
+                  {% empty %}
+                    <div class="text-bg-secondary card-img-top h-100 d-flex align-items-center justify-content-center">
+                      <p class="text-center text-light">No Image</p>
+                    </div>
                   {% endthumbnail %}
                   <div class="card-body d-flex flex-column gap-2">
                     <div>
@@ -70,7 +74,7 @@
             {% empty %}
               <h4>No one has created team yet...</h4>
             {% endfor %}
-      </div>
+          </div>
         </div>
         <div class="col-lg-3 col-12 mb-3">
           <div class="card p-3 display-lg-block d-flex justify-content-center">

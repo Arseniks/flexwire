@@ -136,6 +136,17 @@ class TeamPendings(TeamMixin, generic.TemplateView):
     template_name = 'teams/team_pendings.html'
 
 
+class UserTeams(generic.ListView):
+    template_name = 'teams/user_teams.html'
+    context_object_name = 'teams'
+
+    def get_queryset(self):
+        return teams.models.Team.objects.filter(
+            models.Q(creator_id=self.request.user.id)
+            | models.Q(roleteams__members__id__contains=self.request.user.id)
+        ).distinct()
+
+
 class CreateRoleTeam(generic.CreateView):
     template_name = 'teams/create_roleteam.html'
     form_class = teams.forms.CreateRoleTeamForm

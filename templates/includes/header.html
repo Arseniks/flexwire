@@ -15,16 +15,16 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav mx-md-auto ms-sm-auto">
+      <ul class="navbar-nav mx-md-auto ms-sm-auto gap-4">
         <li class="nav-item">
           {% url 'teams:teams_list' as team_list %}
-          <a class="header__link h3 {% if request.path == team_list %}active{% endif %} me-4"
+          <a class="header__link h3 {% if request.path == team_list %}active{% endif %}"
              href="{{ team_list }}">Team search</a>
         </li>
         <li class="nav-item">
-          {% url 'teams:create_team' as create_team %}
-          <a class="header__link h3 {% if request.path == create_team %}active{% endif %} me-4"
-             href="{{ create_team }}">Create team</a>
+          {% url 'teams:user_teams' as user_teams %}
+          <a class="header__link h3 {% if request.path == user_teams %}active{% endif %}"
+             href="{{ user_teams }}">My teams</a>
         </li>
 
       </ul>
@@ -58,6 +58,7 @@
                          class="dropdown-item {% if request.path == profile %}active{% endif %}">Profile</a></li>
                   <li><a href="{{ account }}"
                          class="dropdown-item {% if request.path == account %}active{% endif %}">Account</a></li>
+
                   <li><hr class="dropdown-divider"/></li>
                   <li><a href="{% url 'users:logout' %}" class="dropdown-item">Logout</a></li>
                 </ul>

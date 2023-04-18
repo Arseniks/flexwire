@@ -51,6 +51,7 @@
         {% endfor %}
       </ul>
     </div>
+    <hr/>
     <h4>Free roles <span class="badge rounded-circle text-bg-danger">{{ roleteams.all.count }}</span></h4>
     <div>
       <ul class="list-group list-group-flush">
@@ -68,8 +69,8 @@
           </li>
         {% endfor %}
       </ul>
+      <a href="{% url 'teams:create_roleteam' team.id %}" class="btn btn-primary" target="_blank">Create role for team</a>
     </div>
-    <a href="{% url 'teams:create_roleteam' team.id %}" class="btn btn-primary" target="_blank">Create role for team</a>
   </div>
 {% endblock inner %}
 
