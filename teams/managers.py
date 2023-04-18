@@ -8,7 +8,6 @@ import users.models
 
 class TeamManager(models.Manager):
     def teams(self, user_id):
-
         return (
             self.get_queryset()
             .select_related(teams.models.Team.creator.field.name)
