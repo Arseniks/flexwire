@@ -81,8 +81,10 @@ class MemberManager(models.Manager):
             .only(
                 f'{teams.models.Member.role_team.field.name}__'
                 f'{teams.models.RoleTeam.role_default.field.name}',
-                f'{teams.models.Member.user.field.name}__{users.models.CustomUser.username.field.name}',
-                f'{teams.models.Member.user.field.name}__{users.models.CustomUser.image.field.name}',
+                f'{teams.models.Member.user.field.name}'
+                f'__{users.models.CustomUser.username.field.name}',
+                f'{teams.models.Member.user.field.name}'
+                f'__{users.models.CustomUser.image.field.name}',
             )
         )
 
@@ -99,7 +101,9 @@ class PendingManager(models.Manager):
             .only(
                 f'{teams.models.Pending.role_team.field.name}__'
                 f'{teams.models.RoleTeam.role_default.field.name}',
-                f'{teams.models.Pending.user.field.name}__{users.models.CustomUser.username.field.name}',
-                f'{teams.models.Pending.user.field.name}__{users.models.CustomUser.image.field.name}',
+                f'{teams.models.Pending.user.field.name}'
+                f'__{users.models.CustomUser.username.field.name}',
+                f'{teams.models.Pending.user.field.name}'
+                f'__{users.models.CustomUser.image.field.name}',
             )
         )
