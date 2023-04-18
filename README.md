@@ -3,7 +3,7 @@
 # Запуск проекта
 - Клонируйте проект с GitHub с помощью команды:
 ```
-git clone https://github.com/Arseniks/meeting_point
+git clone https://github.com/Arseniks/flexwire
 ```
 - Скопируйте файл .env.template в .env, при необходимости отредактируйте 
   значения переменных:
