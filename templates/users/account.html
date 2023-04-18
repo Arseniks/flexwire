@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+
 {% load static %}
 {% load bootstrap_icons %}
 {% load thumbnail %}
@@ -38,8 +39,7 @@
               <input name="{{ form.image.html_name }}"
                      type="file"
                      accept="image/*"
-                     class="form-control"
-              />
+                     class="form-control"/>
               <a href="" class="btn btn-danger">Remove</a>
             </div>
           {% empty %}
@@ -58,7 +58,6 @@
               {{ form.education_choose }}
             </div>
           </div>
-
         </div>
         <div class="card border-0 p-3 d-flex flex-column">
           <div class="d-flex flex-column">
@@ -69,7 +68,6 @@
             </div>
           </div>
         </div>
-
       </div>
       <div class="col-lg-8 col-12 d-flex flex-column gap-3">
         <div class="d-flex flex-column card p-3 border-0">
@@ -80,47 +78,47 @@
           </div>
         </div>
         <div class="d-flex flex-column card p-3 border-0">
-            <h1 class="my-0">Contacts</h1>
-            <div class="d-flex justify-content-between mt-3 flex-lg-row flex-column gap-4">
-              <div class="d-flex flex-column col-lg-5 col-12">
-                <span class="d-flex align-items-center gap-1">
-                    {% bs_icon 'github' size='24px' %}
-                    <p href="{{ user.github }}" class="text-read my-0">Github</p>
-                </span>
-                <div class="form-floating mt-2">
-                  {{ form.github }}
-                  {{ form.github.label_tag }}
-                </div>
-              </div>
-              <div class="d-flex flex-column col-lg-5 col-12">
-                <span class="d-flex align-items-center gap-1">
-                  {% bs_icon 'envelope' size='24px' %}
-                  <p class="text-read my-0">email</p>
-                </span>
-                <div class="form-floating mt-2">
-                  {{ form.email }}
-                  {{ form.email.label_tag }}
-                </div>
+          <h1 class="my-0">Contacts</h1>
+          <div class="d-flex justify-content-between mt-3 flex-lg-row flex-column gap-4">
+            <div class="d-flex flex-column col-lg-5 col-12">
+              <span class="d-flex align-items-center gap-1">
+                {% bs_icon 'github' size='24px' %}
+                <p href="{{ user.github }}" class="text-read my-0">Github</p>
+              </span>
+              <div class="form-floating mt-2">
+                {{ form.github }}
+                {{ form.github.label_tag }}
               </div>
             </div>
-            <div class="d-flex flex-column mt-3">
-              <h4>Other contacts</h4>
-              <div class="form-floating">
-                {{ form.contact_data }}
-                {{ form.contact_data.label_tag }}
+            <div class="d-flex flex-column col-lg-5 col-12">
+              <span class="d-flex align-items-center gap-1">
+                {% bs_icon 'envelope' size='24px' %}
+                <p class="text-read my-0">email</p>
+              </span>
+              <div class="form-floating mt-2">
+                {{ form.email }}
+                {{ form.email.label_tag }}
               </div>
             </div>
           </div>
-          <div class="d-flex flex-lg-row flex-column justify-content-between gap-4">
-            <div class="col-12 col-lg-5 d-flex flex-column card p-3 border-0">
-              <h2 class="mb-3">Technologies</h2>
-                {{ form.technologies }}
-            </div>
-            <div class="col-12 col-lg-5 d-flex flex-column card p-3 border-0">
-              <h2 class="mb-3">Languages</h2>
-                {{ form.languages }}
+          <div class="d-flex flex-column mt-3">
+            <h4>Other contacts</h4>
+            <div class="form-floating">
+              {{ form.contact_data }}
+              {{ form.contact_data.label_tag }}
             </div>
           </div>
+        </div>
+        <div class="d-flex flex-lg-row flex-column justify-content-between gap-4">
+          <div class="col-12 col-lg-5 d-flex flex-column card p-3 border-0">
+            <h2 class="mb-3">Technologies</h2>
+              {{ form.technologies }}
+          </div>
+          <div class="col-12 col-lg-5 d-flex flex-column card p-3 border-0">
+            <h2 class="mb-3">Languages</h2>
+              {{ form.languages }}
+          </div>
+        </div>
       </div>
       <div class="col-12">
         <div class="card p-3 mt-5 border-0">

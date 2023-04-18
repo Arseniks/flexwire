@@ -27,8 +27,7 @@
             {% if request.user.is_authenticated %}
               <div class="dropdown d-none d-lg-block d-md-block">
                 <a class="d-flex align-items-center dropdown-toggle"
-                   href="#" data-bs-toggle="dropdown" aria-expanded="false"
-                >
+                   href="#" data-bs-toggle="dropdown" aria-expanded="false">
                   {% thumbnail request.user.image "32x32" crop="center" as img %}
                     <img src="{{ img.url }}"
                        width="32px"
