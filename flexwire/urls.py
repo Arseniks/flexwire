@@ -6,9 +6,9 @@ from django.urls import include
 from django.urls import path
 
 import feedback.urls
-import home.urls
 from flexwire import settings
 from flexwire import views
+import home.urls
 import teams.urls
 import users.urls
 
