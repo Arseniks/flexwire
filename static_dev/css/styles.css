@@ -34,12 +34,16 @@ body {
   color: #000000;
 }
 
-.header__link {
+.header__link, .profile__link {
   color: #6c757d;
   font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 400;
   text-decoration: none;
+}
+
+.profile__link {
+  cursor: pointer;
 }
 
 .header__link.active, .header__link:hover.active {
@@ -193,3 +197,4 @@ body {
 .about_textarea {
   min-height: 10rem!important;
 }
+

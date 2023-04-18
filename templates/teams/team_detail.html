@@ -2,7 +2,6 @@
 
 {% load thumbnail %}
 {% load static %}
-{% load bootstrap_icons %}
 
 {% block title %}
   {{ team.title }}
@@ -58,13 +57,22 @@
                aria-labelledby="pills-about-tab" tabindex="0">
             <p class="text-muted">{{ team.description|safe }}</p>
             {% if team.presentation %}
-              <p>{% bs_icon "file-earmark-ppt" %}
+              <p>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-ppt" viewBox="0 0 16 16">
+                  <path d="M7 5.5a1 1 0 0 0-1 1V13a.5.5 0 0 0 1 0v-2h1.188a2.75 2.75 0 0 0 0-5.5H7zM8.188 10H7V6.5h1.188a1.75 1.75 0 1 1 0 3.5z"/>
+                  <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
+              </svg>
                 <a href="{{ MEDIA_URL }}{{ team.presentation.url }}" download>Presentation</a>
               </p>
             {% endif %}
             <div class="d-flex flex-column gap-2 mt-auto">
               <div class="d-flex gap-2">
-                <span class="tech bg-light">{% bs_icon "stack" %}Technologies:</span>
+                <span class="tech bg-light">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stack" viewBox="0 0 16 16">
+                    <path d="m14.12 10.163 1.715.858c.22.11.22.424 0 .534L8.267 15.34a.598.598 0 0 1-.534 0L.165 11.555a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0l5.317-2.66zM7.733.063a.598.598 0 0 1 .534 0l7.568 3.784a.3.3 0 0 1 0 .535L8.267 8.165a.598.598 0 0 1-.534 0L.165 4.382a.299.299 0 0 1 0-.535L7.733.063z"/>
+                    <path d="m14.12 6.576 1.715.858c.22.11.22.424 0 .534l-7.568 3.784a.598.598 0 0 1-.534 0L.165 7.968a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0l5.317-2.659z"/>
+                  </svg>
+                  Technologies:</span>
                 <ul class="list-unstyled d-flex flex-wrap gap-2 mb-0">
                   {% for tech in technologies %}
                     <li class="badge tech">{{ tech.technology }}</li>
@@ -72,7 +80,10 @@
                 </ul>
               </div>
               <div class="d-flex gap-2">
-                <span class="lang bg-light">{% bs_icon "translate" %}Language:</span>
+                <span class="lang bg-light"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-translate" viewBox="0 0 16 16">
+                  <path d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286H4.545zm1.634-.736L5.5 3.956h-.049l-.679 2.022H6.18z"/>
+                  <path d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z"/>
+                </svg>Language:</span>
                 <span class="badge lang">{{ language.language }}</span>
               </div>
             </div>
@@ -92,7 +103,10 @@
                                class="rounded-circle"
                                alt="team image"/>
                         {% empty %}
-                          {% bs_icon "person-circle" size="72px" extra_classes="text-secondary" %}
+                          <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                          </svg>
                         {% endthumbnail %}
                       </div>
                       <h4 class="card-title text-dark fw-bold">{{ team.creator.nickname }}</h4>
@@ -113,7 +127,10 @@
                                class="rounded-circle"
                                alt="team image"/>
                         {% empty %}
-                          {% bs_icon "person-circle" size="72px" extra_classes="text-secondary" %}
+                          <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                          </svg>
                         {% endthumbnail %}
                       </div>
                       <h4 class="card-title text-dark fw-bold">{{ member.user.nickname }}</h4>
