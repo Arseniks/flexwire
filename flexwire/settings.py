@@ -20,11 +20,15 @@ STATICFILES_DIRS = [
 STATIC_ROOT = BASE_DIR / 'static'
 
 
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY', 'any-other-dummy-key')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'true').lower() == 'true'
+DEBUG = os.environ.get('DEBUG', 'true').lower() in {
+    'y',
+    'yes',
+    'true',
+    '1',
+    't',
+}
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 
@@ -36,15 +40,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_bootstrap_icons',
+    'django_cleanup.apps.CleanupConfig',
     'home.apps.HomeConfig',
     'teams.apps.TeamsConfig',
     'users.apps.UsersConfig',
     'feedback.apps.FeedbackConfig',
-    'debug_toolbar',
-    'django_bootstrap_icons',
-    'django_cleanup.apps.CleanupConfig',
     'sorl.thumbnail',
     'ckeditor',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -58,11 +62,10 @@ MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
-INTERNAL_IPS = [
-    '127.0.0.1',
-]
+INTERNAL_IPS = os.environ.get('INTERNAL_IPS', '*').split(',')
 
-ROOT_URLCONF = 'meeting_point.urls'
+
+ROOT_URLCONF = 'flexwire.urls'
 
 TEMPLATES = [
     {
@@ -80,7 +83,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'meeting_point.wsgi.application'
+WSGI_APPLICATION = 'flexwire.wsgi.application'
 
 
 DATABASES = {
@@ -116,7 +119,7 @@ LOGOUT_REDIRECT_URL = '/auth/login/'
 
 AUTH_USER_MODEL = 'users.CustomUser'
 
-LANGUAGE_CODE = 'ru'
+LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'UTC'
 
@@ -157,19 +160,49 @@ else:
     DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
-DEFAULT_USER_ACTIVITY = (
-    os.environ.get('DEFAULT_USER_ACTIVITY', str(DEBUG)).lower() == 'true'
-)
+DEFAULT_USER_ACTIVITY = os.environ.get(
+    'DEFAULT_USER_ACTIVITY', str(DEBUG)
+).lower() in {'y', 'yes', 'true', '1', 't'}
 
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 CKEDITOR_CONFIGS = {
     'default': {
-        'toolbar': 'full',
+        'toolbar': [
+            [
+                'Undo',
+                'Redo',
+                'Bold',
+                'Italic',
+                'Underline',
+                'Link',
+                'Unlink',
+                'Anchor',
+                'Format',
+                'Maximize',
+                'Source',
+                'NumberedList',
+                'BulletedList',
+            ],
+            [
+                'JustifyLeft',
+                'JustifyCenter',
+                'JustifyRight',
+                'JustifyBlock',
+                'Font',
+                'FontSize',
+                'TextColor',
+                'Outdent',
+                'Indent',
+                'HorizontalRule',
+                'Blockquote',
+            ],
+        ],
         'width': 'auto',
         'extraPlugins': ','.join(
             [
                 'codesnippet',
             ]
         ),
+        'removePlugins': 'exportpdf',
     },
 }

@@ -12,7 +12,6 @@
     <div class="col-lg-6 m-auto card p-3 border-0">
       <form action="" enctype="multipart/form-data" method="post">
         {% csrf_token %}
-        {{ form.media }}
         {% include "includes/form.html" %}
       </form>
     </div>
