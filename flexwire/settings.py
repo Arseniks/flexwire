@@ -36,15 +36,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_bootstrap_icons',
+    'django_cleanup.apps.CleanupConfig',
     'home.apps.HomeConfig',
     'teams.apps.TeamsConfig',
     'users.apps.UsersConfig',
     'feedback.apps.FeedbackConfig',
-    'debug_toolbar',
-    'django_bootstrap_icons',
-    'django_cleanup.apps.CleanupConfig',
     'sorl.thumbnail',
     'ckeditor',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -116,7 +116,7 @@ LOGOUT_REDIRECT_URL = '/auth/login/'
 
 AUTH_USER_MODEL = 'users.CustomUser'
 
-LANGUAGE_CODE = 'ru'
+LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'UTC'
 
