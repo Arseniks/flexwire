@@ -7,23 +7,45 @@ from django.urls import path
 import django_select2.urls
 
 import feedback.urls
+from flexwire import settings
+from flexwire import views
 import home.urls
-from meeting_point import settings
-from meeting_point import views
 import teams.urls
 import users.urls
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include(home.urls)),
-    path('auth/', include(users.urls)),
-    path('auth/', include(urls)),
-    path('select2/', include(django_select2.urls)),
-    path('teams/', include(teams.urls)),
-    path('feedback/', include(feedback.urls)),
+    path(
+        'admin/',
+        admin.site.urls,
+    ),
+    path(
+        '',
+        include(home.urls),
+    ),
+    path(
+        'auth/',
+        include(users.urls),
+    ),
+    path(
+        'auth/',
+        include(urls),
+    ),
+    path(
+        'teams/',
+        include(teams.urls),
+    ),
+    path(
+        'feedback/',
+        include(feedback.urls),
+    ),
+    path(
+        'select2/',
+        include(django_select2.urls)),
 ]
 
 handler404 = views.Custom404.as_view()
+handler500 = views.Custom500.as_view()
+
 
 if settings.DEBUG:
     import debug_toolbar

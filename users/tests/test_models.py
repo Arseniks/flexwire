@@ -21,6 +21,7 @@ class TestDataBaseAddUser(TestCase):
         )
 
     def tearDown(self):
+        super().tearDown()
         CustomUser.objects.all().delete()
         Language.objects.all().delete()
         Technology.objects.all().delete()

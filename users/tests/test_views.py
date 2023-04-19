@@ -38,6 +38,7 @@ class ViewsTests(TestCase):
 
     @classmethod
     def setUpTestData(cls):
+        super().setUpTestData()
         cls.user1 = CustomUser.objects.create(
             id=1,
             username='username',
@@ -53,6 +54,7 @@ class ViewsTests(TestCase):
         )
 
     def tearDown(self):
+        super().tearDown()
         CustomUser.objects.all().delete()
 
     def test_user_signup_context(self):
