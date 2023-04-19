@@ -32,8 +32,7 @@
             {% if request.user.is_authenticated %}
               <div class="dropdown d-none d-lg-block d-md-block">
                 <div class="d-flex align-items-center dropdown-toggle"
-                   data-bs-toggle="dropdown" aria-expanded="false"
-                >
+                   data-bs-toggle="dropdown" aria-expanded="false">
                   {% thumbnail request.user.image "32x32" crop="center" as img %}
                     <img src="{{ img.url }}"
                          width="32px"
@@ -57,7 +56,6 @@
                          class="dropdown-item {% if request.path == profile %}active{% endif %}">Profile</a></li>
                   <li><a href="{{ account }}"
                          class="dropdown-item {% if request.path == account %}active{% endif %}">Account</a></li>
-
                   <li><hr class="dropdown-divider"/></li>
                   <li><a href="{% url 'users:logout' %}" class="dropdown-item">Logout</a></li>
                 </ul>
