@@ -40,7 +40,8 @@ urlpatterns = [
     ),
     path(
         'select2/',
-        include(django_select2.urls)),
+        include(django_select2.urls),
+    ),
 ]
 
 handler404 = views.Custom404.as_view()
