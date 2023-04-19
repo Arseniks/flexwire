@@ -186,11 +186,18 @@ class RemoveRoleTeam(generic.View):
 class CreatePending(mixins.LoginRequiredMixin, generic.View):
     def post(self, request, pk):
         role_team = shortcuts.get_object_or_404(teams.models.RoleTeam, pk=pk)
-        is_exists = teams.models.Pending.objects.filter(
+        is_member = (
+            teams.models.Member.objects.get_members(role_team.team_id)
+            .filter(user_id=self.request.user.id)
+            .exists()
+        )
+        is_pending = teams.models.Pending.objects.filter(
             user=self.request.user, role_team=role_team
         ).exists()
 
-        if role_team.team.creator_id != self.request.user.id and not is_exists:
+        if role_team.team.creator_id != self.request.user.id and (
+            not is_pending and not is_member
+        ):
             teams.models.Pending.objects.create(
                 role_team=role_team,
                 user=self.request.user,
