@@ -135,6 +135,23 @@ class TeamEdit(TeamMixin, generic.TemplateView):
 class TeamPendings(TeamMixin, generic.TemplateView):
     template_name = 'teams/team_pendings.html'
 
+    def get(self, request, *args, **kwargs):
+        context = super(TeamPendings, self).get_context_data(**kwargs)
+        if request.user != context['team'].creator:
+            return shortcuts.redirect('teams:team_detail', kwargs.get('pk'))
+        return self.render_to_response(context)
+
+
+class UserTeams(mixins.LoginRequiredMixin, generic.ListView):
+    template_name = 'teams/user_teams.html'
+    context_object_name = 'teams'
+
+    def get_queryset(self):
+        return teams.models.Team.objects.filter(
+            models.Q(creator_id=self.request.user.id)
+            | models.Q(roleteams__members__id__contains=self.request.user.id)
+        ).distinct()
+
 
 class CreateRoleTeam(generic.CreateView):
     template_name = 'teams/create_roleteam.html'
@@ -166,7 +183,7 @@ class RemoveRoleTeam(generic.View):
         return shortcuts.redirect('teams:edit_team', role_team.team_id)
 
 
-class CreatePending(generic.View):
+class CreatePending(mixins.LoginRequiredMixin, generic.View):
     def post(self, request, pk):
         role_team = shortcuts.get_object_or_404(teams.models.RoleTeam, pk=pk)
         is_exists = teams.models.Pending.objects.filter(

@@ -60,4 +60,9 @@ urlpatterns = [
         views.RemoveRoleTeam.as_view(),
         name='remove_roleteam',
     ),
+    urls.path(
+        'user_teams/',
+        views.UserTeams.as_view(),
+        name='user_teams',
+    ),
 ]

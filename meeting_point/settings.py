@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'feedback.apps.FeedbackConfig',
     'debug_toolbar',
-    'django_bootstrap_icons',
     'django_cleanup.apps.CleanupConfig',
     'sorl.thumbnail',
     'ckeditor',
@@ -136,6 +135,7 @@ STATIC_ROOT = BASE_DIR / 'static'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
