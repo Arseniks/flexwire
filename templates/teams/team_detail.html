@@ -145,6 +145,7 @@
                id="pills-vacancies" role="tabpanel"
                aria-labelledby="pills-vacancies-tab" tabindex="0">
             <ul class="list-group list-group-flush">
+            {% if request.user == team.creator or not request.user.is_authenticated or request.user.is_authenticated and request.user not in members.users %}
               {% for place in vacancies %}
                 <li class="list-group-item d-flex justify-content-between">
                   <p class="fw-lighter text-capitalize my-auto">{{ place.role_default.name }}</p>
@@ -164,6 +165,9 @@
               {% empty %}
                 <h4>Oops... there's no job for you</h4>
               {% endfor %}
+            {% else %}
+              <h4>Oops... there's no job for you</h4>
+            {% endif %}
             </ul>
           </div>
         </div>
