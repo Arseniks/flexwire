@@ -5,5 +5,9 @@ import home.views
 app_name = 'home'
 
 urlpatterns = [
-    path('', home.views.Landing.as_view(), name='landing'),
+    path(
+        '',
+        home.views.Landing.as_view(),
+        name='landing',
+    ),
 ]

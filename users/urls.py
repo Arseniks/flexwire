@@ -10,7 +10,8 @@ urlpatterns = [
     path(
         'login/',
         django.contrib.auth.views.LoginView.as_view(
-            template_name='users/login.html', redirect_authenticated_user=True
+            template_name='users/login.html',
+            redirect_authenticated_user=True,
         ),
         name='login',
     ),
@@ -31,7 +32,7 @@ urlpatterns = [
     path(
         'password_change/done/',
         django.contrib.auth.views.PasswordChangeDoneView.as_view(
-            template_name='users/password_change_done.html'
+            template_name='users/password_change_done.html',
         ),
         name='password_change_done',
     ),
@@ -75,7 +76,11 @@ urlpatterns = [
         users.views.ActivateUserView.as_view(),
         name='activate_user',
     ),
-    path('profile/<int:pk>/', users.views.Profile.as_view(), name='profile'),
+    path(
+        'profile/<int:pk>/',
+        users.views.Profile.as_view(),
+        name='profile',
+    ),
     path(
         'account/',
         login_required(users.views.Account.as_view()),
