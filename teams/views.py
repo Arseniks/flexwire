@@ -217,7 +217,7 @@ class AcceptPending(generic.View):
         if pending.role_team.team.creator_id == self.request.user.id:
             send_mail(
                 'Your pending accepted',
-                f'Creator of the team {pending.role_team.team.title}'
+                f'Creator of the team {pending.role_team.team.title} '
                 'has accepted your pending.\n'
                 '---\n'
                 'FLEXWIRE',
@@ -240,7 +240,7 @@ class RejectPending(generic.View):
         if pending.role_team.team.creator_id == self.request.user.id:
             send_mail(
                 'Your pending rejected',
-                f'Creator of the team {pending.role_team.team.title}'
+                f'Creator of the team {pending.role_team.team.title} '
                 'has rejected your pending.\n'
                 '---\n'
                 'FLEXWIRE',
