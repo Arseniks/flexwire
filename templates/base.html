@@ -38,6 +38,10 @@
       <main class="main">
         {% block content %}
         {% endblock content %}
+        <a href="{% url 'feedback:feedback' %}"
+           class="position-fixed feedback text-center text-dark p-3 text-decoration-none d-flex align-items-center">
+          <span>?</span>
+        </a>
       </main>
       {% include "includes/footer.html" %}
     </div>
