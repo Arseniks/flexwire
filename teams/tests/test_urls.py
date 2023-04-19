@@ -48,7 +48,6 @@ class StaticUrlTest(TestCase):
         role_team = teams.models.RoleTeam.objects.create(
             team=cls.team, role_default=role
         )
-        teams.models.RoleTeam.objects.create(team=cls.team, role_default=role)
         cls.vacancy = teams.models.RoleTeam.objects.create(
             team=cls.team, role_default=role
         )
@@ -58,7 +57,7 @@ class StaticUrlTest(TestCase):
             user=cls.dummy_user1,
         )
         cls.pending = teams.models.Pending.objects.create(
-            role_team=role_team, user=cls.dummy_user2
+            role_team=cls.vacancy, user=cls.dummy_user2
         )
 
     def tearDown(self):
@@ -121,32 +120,29 @@ class StaticUrlTest(TestCase):
         self.assertEqual(resp.status_code, 200)
 
     def test_team_pending(self):
-        self.vacancy.delete()
-
         resp = self.client.get(
             reverse('teams:team_detail', kwargs={'pk': self.team.id})
         )
-        self.assertContains(resp, self.vacancy.role_default.name)
+        self.assertContains(resp, self.pending.role_team.role_default.name)
 
         self.client.force_login(self.pending.user)
         resp = self.client.get(
             reverse('teams:team_detail', kwargs={'pk': self.team.id})
         )
-        print(self.pending.role_team.team.title)
-        self.assertContains(resp, "Oops... there's no job for you")
+        self.assertContains(resp, 'Oops... there is no job for you')
 
     def test_team_member(self):
         self.client.force_login(self.member.user)
         resp = self.client.get(
             reverse('teams:team_detail', kwargs={'pk': self.team.id})
         )
-        self.assertContains(resp, "Oops... there's no job for you")
+        self.assertContains(resp, 'Oops... there is no job for you')
 
     def test_team_unauth(self):
         resp = self.client.get(
             reverse('teams:team_detail', kwargs={'pk': self.team.id})
         )
-        self.assertContains(resp, "You aren't able to respond to vacancy")
+        self.assertContains(resp, 'You are not able to respond to vacancy')
 
     @parameterized.expand([('teams:edit_team',), ('teams:pendings_team',)])
     def test_team_creator_pages(self, view):

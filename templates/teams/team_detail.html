@@ -148,7 +148,7 @@
               {% for place in vacancies %}
                 <li class="list-group-item d-flex justify-content-between">
                   <p class="fw-lighter text-capitalize my-auto">{{ place.role_default.name }}</p>
-                  {% if team.creator_id != request.user.id and request.user.is_authenticated and request.user not in members %}
+                  {% if team.creator_id != request.user.id and request.user.is_authenticated %}
                     <form action="{% url 'teams:create_pending' place.id %}"
                           method="post">
                       {% csrf_token %}
@@ -157,12 +157,12 @@
                   {% else %}
                     <div class="d-flex flex-column">
                       <input class="btn btn-primary" value="Respond" disabled/>
-                      <p class="m-0 text-muted h-50">You aren't able to respond to vacancy</p>
+                      <p class="m-0 text-muted h-50">You are not able to respond to vacancy</p>
                     </div>
                   {% endif %}
                 </li>
               {% empty %}
-                <h4>Oops... there's no job for you</h4>
+                <h4>Oops... there is no job for you</h4>
               {% endfor %}
             </ul>
           </div>

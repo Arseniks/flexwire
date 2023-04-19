@@ -79,15 +79,17 @@ class TeamDetail(TeamMixin, generic.DetailView):
         team = context['team']
 
         members = teams.models.Member.objects.get_members(team.id).all()
-        vacancies = teams.models.RoleTeam.objects.get_vacancies(team.id)
+        if not members.filter(user_id=self.request.user.id).exists():
+            vacancies = teams.models.RoleTeam.objects.get_vacancies(team.id)
+            if self.request.user.is_authenticated:
+                vacancies = vacancies.exclude(
+                    pendings__user_id=self.request.user.id
+                )
+        else:
+            vacancies = []
 
         language = team.language
         technologies = team.technologies.all()
-
-        if self.request.user.is_authenticated:
-            vacancies = vacancies.exclude(
-                pendings__user_id=self.request.user.id
-            )
 
         context.update(
             {
