@@ -35,7 +35,6 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 
 INSTALLED_APPS = [
     'ckeditor',
-    'debug_toolbar',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -49,6 +48,7 @@ INSTALLED_APPS = [
     'sorl.thumbnail',
     'teams.apps.TeamsConfig',
     'users.apps.UsersConfig',
+    'debug_toolbar',
 ]
 
 
