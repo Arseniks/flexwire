@@ -256,7 +256,7 @@ class ViewTests(TestCase):
         pendings_count = self.role_team.pendings.count()
         url = reverse('teams:create_pending', kwargs={'pk': self.role_team.id})
         resp = self.client.post(url, follow=True)
-        self.assertRedirects(resp, f"{reverse('users:login')}?next={url}")
+        self.assertRedirects(resp, f'{reverse("users:login")}?next={url}')
         self.assertEqual(pendings_count, self.role_team.pendings.count())
 
     def test_create_pending(self):
