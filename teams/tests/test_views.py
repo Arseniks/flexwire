@@ -134,7 +134,7 @@ class ViewTests(TestCase):
         self.assertEqual(
             mail.outbox[0].body,
             'Creator of the team Test title has made a decision to remove you '
-            'from the team.\n '
+            'from the team.\n'
             '---\n'
             'FLEXWIRE',
         )
