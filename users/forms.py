@@ -3,6 +3,8 @@ from django import forms
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.forms import UserCreationForm
 
+from teams.forms import LanguagesWidget
+from teams.forms import TechnologyWidget
 from users.models import CustomUser
 
 
@@ -24,8 +26,6 @@ class UserAccountForm(UserChangeForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.visible_fields():
-            if field.widget_type in ('select', 'selectmultiple'):
-                continue
             field.field.widget.attrs['class'] = 'form-control'
 
     password = None
@@ -48,8 +48,11 @@ class UserAccountForm(UserChangeForm):
             CustomUser.education.field.name,
             CustomUser.image.field.name,
         ]
+
         widgets = {
+            CustomUser.technologies.field.name: TechnologyWidget,
+            CustomUser.languages.field.name: LanguagesWidget,
             CustomUser.about_me.field.name: forms.CharField(
                 widget=CKEditorWidget()
-            )
+            ),
         }

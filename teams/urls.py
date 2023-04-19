@@ -40,4 +40,29 @@ urlpatterns = [
         views.CreateTeam.as_view(),
         name='create_team',
     ),
+    urls.path(
+        '<int:pk>/edit',
+        views.TeamEdit.as_view(),
+        name='edit_team',
+    ),
+    urls.path(
+        '<int:pk>/pendings',
+        views.TeamPendings.as_view(),
+        name='pendings_team',
+    ),
+    urls.path(
+        '<int:pk>/create_roleteam',
+        views.CreateRoleTeam.as_view(),
+        name='create_roleteam',
+    ),
+    urls.path(
+        'remove_roleteam/<int:pk>/',
+        views.RemoveRoleTeam.as_view(),
+        name='remove_roleteam',
+    ),
+    urls.path(
+        'user_teams/',
+        views.UserTeams.as_view(),
+        name='user_teams',
+    ),
 ]

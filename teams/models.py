@@ -123,7 +123,7 @@ class Member(django.db.models.Model):
         help_text='Choose roles in your project',
         on_delete=django.db.models.deletion.CASCADE,
     )
-    user = django.db.models.OneToOneField(
+    user = django.db.models.ForeignKey(
         users.models.CustomUser,
         help_text='User for this role',
         on_delete=django.db.models.deletion.CASCADE,

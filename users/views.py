@@ -16,7 +16,6 @@ from django.views.generic import FormView
 from django.views.generic import View
 import jwt
 
-from teams.utils import pull_out_list
 from users.forms import CustomUserCreationForm
 from users.forms import UserAccountForm
 from users.models import CustomUser
@@ -119,9 +118,6 @@ class Account(View):
         return render(request, self.template_name, context)
 
     def post(self, request):
-        pull_out_list(request, 'technologies')
-        pull_out_list(request, 'languages')
-
         user = request.user
 
         form = UserAccountForm(request.POST, request.FILES, instance=user)

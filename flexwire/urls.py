@@ -4,6 +4,7 @@ from django.contrib.auth import urls
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import include
 from django.urls import path
+import django_select2.urls
 
 import feedback.urls
 from flexwire import settings
@@ -36,6 +37,10 @@ urlpatterns = [
     path(
         'feedback/',
         include(feedback.urls),
+    ),
+    path(
+        'select2/',
+        include(django_select2.urls),
     ),
 ]
 
