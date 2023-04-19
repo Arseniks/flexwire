@@ -5,12 +5,16 @@
 ```
 git clone https://github.com/Arseniks/flexwire
 ```
+- Перейдите в папку с проектом:
+```
+cd flexwire
+```
+### На Windows
 - Скопируйте файл .env.template в .env, при необходимости отредактируйте 
   значения переменных:
 ```
-cp .env.template .env
+copy .env.template .env
 ``` 
-### На Windows
 - Установите и активируйте виртуальное окружение с помощью команд:
 ```
 python -m venv venv
@@ -53,6 +57,11 @@ python manage.py loaddata fixtures/technologies_data.json
 python manage.py runserver
 ```
 ### На Linux/MAC
+- Скопируйте файл .env.template в .env, при необходимости отредактируйте 
+  значения переменных:
+```
+cp .env.template .env
+``` 
 - Установите и активируйте виртуальное окружение с помощью команд:
 ```
 python3 -m venv venv
