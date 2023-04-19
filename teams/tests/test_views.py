@@ -362,9 +362,8 @@ class ViewTests(TestCase):
         )
         self.assertContains(
             resp,
-            'Загрузите правильное изображение. Файл, '
-            'который вы загрузили, поврежден или не является '
-            'изображением.',
+            'Upload a valid image. The file you uploaded was either not an '
+            'image or a corrupted image.',
         )
 
     def test_adding_presentation(self):
