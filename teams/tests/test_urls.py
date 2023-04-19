@@ -5,17 +5,6 @@ from parameterized import parameterized
 import teams.models
 import users.models
 
-"""
-    Тек-тек, что тут у нас:
-        1. team_detail (contains members, vacancies and header for creator,
-            available for members being unpublished
-        )
-        2. test security: try access on unpublished pages(detail, edit,
-         pending)
-        3. user teams (being member and creator)
-        4. vacancies (unauth, creator, anonymous, user, member)
-"""
-
 
 class StaticUrlTest(TestCase):
     @classmethod
@@ -72,7 +61,7 @@ class StaticUrlTest(TestCase):
             role_team=role_team, user=cls.dummy_user2
         )
 
-    def tearDown(self) -> None:
+    def tearDown(self):
         users.models.CustomUser.objects.all().delete()
         users.models.Language.objects.all().delete()
         teams.models.Team.objects.all().delete()
@@ -102,7 +91,7 @@ class StaticUrlTest(TestCase):
                 self.member.role_team.role_default.name,
             ],
             'Vacancies': [
-                "You aren't able to respond to vacancy",
+                'You are not able to respond to vacancy',
                 self.vacancy.role_default.name,
             ],
         }

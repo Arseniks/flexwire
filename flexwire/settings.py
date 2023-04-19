@@ -34,22 +34,23 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 
 
 INSTALLED_APPS = [
+    'ckeditor',
+    'debug_toolbar',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sessions',
     'django.contrib.staticfiles',
+    'django_cleanup.apps.CleanupConfig',
+    'django_select2',
+    'feedback.apps.FeedbackConfig',
     'home.apps.HomeConfig',
+    'sorl.thumbnail',
     'teams.apps.TeamsConfig',
     'users.apps.UsersConfig',
-    'feedback.apps.FeedbackConfig',
-    'debug_toolbar',
-    'django_cleanup.apps.CleanupConfig',
-    'sorl.thumbnail',
-    'ckeditor',
-    'django_select2',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
