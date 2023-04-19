@@ -198,7 +198,7 @@ class RemoveMember(generic.View):
             member.delete()
             send_mail(
                 'You was removed from the team',
-                f'Creator of the team {member.role_team.team.title}'
+                f'Creator of the team {member.role_team.team.title} '
                 'has made a decision to remove you from the team.\n'
                 '---\n'
                 'FLEXWIRE',
