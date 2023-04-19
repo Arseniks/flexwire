@@ -3,6 +3,7 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
+
 load_dotenv()
 
 
@@ -52,10 +53,12 @@ MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
+
 INTERNAL_IPS = os.environ.get('INTERNAL_IPS', '*').split(',')
 
 
 ROOT_URLCONF = 'flexwire.urls'
+
 
 TEMPLATES = [
     {
@@ -72,6 +75,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'flexwire.wsgi.application'
 
@@ -103,11 +107,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
 LOGIN_URL = '/auth/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/auth/login/'
 
 AUTH_USER_MODEL = 'users.CustomUser'
+
 
 LANGUAGE_CODE = 'en'
 
@@ -153,6 +159,7 @@ else:
 DEFAULT_USER_ACTIVITY = os.environ.get(
     'DEFAULT_USER_ACTIVITY', str(DEBUG)
 ).lower() in {'y', 'yes', 'true', '1', 't'}
+
 
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 CKEDITOR_CONFIGS = {
