@@ -8,17 +8,6 @@ load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-MEDIA_ROOT = BASE_DIR / 'media'
-MEDIA_URL = '/media/'
-
-STATIC_URL = '/static/'
-
-STATICFILES_DIRS = [
-    BASE_DIR / 'static_dev',
-]
-
-STATIC_ROOT = BASE_DIR / 'static'
-
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'any-other-dummy-key')
 
