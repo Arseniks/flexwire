@@ -198,3 +198,20 @@ body {
   min-height: 10rem!important;
 }
 
+.feedback {
+  bottom: 20px;
+  right: 20px;
+  font-size: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  background: #FFFFFF;
+  box-shadow: 0 0.375rem 1.5rem 0 rgba(82, 87, 94, 0.5);
+  border: 2px gray;
+  transition: all 0.2s ease-in-out;
+
+}
+
+.feedback:hover {
+  transform: translateY(-0.1875rem);
+}
