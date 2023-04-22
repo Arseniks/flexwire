@@ -1,0 +1,210 @@
+[
+{
+  "model": "users.customuser",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$0NUFBW7CXCiOBjupjyF1o5$yb5SNpKPpMHDboLYXJhyZvhaLebAXwatWsbk3nkMw5c=",
+    "last_login": "2023-04-22T12:45:20.317Z",
+    "is_superuser": true,
+    "username": "Lia",
+    "first_name": "",
+    "last_name": "",
+    "email": "100@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2023-04-22T12:45:02.778Z",
+    "nickname": "Lia",
+    "about_me": null,
+    "github": "",
+    "contact_data": "",
+    "city": null,
+    "resume": "",
+    "image": "",
+    "education_choose": "",
+    "education": null,
+    "user_picture": "",
+    "groups": [],
+    "user_permissions": [],
+    "languages": [],
+    "technologies": []
+  }
+},
+{
+  "model": "users.customuser",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$Z6wq15DryJZWg3VaUbZnnl$9qZDz47+drFx++NAOnYvgcLi8LNpolIEmc0UehxFJtc=",
+    "last_login": "2023-04-22T13:18:41.799Z",
+    "is_superuser": false,
+    "username": "Jennifer_Brown",
+    "first_name": "",
+    "last_name": "",
+    "email": "1@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-04-22T12:47:49.934Z",
+    "nickname": "Jennifer_Brown",
+    "about_me": "<p>I&#39;m a junoir backend developer, and I&#39;m here bcs i want to learn how to code better</p>",
+    "github": "https://github.com/jennifed_brown",
+    "contact_data": "twitter: jennifer_brown",
+    "city": "Great Britain, London",
+    "resume": "",
+    "image": "",
+    "education_choose": "university",
+    "education": "Univeristy of Oxford",
+    "user_picture": "",
+    "groups": [],
+    "user_permissions": [],
+    "languages": [
+      8,
+      44,
+      58
+    ],
+    "technologies": [
+      2753,
+      3648,
+      7189
+    ]
+  }
+},
+{
+  "model": "users.customuser",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$5PjxPqDsjWfWS1tA7hXue8$8Cg8LpWpz8ETcjH/6sVGX2He/bZwoM2Vqzpw3s5ztU4=",
+    "last_login": "2023-04-22T13:54:35.748Z",
+    "is_superuser": false,
+    "username": "John_Smith",
+    "first_name": "",
+    "last_name": "",
+    "email": "2@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-04-22T13:06:31.698Z",
+    "nickname": "John_Smith",
+    "about_me": "<p>Hello world! How about creating something fun? I am stepping on the path of game developer and currently watchnig for somebody who will join me and help me to create my game</p>",
+    "github": "https://github.com/john_smith",
+    "contact_data": "facebook: john_smith",
+    "city": "USA, New York",
+    "resume": "",
+    "image": "",
+    "education_choose": "university",
+    "education": "MIT",
+    "user_picture": "",
+    "groups": [],
+    "user_permissions": [],
+    "languages": [
+      44,
+      67
+    ],
+    "technologies": [
+      1851,
+      2773,
+      2921
+    ]
+  }
+},
+{
+  "model": "users.customuser",
+  "pk": 5,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$pmyMajoaRKKnrgBVpOI1rY$0mDNYLuYn6QJPc8yhFK9rZCRRq/PSbruhtAXMtXOoAM=",
+    "last_login": "2023-04-22T13:55:06.408Z",
+    "is_superuser": false,
+    "username": "Michail_Petrov",
+    "first_name": "",
+    "last_name": "",
+    "email": "3@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-04-22T13:21:03.905Z",
+    "nickname": "Michail_Petrov",
+    "about_me": "<p>Я начинающий kotlin разработчик, <em>хочу создать приложение для android</em></p>",
+    "github": "https://github.com/michail",
+    "contact_data": "tme: super_developer",
+    "city": "Moscow, Russia",
+    "resume": "",
+    "image": "",
+    "education_choose": "school",
+    "education": null,
+    "user_picture": "",
+    "groups": [],
+    "user_permissions": [],
+    "languages": [
+      28,
+      44
+    ],
+    "technologies": [
+      936
+    ]
+  }
+},
+{
+  "model": "users.customuser",
+  "pk": 6,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$r7PH74VN9FdTzJA214Zg80$qY3oYJS7f73hrT9dnoJx73GVMBiuvj5ZTewqSVivGbk=",
+    "last_login": "2023-04-22T13:56:01.802Z",
+    "is_superuser": false,
+    "username": "Sarah_Wilson",
+    "first_name": "",
+    "last_name": "",
+    "email": "4@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-04-22T13:30:09.282Z",
+    "nickname": "Sarah_Wilson",
+    "about_me": "",
+    "github": "https://github.com/sarahhhh",
+    "contact_data": "tme",
+    "city": null,
+    "resume": "",
+    "image": "",
+    "education_choose": "school",
+    "education": null,
+    "user_picture": "",
+    "groups": [],
+    "user_permissions": [],
+    "languages": [
+      44
+    ],
+    "technologies": [
+      936
+    ]
+  }
+},
+{
+  "model": "users.customuser",
+  "pk": 7,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$FVhWrmAepvOuQFmZkEGKC9$zlyIza0M6OuR3TCkI5XGUf0O6d8GPfVgC3Pwlm4bZAo=",
+    "last_login": "2023-04-22T13:42:41.970Z",
+    "is_superuser": false,
+    "username": "William_Davis",
+    "first_name": "",
+    "last_name": "",
+    "email": "6@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-04-22T13:42:41.436Z",
+    "nickname": "William_Davis",
+    "about_me": "<p>Я умею делать красивые дизайны</p>",
+    "github": "https://github.com/william",
+    "contact_data": "vk: id123456",
+    "city": "Россия, Санкт-Петербург",
+    "resume": "",
+    "image": "",
+    "education_choose": "university",
+    "education": "МГУ",
+    "user_picture": "",
+    "groups": [],
+    "user_permissions": [],
+    "languages": [
+      28
+    ],
+    "technologies": [
+      584
+    ]
+  }
+}
+]
